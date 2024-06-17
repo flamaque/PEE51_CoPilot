@@ -10,7 +10,7 @@
 #include "BluetoothSerial.h"
 #include <SD.h>
 #include <SPI.h>
-#include "DFRobot_PH.h"
+//#include "DFRobot_PH.h"
 #include <time.h>
 #include <nvs_flash.h>
 #include <nvs.h>
@@ -24,6 +24,7 @@
 #include "freertos/ringbuf.h"
 #include "soc/lldesc.h"
 #include <EEPROM.h>
+#include "ESP_PH.h" // library van de sensormaker
 
 void BluetoothListen(void *parameter);
 void DisplayMeasurements(void *parameter);
@@ -135,7 +136,7 @@ void buttonInterrupt_bigOled();
 void buttonInterrupt_smallOled();
 
 /*      Ph Sensor         */
-extern DFRobot_PH ph;
+extern ESP_PH ph;
 extern int PH_PIN;
 float pH();
 float readTemperature();

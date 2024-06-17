@@ -265,41 +265,36 @@ float Cond(){
 }
 
 /*      pH Sensor             */
-float voltage_pH, phValue, temperature_pH = 25;
+#define ESPADC 4096.0   // the esp Analog Digital Conversion value
+#define ESPVOLTAGE 3300 // the esp voltage supply value
+//#define PH_PIN 35       // the esp gpio data pin number
+float voltage_pH, phValue;
+float temperature_pH = 20.0; // Fixed temperature value kan vervangen worden wanneer temp sensor gebruikt wordt
+
+// wanneer je inf melding krijgt moet je caliberen lees hieronder
+// om de code te laten werken is er een calibratie proces nodig
+// type enterph
+// doe ph sensor in 4ph en type calph 
+// doe ph sensor in 7ph en type calph
+// type endcalph om compleet te maken. 
+
 float pH(){
-    static unsigned long lastTime = 0;
-    unsigned long currentTime = millis();
-    
-    if (currentTime - lastTime >= 1000) {  // tijdsinterval: 1s
-        lastTime = currentTime;
-        
-        temperature_pH = readTemperature();  // Lees de temperatuur om temperatuurcompensatie uit te voeren
-        voltage_pH = analogRead(PH_PIN) / 1024.0 * 5000;  // Lees de spanning
-        phValue = ph.readPH(voltage_pH, temperature_pH);  // Converteer spanning naar pH met temperatuurcompensatie
-        
-        //Serial.print("Temperature: ");
-        //Serial.println(temperature_pH, 1);
-        //Serial.print("°C  pH: ");
-        //Serial.println(phValue, 2);
-        
-        ph.calibration(voltage_pH, temperature_pH);  // Kalibratieproces via Seriële CMD
+    static unsigned long timepoint = millis();
+    if (millis() - timepoint > 1000U) // time interval: 1s
+    {
+        timepoint = millis();
+        voltage_pH = analogRead(PH_PIN) / ESPADC * ESPVOLTAGE; // read the voltage
+        //Serial.print("voltage_pH:");
+        //Serial.println(voltage_pH, 4);
+
+        phValue = ph.readPH(voltage_pH, temperature_pH); // convert voltage to pH with fixed temperature
+        //Serial.print("pH:");
+        //Serial.println(phValue, 4);
     }
+    ph.calibration(voltage_pH, temperature_pH); // calibration process by Serial CMD
   return phValue;
 }
- 
-float readTemperature() {
-    // Voeg hier je code toe om de temperatuur van je temperatuursensor te krijgen
-    // Bijvoorbeeld, als je een LM35 gebruikt:
-    // int rawValue = analogRead(TEMP_SENSOR_PIN);
-    // float millivolts = (rawValue / 1024.0) * 5000;
-    // return millivolts / 10;
-    // kan nog standaard waarde zoals 25 graden
-    
-    //Serial.println("Received 1st temperature: " + String(a));
-    //Serial.println("Received 2nd temperature: " + String(b));
-    // Als placeholder, retourneer een constante waarde:
-    return 25.0;
-}
+
 /*      SD card       */
 void listDir(fs::FS &fs, const char * dirname, uint8_t levels){
   Serial.printf("Listing directory: %s\n", dirname);

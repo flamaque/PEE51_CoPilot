@@ -68,7 +68,7 @@ int EC_PIN = 39;
 int CurrentPin = 33;
 
 /*          pH sensor                       */
-DFRobot_PH ph;
+ESP_PH ph;
 int PH_PIN = 34;
 
 /*          Test for Array of JSON Objects         */
@@ -82,15 +82,15 @@ Measurement measurement[MaxMeasurements];
 
 int h2Amount = 5;
 int coAmount = 5;
-int flowRateAmount = 50;
-int flowRate2Amount = 50;
+int flowRateAmount = 25;
+int flowRate2Amount = 25;
 int temperatureAmount = 10;
 int phValueAmount = 25;
 int ecValueAmount = 25;
 int humidityAmount = 5;
 int ds18b20Amount = 10;
-int voltAmount = 50;
-int acsAmount = 50;
+int voltAmount = 25;
+int acsAmount = 25;
 // extern const int dht22_tempInterval, phValueInterval, dht22_humInterval, ecValueInterval, flowRateInterval, flowRate2Interval, acsValueFInterval, ds18b20Interval, voltInterval, h2Interval, coInterval;
 
 const int numMeasurements = std::max({temperatureAmount, phValueAmount, humidityAmount, ecValueAmount, flowRateAmount, flowRate2Amount, acsAmount, ds18b20Amount, h2Amount, coAmount, voltAmount});
@@ -649,8 +649,8 @@ void BluetoothListen(void *parameter)
           // File operations go here
           if (message == "1")
           {
-            Serial.println("Sending measurements.txt");
-            sendFileOverBluetooth("/measurements.txt");
+            Serial.println("Sending config.txt");
+            sendFileOverBluetooth("/config.txt");
             // ... (other file operations)
           }
           else if (message == "2")
@@ -1027,7 +1027,6 @@ void setup()
   stateBigOled = 1;
   getTime();
   savedTimestamp = getSavedTimestamp();
-  // savedTimestamp = 1718108541303745;
   vTaskDelay(100 / portTICK_PERIOD_MS);
   // initialize_gsm();
   vTaskDelay(1000 / portTICK_PERIOD_MS);
@@ -1087,11 +1086,11 @@ void setup()
   esp_err_t esp_wifi_stop();
 
   analogReadResolution(12);
-//  Serial.println("Display hight: " + String(bigOled.getDisplayHeight()) + "Display width: " + String(bigOled.getDisplayWidth()));
+  //Serial.println("Display hight: " + String(bigOled.getDisplayHeight()) + "Display width: " + String(bigOled.getDisplayWidth()));
   xTaskCreatePinnedToCore(Measuring, "Measuring", 8192, NULL, 2, &Task1, 1);
   xTaskCreatePinnedToCore(DisplayMeasurements, "Display Measurements", 2048, NULL, 0, &Task2, 0);
-  xTaskCreatePinnedToCore(sendArray, "Send Array", 8192, NULL, 2, &Task3, 0);
-  // xTaskCreatePinnedToCore(BluetoothListen, "Listen to Bluetooth", 1024, NULL, 0, &Task4, 0); 
+  xTaskCreatePinnedToCore(sendArray, "Send Array", 8192, NULL, 3, &Task3, 0);
+  xTaskCreatePinnedToCore(BluetoothListen, "Listen to Bluetooth", 1024, NULL, 0, &Task4, 0); 
   xTaskCreatePinnedToCore(Counting, "Count pulses", 2048, NULL, 2, &Task5, 1);
 }
 
