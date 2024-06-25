@@ -1,29 +1,29 @@
 #ifndef CONFIG_H
 #define CONFIG_H
+//#include "DFRobot_PH.h"
+//#include <Wire.h>
+//#include "esp_attr.h"
 #include <Arduino.h>
 #include "MQUnifiedsensor.h"
 #include <HardwareSerial.h>
 #include <U8g2lib.h>
-//#include <Wire.h>
 #include <DallasTemperature.h>
 #include <OneWire.h>
 #include "BluetoothSerial.h"
-#include <SD.h>
-#include <SPI.h>
-//#include "DFRobot_PH.h"
+#include <SD.h> //Changed uint8_t max_files=5 to uint8_t max_files=2
+//#include <SPI.h>
+//#include "FS.h"
 #include <time.h>
 #include <nvs_flash.h>
-#include <nvs.h>
-//#include "esp_attr.h"
+//#include <nvs.h>
 #include "DFRobot_ESP_EC.h"
-#include <stdio.h>
+#include <EEPROM.h>
+//#include <stdio.h>
 #include "freertos/FreeRTOS.h"
 #include "freertos/portmacro.h"
 #include "freertos/task.h"
 #include "driver/pcnt.h"
-#include "freertos/ringbuf.h"
-#include "soc/lldesc.h"
-#include <EEPROM.h>
+//#include "soc/lldesc.h"
 #include "ESP_PH.h" // library van de sensormaker
 
 void BluetoothListen(void *parameter);
@@ -77,7 +77,7 @@ void saveTimestamp(uint64_t timestamp);
 uint64_t getSavedTimestamp();
 extern uint64_t savedTimestamp;
 void parseDatetime();
-//extern HardwareSerial gsmSerial;
+extern String datetime_gsm;
 
 extern String apn, apn_User, apn_Pass;
 extern char httpapi[];
@@ -131,9 +131,8 @@ void logMeasurement(String measurement);
 void sendFileOverBluetoothInOneGo(const char* path);
 
 /*      Configuration     */
-extern int buttonbigOled, buttonsmallOled;
+extern int buttonbigOled;
 void buttonInterrupt_bigOled();
-void buttonInterrupt_smallOled();
 
 /*      Ph Sensor         */
 extern ESP_PH ph;

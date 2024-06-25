@@ -1,7 +1,7 @@
 #include "config.h"
 extern HardwareSerial gsmSerial;
 volatile int stateBigOled = 1;
-String response, longitude, latitude, date, time_gsm, jsonPayload = "";
+String response, longitude, latitude, date, time_gsm, jsonPayload, datetime_gsm = "";
 
 void readGsmResponse() {
     char c;
@@ -34,7 +34,8 @@ void parseDatetime() {
   bool validResponse = false;
   while (!validResponse) {
     Serial.println("Requesting datetime...");
-    gsmSerial.println("AT+CIPGSMLOC=1,1");
+    gsmSerial.println("AT+CIPGSMLOC=2,1");
+    //gsmSerial.println("AT+CIPGSMLOC=1,1");
     vTaskDelay(100 / portTICK_PERIOD_MS);
     readGsmResponse();
     String resp = response;
@@ -117,6 +118,8 @@ void parseDatetime() {
     Serial.println("Parsed Latitude: " + latitude);
     Serial.println("Parsed Longitude: " + longitude);
     Serial.println("time_gsm created in parseDatetime: " + time_gsm);
+    datetime_gsm = date + " " + time_gsm;
+    Serial.println("datetime_gsm created in parseDatetime: " + datetime_gsm);
   }
 }
 
