@@ -59,7 +59,7 @@ void printCMDList(Measurement list);
 /*      Configuration     */
 extern bool sendhttp;
 extern String payload;
-
+extern bool Posting;
 /*      Display      */
 //U8G2_SSD1306_128X64_NONAME_1_HW_I2C 
 extern U8G2_SSD1306_128X64_NONAME_1_HW_I2C bigOled;
@@ -86,15 +86,20 @@ extern char httpapi[];
 void getTime();
 void getTimeNow();  
 void post_http(String j); 
+void post_http2(String a); 
 time_t convertToUnixTimestamp(String date, String time);
 void readGsmResponse();
+String readGsmResponse3();
 void initialize_gsm();
 void initialize_gsm2();
-
+extern String response;
 
 /*      Display Setup     */
 void init_displays();
 
+/* voltage sensor */
+float readVoltage();
+float Dennis();
 
 /*      DS18B20 sensor       */
 //extern struct Measurement measurement;

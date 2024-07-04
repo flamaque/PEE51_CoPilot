@@ -1,4 +1,30 @@
 #include "config.h"
+/* voltage sensor   */
+float voltage = 0.00;
+extern int voltPin;
+float readVoltage()
+{
+  const int numSamples = 100;
+  float adc_voltage_sum = 0.0;
+  float R1 = 1000.0;
+  float R2 = 10000.0;
+  // Read ADC value multiple times to average
+  for (int i = 0; i < numSamples; i++)
+  {
+    int adc = analogRead(voltPin);
+    adc_voltage_sum += adc * (3.3 / 4095.0);
+    delay(1); // Small delay to allow for better averaging
+  }
+
+  // Average the ADC voltage
+  float adc_voltage = adc_voltage_sum / numSamples;
+  // Serial.println("ADC voltage: " + String(adc_voltage));
+
+  // Calculate the sensor voltage
+  voltage = (adc_voltage * R2) / (R1 + R2);
+
+  return voltage;
+}
 /*      DS18B20 sensor            */
 OneWire oneWire(DS18B20_PIN);                                               // Setup a oneWire instance to communicate with any OneWire devices (not just Maxim/Dallas temperature ICs)
 DallasTemperature sensors(&oneWire);                                        // Pass our oneWire reference to Dallas Temperature.
