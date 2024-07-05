@@ -25,6 +25,7 @@
 #include "driver/pcnt.h"
 //#include "soc/lldesc.h"
 #include "ESP_PH.h" // library van de sensormaker
+#include <ArduinoJson.h>
 
 void BluetoothListen(void *parameter);
 void DisplayMeasurements(void *parameter);
