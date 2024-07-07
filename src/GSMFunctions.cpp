@@ -11,33 +11,29 @@ void readGsmResponse()
     response = "";
     unsigned long startTime = millis();
     unsigned long lastReadTime = millis();
-    const unsigned long readTimeout = 250; // Time to wait for new data in milliseconds
-
-    while (millis() - startTime < 10000)
-    { // Overall timeout after 10 seconds (was 5 but httpdata didn't work correctly)
-        while (gsmSerial.available() > 0)
+    const unsigned long readTimeout = 500; // Time to wait for new data in milliseconds
+       
+    while (1){
+        if (gsmSerial.available() > 0)
         {
             uint8_t byteFromSerial = gsmSerial.read();
             c = char(byteFromSerial);
             response += c;
-            printf("%c", c);
+            //printf("%c", c);
             //Serial.write(byteFromSerial);
             if (stateBigOled == 1)
-            {
-                if(Posting==false){                    
-                    u8g2log.print(c);
-                }
+            {            
+                u8g2log.print(c);                
             }
             lastReadTime = millis(); // Update last read time
             // vTaskDelay(1/portTICK_PERIOD_MS);//delay(5);
         }
-        // Check if there's been no data read for the readTimeout duration
-        if (millis() - lastReadTime > readTimeout)
-        {
-            //printf("(printf) Response: %s\n", response.c_str());
+        if (millis() - lastReadTime > readTimeout){
+            Serial.println("readGsmResponse timeout");
             break;
         }
-    }
+    }        
+    printf("(printf) Response: %s\n", response.c_str());            
 }
 
 void readGsmResponse2() {
@@ -67,7 +63,6 @@ void readGsmResponse2() {
             }
             lastReadTime = millis(); // Update last read time
         }
-
         // Check if there's been no data read for the readTimeout duration
         if (millis() - lastReadTime > readTimeout) {
             break;
@@ -124,7 +119,6 @@ String readGsmResponse3()
     }
     return response;
 }
-
 
 void getTime()
 {
@@ -225,7 +219,6 @@ void getTime()
     convertToUnixTimestamp(date, time_gsm);
     vTaskDelay(100 / portTICK_PERIOD_MS);
 }
-
 
 /*
 void parseDatetime()
@@ -485,8 +478,6 @@ void post_http(String jsonPayload)
     printf("Time initialize and setting: %d ms \n", endTime - startTime);
 
     String httpDataCommand = "AT+HTTPDATA=" + String(dataSize) + ",5000"; //20000
-    vTaskDelay(50 / portTICK_PERIOD_MS);
-
     gsmSerial.println(httpDataCommand);
     readGsmResponse();
     vTaskDelay(500 / portTICK_PERIOD_MS);
@@ -522,10 +513,11 @@ void post_http2(String jsonPayload)
         Serial.println("No data to post.");
         return;
     }
+    
     gsmSerial.println("AT+HTTPINIT=?");
-    readGsmResponse2();
+    readGsmResponse();
     gsmSerial.println("AT+HTTPINIT");
-    readGsmResponse2();
+    readGsmResponse();
     TickType_t EndTime1 = xTaskGetTickCount();
     printf("httpinit=? and httpinit: %d ms \n", EndTime1 - startTime);
 

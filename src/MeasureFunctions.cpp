@@ -446,6 +446,9 @@ void SD_init()
   if (!SD.begin(CS_PIN))
   {
     Serial.println("SD Card initialization failed!");
+    Serial.println("Log file not created and configuration not read.");
+    Serial.println("Restart ESP32!");
+    return;
     // Light up RED LED
   }
   Serial.println("SD Card initialized.");

@@ -33,7 +33,7 @@ void Measuring(void *parameter);
 void sendArray(void *parameter);
 void Counting(void *parameter);
 
-const int MaxMeasurements = 100;
+const int MaxMeasurements = 50;
 struct Measurement {
   float phValue;
   float ecValue;
