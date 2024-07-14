@@ -4,7 +4,7 @@ float voltage = 0.00;
 extern int voltPin;
 float readVoltage()
 {
-  const int numSamples = 100;
+  const int numSamples = 50;
   float adc_voltage_sum = 0.0;
   float R1 = 1000.0;
   float R2 = 10000.0;
@@ -13,18 +13,17 @@ float readVoltage()
   {
     int adc = analogRead(voltPin);
     adc_voltage_sum += adc * (3.3 / 4095.0);
-    delay(1); // Small delay to allow for better averaging
+     vTaskDelay(5 / portTICK_PERIOD_MS); // Small delay to allow for better averaging
   }
-
-  // Average the ADC voltage
-  float adc_voltage = adc_voltage_sum / numSamples;
+  
+  float adc_voltage = adc_voltage_sum / numSamples; // Average the ADC voltage
   // Serial.println("ADC voltage: " + String(adc_voltage));
-
-  // Calculate the sensor voltage
-  voltage = (adc_voltage * R2) / (R1 + R2);
+  //printf("R1: %f, R2: %f, sampling: %d, ADC voltage: %f\n", R1, R2, numSamples, adc_voltage);
+  voltage = (adc_voltage * R2) / (R1 + R2);  // Calculate the sensor voltage
 
   return voltage;
 }
+
 /*      DS18B20 sensor            */
 OneWire oneWire(DS18B20_PIN);                                               // Setup a oneWire instance to communicate with any OneWire devices (not just Maxim/Dallas temperature ICs)
 DallasTemperature sensors(&oneWire);                                        // Pass our oneWire reference to Dallas Temperature.
@@ -63,7 +62,9 @@ void printDS18B20Address()
       Serial.println();
     }
   }
+  sensors.setResolution(10);
 }
+
 // Loop through each device, print out DS18B20 temperature data
 void AllDS18B20Sensors(Measurement &measurement)
 {
@@ -103,7 +104,6 @@ void AllDS18B20Sensors(Measurement &measurement)
       }
     }
   }
-  sensors.setResolution(9);
 }
 
 /*              Setup Flowsensor    */
@@ -243,6 +243,7 @@ void init_displays()
 }
 
 /*              Setup Currentsensor    */
+extern int CurrentPin;
 float CurrentSensor_quick()
 {
   float current_voltage, current = 0.0;
@@ -250,7 +251,7 @@ float CurrentSensor_quick()
   float R1 = 1000.0;
   float R2 = 2000.0;
 
-  const int numSamples = 100;
+  const int numSamples = 50;
   float adc_voltage_sum = 0.0;
 
   // Read ADC value multiple times to average
@@ -258,7 +259,7 @@ float CurrentSensor_quick()
   {
     int adc = analogRead(CurrentPin);
     adc_voltage_sum += adc * (3.3 / 4095.0);
-    delay(1); // Small delay to allow for better averaging
+  vTaskDelay(5 / portTICK_PERIOD_MS);// Small delay to allow for better averaging
   }
 
   // Average the ADC voltage
@@ -278,6 +279,7 @@ float CurrentSensor_quick()
   // Calculate the current
   current = (current_voltage - zeroCurrentVoltage) / sensitivity;
   // Serial.println("Current: " + String(current));
+  //printf("R1: %f, R2: %f, sampling: %d, ADC voltage: %f\n", R1, R2, numSamples, adc_voltage);
 
   return current;
 }
@@ -311,7 +313,7 @@ float Cond()
 /*      pH Sensor             */
 #define ESPADC 4096.0   // the esp Analog Digital Conversion value
 #define ESPVOLTAGE 3300 // the esp voltage supply value
-// #define PH_PIN 35       // the esp gpio data pin number
+extern int PH_PIN;
 float voltage_pH, phValue;
 float temperature_pH = 20.0; // Fixed temperature value kan vervangen worden wanneer temp sensor gebruikt wordt
 
@@ -581,6 +583,7 @@ void removeDir(fs::FS &fs, const char * path){
   }
 }
 */
+
 /*      Bluetooth Setup   */
 void sendFileOverBluetooth(const char *path)
 {
@@ -707,7 +710,7 @@ void buttonInterrupt_bigOled()
   }
 }
 
-void buttonInterrupt_smallOled()
-{
-  buttonSmallPressed = true; // Set button press flag
-}
+// void buttonInterrupt_smallOled()
+// {
+//   buttonSmallPressed = true; // Set button press flag
+// }

@@ -26,6 +26,7 @@
 //#include "soc/lldesc.h"
 #include "ESP_PH.h" // library van de sensormaker
 #include <ArduinoJson.h>
+extern int voltPin, CurrentPin, EC_PIN, PH_PIN;
 
 void BluetoothListen(void *parameter);
 void DisplayMeasurements(void *parameter);
