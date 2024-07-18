@@ -26,7 +26,6 @@ void readGsmResponse()
                 u8g2log.print(c);                
             }
             lastReadTime = millis(); // Update last read time
-            // vTaskDelay(1/portTICK_PERIOD_MS);//delay(5);
         }
         if (millis() - lastReadTime > readTimeout){
             Serial.println("readGsmResponse timeout");

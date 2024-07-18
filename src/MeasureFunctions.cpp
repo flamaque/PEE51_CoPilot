@@ -13,7 +13,7 @@ float readVoltage()
   {
     int adc = analogRead(voltPin);
     adc_voltage_sum += adc * (3.3 / 4095.0);
-     vTaskDelay(5 / portTICK_PERIOD_MS); // Small delay to allow for better averaging
+     vTaskDelay(2 / portTICK_PERIOD_MS); // Small delay to allow for better averaging
   }
   
   float adc_voltage = adc_voltage_sum / numSamples; // Average the ADC voltage
@@ -29,7 +29,6 @@ OneWire oneWire(DS18B20_PIN);                                               // S
 DallasTemperature sensors(&oneWire);                                        // Pass our oneWire reference to Dallas Temperature.
 int numberOfDevices;                                                        // Number of temperature devices found
 DeviceAddress tempDeviceAddress;                                            // We'll use this variable to store a found device address
-volatile float DS18B20_1, DS18B20_2, DS18B20_3, DS18B20_4, DS18B20_5 = 0.0; // Initialize to a default value
 
 // DS18B20 Find and print Address
 void printDS18B20Address()
@@ -65,8 +64,9 @@ void printDS18B20Address()
   sensors.setResolution(10);
 }
 
+/*
 // Loop through each device, print out DS18B20 temperature data
-void AllDS18B20Sensors(Measurement &measurement)
+void AllDS18B20Sensors()
 {
   sensors.requestTemperatures(); // Send the command to get temperatures
   int numberOfDevices = sensors.getDeviceCount();
@@ -80,31 +80,53 @@ void AllDS18B20Sensors(Measurement &measurement)
       // Assign readings to variables Tempc1 and Tempc2
       if (i == 0)
       {
-        measurement.DS18B20_1 = tempC;
+        if(isnan(tempC)||isinf(tempC)){
+          tempC = 0.0;
+        } 
+        else{
+          values["T1"] = tempC;
+        }
       }
       else if (i == 1)
       {
-        // DS18B20_2 = tempC;
-        measurement.DS18B20_2 = tempC;
+        if(isnan(tempC)||isinf(tempC)){
+          tempC = 0.0;
+        } 
+        else{
+          values["T2"] = tempC;
+        }
       }
       else if (i == 2)
       {
-        // DS18B20_3 = tempC;
-        measurement.DS18B20_3 = tempC;
+        if(isnan(tempC)||isinf(tempC)){
+          tempC = 0.0;
+        } 
+        else{
+          values["T3"] = tempC;
+          }        
       }
       else if (i == 3)
       {
-        // DS18B20_4 = tempC;
-        measurement.DS18B20_4 = tempC;
+        if(isnan(tempC)||isinf(tempC)){
+          tempC = 0.0;
+        }
+        else{
+          values["T4"] = tempC;
+        }
       }
       else if (i == 4)
       {
-        // DS18B20_5 = tempC;
-        measurement.DS18B20_5 = tempC;
+        if(isnan(tempC)||isinf(tempC)){
+          tempC = 0.0;
+        }
+        else{
+        values["T5"] = tempC;
+      }
       }
     }
   }
 }
+*/
 
 /*              Setup Flowsensor    */
 void pcnt_example_init(pcnt_unit_t unit, int pulse_gpio_num)
@@ -144,7 +166,6 @@ float RatioMQ7CleanAir = 27.5;
 float RatioMQ8CleanAir = 70.0;
 void mq7_init(MQUnifiedsensor &MQ7)
 {
-  vTaskDelay(500 / portTICK_PERIOD_MS);
   // CO
   MQ7.setRegressionMethod(1); //_PPM =  a*ratio^b
   // MQ7.setA(521853); MQ7.setB(-3.821); // Configurate the ecuation values to get Benzene concentration
@@ -181,7 +202,6 @@ void mq7_init(MQUnifiedsensor &MQ7)
 
 void mq8_init(MQUnifiedsensor &MQ8)
 {
-  vTaskDelay(500 / portTICK_PERIOD_MS);
   // Hydrogen
   MQ8.setRegressionMethod(1); //_PPM =  a*ratio^b
   MQ8.setA(976.97);
@@ -259,7 +279,7 @@ float CurrentSensor_quick()
   {
     int adc = analogRead(CurrentPin);
     adc_voltage_sum += adc * (3.3 / 4095.0);
-  vTaskDelay(5 / portTICK_PERIOD_MS);// Small delay to allow for better averaging
+    vTaskDelay(2 / portTICK_PERIOD_MS);// Small delay to allow for better averaging
   }
 
   // Average the ADC voltage

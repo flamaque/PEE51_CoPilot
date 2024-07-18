@@ -34,29 +34,16 @@ void Measuring(void *parameter);
 void sendArray(void *parameter);
 void Counting(void *parameter);
 
-const int MaxMeasurements = 50;
-struct Measurement {
-  float phValue;
-  float ecValue;
-  float AcsValueF;
-  float flowRate;
-  float flowRate2;
-  float Volt;
-  float DS18B20_1;
-  float DS18B20_2;
-  float DS18B20_3;
-  float DS18B20_4;
-  float DS18B20_5;
-  float temperature;
-  float humidity;
-  float ppmH;
-  float ppmCO;
-  uint64_t ts;
-}; 
-extern Measurement measurement[MaxMeasurements];
+//extern const int bufferSize;
+//extern StaticJsonDocument<bufferSize> doc2;
+extern OneWire oneWire;                                               // Setup a oneWire instance to communicate with any OneWire devices (not just Maxim/Dallas temperature ICs)
+extern DallasTemperature sensors;                                        // Pass our oneWire reference to Dallas Temperature.
+extern DeviceAddress tempDeviceAddress;                                            // We'll use this variable to store a found device address
+
+//extern JsonObject values;
+extern float t, pHvalue;
+
 extern QueueHandle_t measurementQueue; // Define the queue handle
-void printCMD();
-void printCMDList(Measurement list);
 
 /*      Configuration     */
 extern bool sendhttp;
@@ -107,8 +94,7 @@ float Dennis();
 //extern struct Measurement measurement;
 extern const int DS18B20_PIN;
 void printDS18B20Address();
-void AllDS18B20Sensors(Measurement& measurement);
-//void AllDS18B20Sensors(Measurement& measurement);
+void AllDS18B20Sensors();
 
 /*      Flow sensor       */
 void pcnt_example_init(pcnt_unit_t unit, int pulse_gpio_num);
