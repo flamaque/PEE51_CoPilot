@@ -4,7 +4,7 @@
 HardwareSerial gsmSerial(2); // Use UART2
 #define GSM_RX_PIN 17        // 16
 #define GSM_TX_PIN 16        // 17
-#define GSM_RST_PIN 12       // Not connected
+#define GSM_RST_PIN 4       // Not connected
 String apn = "data.lycamobile.nl";
 String apn_User = "lmnl";
 String apn_Pass = "plus";
