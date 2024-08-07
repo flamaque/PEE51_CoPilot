@@ -143,4 +143,8 @@ float Cond();
 extern int CurrentPin;
 float CurrentSensor_quick();
 
+extern float steinhart;
+extern float temp_flow;
+float Read_NTC();
+
 #endif // CONFIG_H

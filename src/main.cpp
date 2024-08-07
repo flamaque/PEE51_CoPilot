@@ -1,4 +1,5 @@
 #include "config.h"
+#include <driver/adc.h>
 
 /*      GSM Module Setup     */
 HardwareSerial gsmSerial(2); // Use UART2
@@ -33,7 +34,7 @@ const int DS18B20_PIN = 27;
 
 /*      Setup Flowsensor                */
 volatile float flowRate, flowRate2, flowRate3 = 0.00;
-const int flowSensorPin = 36; // 14
+const int flowSensorPin = 36; 
 const float flowSensorCalibration = 21.00;
 
 const int flowSensor2Pin = 26;
@@ -47,6 +48,18 @@ const float flowSensorCalibration3 = 11.0;
 #define PCNT_UNIT1 PCNT_UNIT_0
 #define PCNT_UNIT2 PCNT_UNIT_1
 // #define PCNT_UNIT3 PCNT_UNIT_2
+
+/*      Flowsensor Temperature        */
+#define NTC_PIN 12 // ADC2_5 
+uint16_t nominalResistance  =   50000;
+/// The resistance value of the serial resistor used in the conductivity sensor circuit.
+uint16_t serialResistance    =  3230;
+uint16_t bCoefficient         = 3950;
+#define TEMPERATURENOMINAL 25
+#define NUMSAMPLES         5 
+#define NTC_ADC_RESOLUTION 0xFFF
+#define VERBOSE_SENSOR_ENABLED 1
+float temp_flow;                   // Global temperature reading
 
 /*      Bluetooth                       */
 BluetoothSerial SerialBT;
@@ -695,6 +708,7 @@ void Measuring(void *parameter)
               else
               {
                 obj["T1"] = tempC;
+                DS18B20_1 = tempC;
               }
             }
             else if (i == 1)
@@ -706,6 +720,7 @@ void Measuring(void *parameter)
               else
               {
                 obj["T2"] = tempC;
+                DS18B20_2 = tempC;
               }
             }
             else if (i == 2)
@@ -717,6 +732,7 @@ void Measuring(void *parameter)
               else
               {
                 obj["T3"] = tempC;
+                DS18B20_3 = tempC;
               }
             }
             else if (i == 3)
@@ -728,6 +744,7 @@ void Measuring(void *parameter)
               else
               {
                 obj["T4"] = tempC;
+                DS18B20_4 = tempC;
               }
             }
             else if (i == 4)
@@ -739,6 +756,7 @@ void Measuring(void *parameter)
               else
               {
                 obj["T5"] = tempC;
+                DS18B20_5 = tempC;
               }
             }
           }
@@ -892,6 +910,8 @@ void Measuring(void *parameter)
           //delete &doc2;
         }
       }
+      temp_flow = Read_NTC();   // Read temperature
+      Serial.println("Temperature of flowsenor: " + String(temp_flow) + "°C");
     }
 
     vTaskDelay(50 / portTICK_PERIOD_MS);
@@ -912,6 +932,7 @@ void DisplayMeasurements(void *parameter)
   Serial.println("Inside Display Measurements task.");
   for (;;)
   {
+    float temp_flow = Read_NTC();
     String flowDis = "Flow: " + String(flowRate) + " L/min";
     String flowDis2 = "Flow2: " + String(flowRate2) + " L/min";
     String flowDis3 = "Flow3: " + String(flowRate3) + " L/min";
@@ -928,7 +949,7 @@ void DisplayMeasurements(void *parameter)
     String pH_Dis = "pH__: " + String(phvalue) + "";
     String VoltDis = "Volt: " + String(Volt) + " V";
     String ecDis = "EC__: " + String(ecValue) + " ms/cm";
-
+    String temp_flowDis = "Tflow: " + String(temp_flow) + " °C";
     // #1 u8g2_font_micro_mr
     // #2 u8g2_font_3x5im_mr
     // For horizontal display u8g2_font_tinytim_tr
@@ -953,7 +974,7 @@ void DisplayMeasurements(void *parameter)
         bigOled.drawStr(0, 96, DS18B20_5_Dis.c_str());
         bigOled.drawStr(0, 104, flowDis.c_str());
         bigOled.drawStr(0, 112, flowDis2.c_str());
-        bigOled.drawStr(0, 120, flowDis3.c_str());
+        bigOled.drawStr(0, 120, temp_flowDis.c_str());
         bigOled.drawStr(0, 128, coDis.c_str());
       } while (bigOled.nextPage());
     }
@@ -1133,7 +1154,7 @@ void Counting(void *parameter)
       float frequency1 = (float)pulses1 / (elapsed_time / 1000.0); // Frequency in Hz
       flowRate = frequency1 / flowSensorCalibration;
       // Update last count for unit 1
-      last_count1 = count1;
+      last_count1 = count1;      
       // Serial.printf("Frequency on GPIO %d: %.2f Hz\n", PCNT_INPUT_SIG_IO1, frequency1);
       // Serial.println("flowRate: " + String(flowRate));
     }
@@ -1170,6 +1191,54 @@ void Counting(void *parameter)
 }
 
 TaskHandle_t Task1, Task2, Task3, Task4, Task5 = NULL;
+
+float Read_NTC()
+{
+  uint8_t i;
+  uint16_t sample;
+  float average = 0;
+  
+  // take N samples in a row, with a slight delay
+  for (i=0; i< NUMSAMPLES; i++)
+  {
+    sample = analogRead(NTC_PIN);
+    average += sample;
+    delay(10);
+  }
+  average /= NUMSAMPLES;
+
+  #ifdef VERBOSE_SENSOR_ENABLED  
+  Serial.print("1 sample analog reading "); 
+  Serial.println(sample);
+  Serial.print("Average analog reading "); 
+  Serial.println(average);
+  #endif
+ 
+  // convert the value to resistance
+  average = NTC_ADC_RESOLUTION / average - 1;
+  average = serialResistance * average;
+
+  #ifdef VERBOSE_SENSOR_ENABLED
+  Serial.print("Thermistor resistance "); 
+  Serial.println(average);
+  #endif
+ 
+  float steinhart;
+  steinhart = average / nominalResistance;     // (R/Ro)
+  steinhart = log(steinhart);                  // ln(R/Ro)
+  steinhart /= bCoefficient;                   // 1/B * ln(R/Ro)
+  steinhart += 1.0 / (TEMPERATURENOMINAL + 273.15); // + (1/To)
+  steinhart = 1.0 / steinhart;                 // Invert
+  steinhart -= 273.15;                         // convert to C
+ 
+  #ifdef VERBOSE_SENSOR_ENABLED
+  Serial.print("Temperature "); 
+  Serial.print(steinhart);
+  Serial.println(" *C");
+  #endif
+  
+  return steinhart;
+}
 
 void processLine(String line)
 {
@@ -1436,10 +1505,10 @@ void setup()
   // gsmSerial.println("AT&V"); //Show saved GSM settings
   nvs_flash_init();
   stateBigOled = 1;
-  getTime();
+  //getTime();
   savedTimestamp = getSavedTimestamp();
   vTaskDelay(100 / portTICK_PERIOD_MS);
-  initialize_gsm();
+  //initialize_gsm();
   vTaskDelay(1000 / portTICK_PERIOD_MS);
   mq7_init(MQ7);
   vTaskDelay(1000 / portTICK_PERIOD_MS);
@@ -1559,7 +1628,12 @@ void setup()
 
   // Serial.println("Display hight: " + String(bigOled.getDisplayHeight()) + "Display width: " + String(bigOled.getDisplayWidth()));
   // xTaskCreatePinnedToCore(MeasureAndForm, "MeasureAndForm", 4500, NULL, 1, &Task1, 1);
-  xTaskCreatePinnedToCore(sendArray, "Send Array", 7168, NULL, 3, &Task1, 0); // 8192
+  
+  temp_flow = Read_NTC();   // Read temperature
+  Serial.println("Temperature of flowsenor: ");
+  Serial.println(temp_flow);
+  vTaskDelay(100 / portTICK_PERIOD_MS);
+  xTaskCreatePinnedToCore(sendArray, "Send Array", 8192, NULL, 3, &Task1, 0); // 8192
   xTaskCreatePinnedToCore(Measuring, "Measuring", 4096, NULL, 2, &Task2, 1);
   xTaskCreatePinnedToCore(DisplayMeasurements, "Display Measurements", 2048, NULL, 0, &Task3, 0);
   xTaskCreatePinnedToCore(BluetoothListen, "Listen to Bluetooth", 5120, NULL, 0, &Task4, 0);
