@@ -26,6 +26,9 @@
 //#include "soc/lldesc.h"
 #include "ESP_PH.h" // library van de sensormaker
 #include <ArduinoJson.h>
+#include <sstream>
+#include <iomanip>
+
 extern int voltPin, CurrentPin, EC_PIN, PH_PIN;
 
 void BluetoothListen(void *parameter);
@@ -92,13 +95,17 @@ float Dennis();
 
 /*      DS18B20 sensor       */
 //extern struct Measurement measurement;
-extern const int DS18B20_PIN;
+extern int DS18B20_PIN;
 void printDS18B20Address();
 void AllDS18B20Sensors();
 
 /*      Flow sensor       */
 void pcnt_example_init(pcnt_unit_t unit, int pulse_gpio_num);
 extern volatile float flowRate, flowRate2;
+/*      NTC sensor       */
+extern float steinhart;
+extern float temp_flow;
+float Read_NTC();
 
 /*      Bluetooth          */
 extern BluetoothSerial SerialBT;
@@ -142,9 +149,7 @@ float Cond();
 /*      Current Sensor   */
 extern int CurrentPin;
 float CurrentSensor_quick();
+float CurrentSensor_ACS724();
 
-extern float steinhart;
-extern float temp_flow;
-float Read_NTC();
 
 #endif // CONFIG_H

@@ -4,7 +4,7 @@ float voltage = 0.00;
 extern int voltPin;
 float readVoltage()
 {
-  const int numSamples = 50;
+  const int numSamples = 100;
   float adc_voltage_sum = 0.0;
   float R1 = 1000.0;
   float R2 = 10000.0;
@@ -29,7 +29,6 @@ OneWire oneWire(DS18B20_PIN);                                               // S
 DallasTemperature sensors(&oneWire);                                        // Pass our oneWire reference to Dallas Temperature.
 int numberOfDevices;                                                        // Number of temperature devices found
 DeviceAddress tempDeviceAddress;                                            // We'll use this variable to store a found device address
-
 // DS18B20 Find and print Address
 void printDS18B20Address()
 {
@@ -61,7 +60,7 @@ void printDS18B20Address()
       Serial.println();
     }
   }
-  sensors.setResolution(10);
+  sensors.setResolution(12); // Set the resolution to 11 bits for 0.5°C resolution
 }
 
 /*
@@ -232,19 +231,13 @@ void mq8_init(MQUnifiedsensor &MQ8)
 }
 
 /*      Display Setup               */
-/*      Switching screens           */
-volatile bool buttonBigPressed, buttonSmallPressed = false;
-
 U8G2_SSD1306_128X64_NONAME_1_HW_I2C bigOled(U8G2_R0, /* reset=*/U8X8_PIN_NONE, /* clock=*/22, /* data=*/21);
-// U8G2_SH1106_128X64_NONAME_1_HW_I2C bigOled(U8G2_R0, /* reset=*/ U8X8_PIN_NONE, /* clock=*/ 22, /* data=*/ 21);
 
-// U8G2_SH1106_128X64_NONAME_1_HW_I2C
 // For GSMSerial output on OLED
 #define U8LOG_WIDTH 12 // 25
 #define U8LOG_HEIGHT 6 // 8+
 uint8_t u8log_buffer[U8LOG_WIDTH * U8LOG_HEIGHT];
 U8G2LOG u8g2log;
-
 void init_displays()
 {
   // Serial.println("Display hight: " + String(bigOled.getDisplayHeight()) + "Display width: " + String(bigOled.getDisplayWidth()));
@@ -260,7 +253,11 @@ void init_displays()
   u8g2log.setRedrawMode(1);       // 0: Update screen with newline, 1: Update screen for every char
   Serial.println("Displays initialized!");
   // Serial.println("Big Display height: " + bigOled.getDisplayHeight() + " Big Display Width: "  + bigOled.getDisplayHeight());
+
 }
+/*      Switching screens           */
+volatile bool buttonBigPressed, buttonSmallPressed = false;
+
 
 /*              Setup Currentsensor    */
 extern int CurrentPin;
@@ -268,10 +265,10 @@ float CurrentSensor_quick()
 {
   float current_voltage, current = 0.0;
 
-  float R1 = 1000.0;
-  float R2 = 2000.0;
+  float R1 = 3300.0; //1000.0;
+  float R2 = 6800.0; //2000.0;
 
-  const int numSamples = 50;
+  const int numSamples = 100;
   float adc_voltage_sum = 0.0;
 
   // Read ADC value multiple times to average
@@ -291,15 +288,55 @@ float CurrentSensor_quick()
   // Serial.println("Current voltage: " + String(current_voltage));
 
   // Measure this value when no current is flowing to calibrate zeroCurrentVoltage
-  float zeroCurrentVoltage = 0.48; // Use the previously measured value or measure again
-
+  //float zeroCurrentVoltage = 0.48; // Use the previously measured value or measure again
+  
   // ACS712 sensitivity (e.g., 185mV/A for ACS712-05B)
-  float sensitivity = 0.066; // Change this value based on your specific ACS712 model
+  //float sensitivity = 0.066; // Change this value based on your specific ACS712 model
+
+  //ACS724
+  float zeroCurrentVoltage = 2.38; //Or 1.58V after voltage divider
+  // ACS724 sensitivity 
+  float sensitivity = 0.040; // Change this value based on your specific ACS712 model
 
   // Calculate the current
   current = (current_voltage - zeroCurrentVoltage) / sensitivity;
   // Serial.println("Current: " + String(current));
   //printf("R1: %f, R2: %f, sampling: %d, ADC voltage: %f\n", R1, R2, numSamples, adc_voltage);
+
+  return current;
+}
+float CurrentSensor_ACS724()
+{
+  float current_voltage, current = 0.0;
+  float R1 = 3300.0; //1000.0;
+  float R2 = 6800.0; //2000.0;
+  const int numSamples = 100;
+  float adc_voltage_sum = 0.0;
+
+  // Read ADC value multiple times to average
+  for (int i = 0; i < numSamples; i++)
+  {
+    int adc = analogRead(CurrentPin);
+    adc_voltage_sum += adc * (3.3 / 4095.0);
+    vTaskDelay(2 / portTICK_PERIOD_MS);// Small delay to allow for better averaging
+  }
+
+  // Average the ADC voltage
+  float adc_voltage = adc_voltage_sum / numSamples;
+  // Serial.println("ADC voltage: " + String(adc_voltage));
+
+  // Calculate the sensor voltage
+  current_voltage = (adc_voltage * R2) / (R1 + R2);
+  // Serial.println("Current voltage: " + String(current_voltage));
+
+  // Measure this value when no current is flowing to calibrate zeroCurrentVoltage
+  float zeroCurrentVoltage = 1.58; //2.38; //Or 1.58V after voltage divider
+  float sensitivity = 0.040; // Change this value based on your specific model
+
+  // Calculate the current
+  current = (current_voltage - zeroCurrentVoltage) / sensitivity;
+  // Serial.println("Current: " + String(current));
+  // printf("R1: %f, R2: %f, sampling: %d, ADC voltage: %f\n", R1, R2, numSamples, adc_voltage);
 
   return current;
 }
@@ -337,9 +374,7 @@ extern int PH_PIN;
 float voltage_pH, phValue;
 float temperature_pH = 20.0; // Fixed temperature value kan vervangen worden wanneer temp sensor gebruikt wordt
 
-// wanneer je inf melding krijgt moet je caliberen lees hieronder
-// om de code te laten werken is er een calibratie proces nodig
-// type enterph
+// wanneer je inf melding krijgt moet je caliberen lees hieronder om de code te laten werken is er een calibratie proces nodig type enterph
 // doe ph sensor in 4ph en type calph
 // doe ph sensor in 7ph en type calph
 // type endcalph om compleet te maken.

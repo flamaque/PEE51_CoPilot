@@ -4,7 +4,6 @@ volatile int stateBigOled = 1;
 String response, longitude, latitude, date, time_gsm, jsonPayload, datetime_gsm = "";
 bool Posting = false;
 
-
 void readGsmResponse()
 {
     char c;
