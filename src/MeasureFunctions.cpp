@@ -1,4 +1,23 @@
 #include "config.h"
+
+/**      Flow sensor Dennis     */
+
+#define ADC_PIN 36
+#define NUM_SAMPLES 10
+float flowSens(){
+  int adcValue = 0;
+  int sumAdcValue = 0;
+
+  for (int i = 0; i < NUM_SAMPLES; i++) {
+    adcValue = analogRead(ADC_PIN);
+    sumAdcValue += adcValue;
+    delay(10);  // Small delay between samples
+  }
+
+  int avgAdcValue = sumAdcValue / NUM_SAMPLES;
+  float voltage = (avgAdcValue / 4095.0) * 3.3;  // Convert average ADC value to voltage
+
+}
 /* voltage sensor   */
 float voltage = 0.00;
 extern int voltPin;
@@ -60,7 +79,7 @@ void printDS18B20Address()
       Serial.println();
     }
   }
-  sensors.setResolution(12); // Set the resolution to 11 bits for 0.5°C resolution
+  sensors.setResolution(11); // Set the resolution to 11 bits for 0.5°C resolution
 }
 
 /*

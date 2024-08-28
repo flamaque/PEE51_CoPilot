@@ -31,6 +31,8 @@
 
 extern int voltPin, CurrentPin, EC_PIN, PH_PIN;
 
+float flowSens();
+
 void BluetoothListen(void *parameter);
 void DisplayMeasurements(void *parameter);
 void Measuring(void *parameter);

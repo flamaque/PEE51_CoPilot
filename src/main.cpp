@@ -9,8 +9,8 @@ int GSM_RST_PIN = 4;
 String apn = "data.lycamobile.nl";
 String apn_User = "lmnl";
 String apn_Pass = "plus";
-//char httpapi[] = "http://jrbubuntu.ddns.net:5000/api/telemetry"; // Not yet tested as String
-char httpapi[] = "http://145.131.6.212/api/v1/HR/gl3soo07qchjimbsdwln/telemetry";
+char httpapi[] = "http://jrbubuntu.ddns.net:5000/api/telemetry"; // Not yet tested as String
+//char httpapi[] = "http://145.131.6.212/api/v1/HR/gl3soo07qchjimbsdwln/telemetry";
 String mobileNumber = "+31614504288";
 
 extern time_t timestamp; // Remove extern
@@ -41,6 +41,7 @@ int flowSensor2Pin = 26;
 const float flowSensorCalibration2 = 7.50;
 // const int flowSensor3Pin = 14;
 const float flowSensorCalibration3 = 11.0;
+float frequency2 = 0.0;
 
 #define PCNT_INPUT_SIG_IO1 flowSensorPin  // Pulse Input GPIO for PCNT_UNIT_0
 #define PCNT_INPUT_SIG_IO2 flowSensor2Pin // Pulse Input GPIO for PCNT_UNIT_1
@@ -90,7 +91,7 @@ int PH_PIN = 34;
 /*          Test for Array of JSON Objects         */
 // Define the queue handle
 QueueHandle_t measurementQueue; //= nullptr // Define the queue handle
-const int queueLength = 5;      // was 10, werkte goed maar met gaten in graph
+const int queueLength = 2;  //5    // was 10, werkte goed maar met gaten in graph
 
 // Ctrl + d for multiple cursors
 int currentMeasurementIndex = 0;
@@ -105,11 +106,12 @@ int phValueAmount = 2;
 int ecValueAmount = 2;
 int ds18b20Amount = 8;
 int voltAmount = 25;
+int powerAmount = 25;
 int acsAmount = 25;
 int TempFlowAmount = 5;
 
-const int numMeasurements = std::max({temperatureAmount, phValueAmount, humidityAmount, ecValueAmount, flowRateAmount, flowRate2Amount, acsAmount, ds18b20Amount, h2Amount, coAmount, voltAmount, TempFlowAmount});
-const int totMeasurements = temperatureAmount + phValueAmount + humidityAmount + ecValueAmount + flowRateAmount + flowRate2Amount + acsAmount + ds18b20Amount + h2Amount + coAmount + voltAmount + TempFlowAmount;
+const int numMeasurements = std::max({temperatureAmount, phValueAmount, humidityAmount, ecValueAmount, flowRateAmount, flowRate2Amount, acsAmount, ds18b20Amount, h2Amount, coAmount, voltAmount, TempFlowAmount, powerAmount});
+const int totMeasurements = temperatureAmount + phValueAmount + humidityAmount + ecValueAmount + flowRateAmount + flowRate2Amount + acsAmount + ds18b20Amount + h2Amount + coAmount + voltAmount + TempFlowAmount + powerAmount;
 extern float phValue, AcsValueF, ecValue;
 const int dht22_tempInterval = numMeasurements / temperatureAmount;
 const int phValueInterval = numMeasurements / phValueAmount;
@@ -120,11 +122,12 @@ const int flowRate2Interval = numMeasurements / flowRate2Amount;
 const int acsValueFInterval = numMeasurements / acsAmount;
 const int ds18b20Interval = numMeasurements / ds18b20Amount;
 const int voltInterval = numMeasurements / voltAmount;
+const int powerInterval = numMeasurements / powerAmount;
 const int h2Interval = numMeasurements / h2Amount;
 const int coInterval = numMeasurements / coAmount;
 const int FlowTempinterval = numMeasurements / TempFlowAmount;
-String intervals = "{\"Intervals\":{\"numMeasurements\":" + String(numMeasurements) + ",\"temperatureInterval\":" + String(dht22_tempInterval) + ",\"phValueInterval\":" + String(phValueInterval) + ",\"humidityInterval\":" + String(dht22_humInterval) + ",\"ecValueInterval\":" + String(ecValueInterval) + ",\"flowRateInterval\":" + String(flowRateInterval) + ",\"flowRate2Interval\":" + String(flowRate2Interval) + ",\"acsValueFInterval\":" + String(acsValueFInterval) + ",\"ds18b20Interval\":" + String(ds18b20Interval) + ",\"voltInterval\":" + String(voltInterval) + ",\"h2Interval\":" + String(h2Interval) + ",\"coInterval\":" + String(coInterval) + ",\"FlowTempinterval\":" + String(FlowTempinterval) + "},";
-const int bufferSize = 6144; // 5120;
+String intervals = "{\"Intervals\":{\"numMeasurements\":" + String(numMeasurements) + ",\"temperatureInterval\":" + String(dht22_tempInterval) + ",\"phValueInterval\":" + String(phValueInterval) + ",\"humidityInterval\":" + String(dht22_humInterval) + ",\"ecValueInterval\":" + String(ecValueInterval) + ",\"flowRateInterval\":" + String(flowRateInterval) + ",\"flowRate2Interval\":" + String(flowRate2Interval) + ",\"acsValueFInterval\":" + String(acsValueFInterval) + ",\"ds18b20Interval\":" + String(ds18b20Interval) + ",\"voltInterval\":" + String(voltInterval) + ",\"h2Interval\":" + String(h2Interval) + ",\"coInterval\":" + String(coInterval) + ",\"FlowTempinterval\":" + String(FlowTempinterval) + ",\"powerInterval\":" + String(powerInterval) + "},";
+const int bufferSize = 6144; //6144; //8192 Waarschijnlijk te groot
 char jsonBuffer[bufferSize];
 int bufferIndex = 0;
 
@@ -136,6 +139,7 @@ void sendArray(void *parameter)
   Serial.println("Now running sendArray task.");
   char receivedBuffer[bufferSize];
   memset(receivedBuffer, 0, sizeof(receivedBuffer));
+  unsigned long previousTime = 0;
   for (;;)
   {
     if (measurementQueue != NULL)
@@ -149,7 +153,11 @@ void sendArray(void *parameter)
           // xQueueReceive(measurementQueue, &receivedBuffer, portMAX_DELAY);
           // printf("Received item: %s \n", receivedBuffer);
           // printf("Received item size: %d \n", sizeof(&receivedBuffer));
+          unsigned long currentTime = millis();
+          unsigned long timeBetweenUsage = currentTime - previousTime;
+          previousTime = currentTime;
           post_http2(receivedBuffer);
+          Serial.println("Time between usage: " + String(timeBetweenUsage) + "ms");
         }
       }
     }
@@ -168,407 +176,15 @@ void sendArray(void *parameter)
   }
 }
 
-/*          Backup Measuring Task         */
-/*
-void Measuring(void *parameter)
-{
-  vTaskDelay(10 / portTICK_PERIOD_MS);
-  Serial.println("Inside Measuring task.");
-  Serial.println("MaxMeasurements: " + String(MaxMeasurements));
-  memset(&measurement, 0, sizeof(measurement));
-  static int temperatureCount = 0, phValueCount = 0, humidityCount = 0, ecValueCount = 0, flowRateCount2 = 0, flowRateCount = 0;
-  static int acsValueFCount = 0, ds18b20Count = 0, voltCount = 0, coCount = 0, h2Count = 0;
-  unsigned long start_time, end_time, duration_temperature, duration_phValue, duration_humidity, duration_ecValue;
-  unsigned long duration_flowRate, duration_flowRate2, duration_acsValueF, duration_ds18b20, duration_h2, duration_volt;
-  duration_temperature = duration_phValue = duration_humidity = duration_ecValue = duration_flowRate = duration_acsValueF = duration_ds18b20 = duration_h2 = duration_volt = 0;
-  TickType_t startTimeFormArray, measureTime, stopTime, startTimeMeasurement, startTime, endTimeDHTtemp, endTimepH, endTimeDHThum, endTimeEC, endTimeFlow1, endTimeFlow2, endTimeACS712, endTimeDS18B20, endTimeH2, endTimeCO, endTimeVolt;
-
-  Serial.println("dht22_tempInterval: " + String(dht22_tempInterval));
-  Serial.println("dht22_humInterval: " + String(dht22_humInterval));
-  Serial.println("phValueInterval: " + String(phValueInterval));
-  Serial.println("ecValueInterval: " + String(ecValueInterval));
-  Serial.println("flowRateInterval: " + String(flowRateInterval));
-  Serial.println("flowRate2Interval: " + String(flowRate2Interval));
-  Serial.println("acsValueFInterval: " + String(acsValueFInterval));
-  Serial.println("ds18b20Interval: " + String(ds18b20Interval));
-  Serial.println("voltInterval: " + String(voltInterval));
-  Serial.println("coInterval: " + String(coInterval));
-  Serial.println("h2Interval: " + String(h2Interval));
-
-  for (;;)
-  {
-    startTimeMeasurement = xTaskGetTickCount();
-
-    if (currentMeasurementIndex % dht22_tempInterval == 0)
-    {
-      startTime = xTaskGetTickCount();
-      measurement[currentMeasurementIndex].temperature = dht_sensor.readTemperature();
-      if (isnan(measurement[currentMeasurementIndex].temperature) || isinf(measurement[currentMeasurementIndex].temperature))
-      {
-        measurement[currentMeasurementIndex].temperature = 0;
-      }
-      temperatureCount++;
-      endTimeDHTtemp = xTaskGetTickCount() - startTime;
-    }
-
-    if (currentMeasurementIndex % phValueInterval == 0)
-    {
-      startTime = xTaskGetTickCount();
-      measurement[currentMeasurementIndex].phValue = pH();
-      if (isnan(measurement[currentMeasurementIndex].phValue) || isinf(measurement[currentMeasurementIndex].phValue))
-      {
-        measurement[currentMeasurementIndex].phValue = 0;
-      }
-      phValueCount++;
-      endTimepH = xTaskGetTickCount() - startTime;
-    }
-
-    if (currentMeasurementIndex % dht22_humInterval == 0)
-    {
-      startTime = xTaskGetTickCount();
-      measurement[currentMeasurementIndex].humidity = dht_sensor.readHumidity();
-      if (isnan(measurement[currentMeasurementIndex].humidity) || isinf(measurement[currentMeasurementIndex].humidity))
-      {
-        measurement[currentMeasurementIndex].humidity = 0;
-      }
-      humidityCount++;
-      endTimeDHThum = xTaskGetTickCount() - startTime;
-    }
-
-    if (currentMeasurementIndex % ecValueInterval == 0)
-    {
-      startTime = xTaskGetTickCount();
-      measurement[currentMeasurementIndex].ecValue = Cond();
-      if (isnan(measurement[currentMeasurementIndex].ecValue) || isinf(measurement[currentMeasurementIndex].ecValue))
-      {
-        measurement[currentMeasurementIndex].ecValue = 0;
-      }
-      ecValueCount++;
-      endTimeEC = xTaskGetTickCount() - startTime;
-    }
-
-    if (currentMeasurementIndex % flowRateInterval == 0)
-    {
-      startTime = xTaskGetTickCount();
-      measurement[currentMeasurementIndex].flowRate = flowRate;
-      if (isnan(measurement[currentMeasurementIndex].flowRate) || isinf(measurement[currentMeasurementIndex].flowRate))
-      {
-        measurement[currentMeasurementIndex].flowRate = 0;
-      }
-      flowRateCount++;
-      endTimeFlow1 = xTaskGetTickCount() - startTime;
-    }
-
-    if (currentMeasurementIndex % flowRate2Interval == 0)
-    {
-      startTime = xTaskGetTickCount();
-      measurement[currentMeasurementIndex].flowRate2 = flowRate2;
-      if (isnan(measurement[currentMeasurementIndex].flowRate2) || isinf(measurement[currentMeasurementIndex].flowRate2))
-      {
-        measurement[currentMeasurementIndex].flowRate2 = 0;
-      }
-      flowRateCount2++;
-      endTimeFlow2 = xTaskGetTickCount() - startTime;
-    }
-
-    if (currentMeasurementIndex % acsValueFInterval == 0)
-    {
-      startTime = xTaskGetTickCount();
-      measurement[currentMeasurementIndex].AcsValueF = CurrentSensor_quick();
-      if (isnan(measurement[currentMeasurementIndex].AcsValueF) || isinf(measurement[currentMeasurementIndex].AcsValueF))
-      {
-        measurement[currentMeasurementIndex].AcsValueF = 0;
-      }
-      acsValueFCount++;
-      endTimeACS712 = xTaskGetTickCount() - startTime;
-    }
-
-    if (currentMeasurementIndex % ds18b20Interval == 0)
-    {
-      startTime = xTaskGetTickCount();
-      AllDS18B20Sensors(measurement[currentMeasurementIndex]);
-      ds18b20Count++;
-      endTimeDS18B20 = xTaskGetTickCount() - startTime;
-    }
-
-    if (currentMeasurementIndex % h2Interval == 0)
-    {
-      startTime = xTaskGetTickCount();
-      MQ8.update();
-      measurement[currentMeasurementIndex].ppmH = MQ8.readSensor();
-      if (isnan(measurement[currentMeasurementIndex].ppmH) || isinf(measurement[currentMeasurementIndex].ppmH))
-      {
-        measurement[currentMeasurementIndex].ppmH = 0;
-      }
-      h2Count++;
-      endTimeH2 = xTaskGetTickCount() - startTime;
-    }
-
-    if (currentMeasurementIndex % coInterval == 0)
-    {
-      startTime = xTaskGetTickCount();
-      MQ7.update();
-      measurement[currentMeasurementIndex].ppmCO = MQ7.readSensor();
-      if (isnan(measurement[currentMeasurementIndex].ppmCO) || isinf(measurement[currentMeasurementIndex].ppmCO))
-      {
-        measurement[currentMeasurementIndex].ppmCO = 0;
-      }
-      coCount++;
-      endTimeCO = xTaskGetTickCount() - startTime;
-      }
-
-    if (currentMeasurementIndex % voltInterval == 0)
-    {
-      startTime = xTaskGetTickCount();
-      measurement[currentMeasurementIndex].Volt = readVoltage(); // 27.22; // Placeholder for voltage
-      if (isnan(measurement[currentMeasurementIndex].Volt) || isinf(measurement[currentMeasurementIndex].Volt))
-      {
-        measurement[currentMeasurementIndex].Volt = 0;
-      }
-      voltCount++;
-      endTimeVolt = xTaskGetTickCount() - startTime;
-    }
-
-    measurement[currentMeasurementIndex].ts = savedTimestamp + millis();
-    stopTime = xTaskGetTickCount();
-    measureTime = stopTime - startTimeMeasurement;
-    vTaskDelay(50 / portTICK_PERIOD_MS);
-    if (currentMeasurementIndex >= (numMeasurements-1)) //MaxMeasurements -1
-    {
-      startTimeFormArray = xTaskGetTickCount();
-      StaticJsonDocument<bufferSize> doc;
-      // Add the intervals objects
-      JsonObject intervals = doc.createNestedObject("intervals"); //Intervals (capital)
-      intervals["numMeasurements"] = numMeasurements;
-      intervals["TInt"] = dht22_tempInterval;
-      intervals["pHInt"] = phValueInterval;
-      intervals["AInt"] = acsValueFInterval;
-      intervals["VInt"] = voltInterval;
-      intervals["TDSInt"] = ds18b20Interval;
-      intervals["HumInt"] = dht22_humInterval;
-      intervals["CondInt"] = ecValueInterval;
-      intervals["Flow1Int"] = flowRateInterval;
-      intervals["Flow2Int"] = flowRate2Interval;
-      intervals["COInt"] = coInterval;
-      intervals["H2Int"] = h2Interval;
-
-      JsonObject values = doc.createNestedObject("values");
-      JsonArray ts = values.createNestedArray("ts");
-      for (int i = 0; i < numMeasurements; i++)
-      {
-          ts.add(measurement[i].ts);
-      }
-
-      JsonArray tempGas = values.createNestedArray("T_g");
-      int i = 0;
-      for (int j = 0; j < numMeasurements; j += dht22_tempInterval)
-      {
-          tempGas.add(measurement[j].temperature);
-          i++;
-      }
-
-      JsonArray zuurtegraad = values.createNestedArray("pH");
-      i = 0;
-      for (int j = 0; j < numMeasurements; j += phValueInterval)
-      {
-          zuurtegraad.add(measurement[j].phValue);
-          i++;
-      }
-
-      JsonArray acs712 = values.createNestedArray("A");
-      i = 0;
-      for (int j = 0; j < numMeasurements; j += acsValueFInterval)
-      {
-          acs712.add(measurement[j].AcsValueF);
-          i++;
-      }
-
-      JsonArray Spanning = values.createNestedArray("V");
-      i = 0;
-      for (int j = 0; j < numMeasurements; j += voltInterval)
-      {
-          Spanning.add(measurement[j].Volt);
-          i++;
-      }
-
-      JsonArray ds18b20 = values.createNestedArray("T1");
-      i = 0;
-      for (int j = 0; j < numMeasurements; j += ds18b20Interval)
-      {
-          ds18b20.add(measurement[j].DS18B20_1);
-          i++;
-      }
-
-      JsonArray ds18b202 = values.createNestedArray("T2");
-      i = 0;
-      for (int j = 0; j < numMeasurements; j += ds18b20Interval)
-      {
-          ds18b202.add(measurement[j].DS18B20_2);
-          i++;
-      }
-
-      JsonArray ds18b203 = values.createNestedArray("T3");
-      i = 0;
-      for (int j = 0; j < numMeasurements; j += ds18b20Interval)
-      {
-          ds18b203.add(measurement[j].DS18B20_3);
-          i++;
-      }
-
-      JsonArray ds18b204 = values.createNestedArray("T4");
-      i = 0;
-      for (int j = 0; j < numMeasurements; j += ds18b20Interval)
-      {
-          ds18b204.add(measurement[j].DS18B20_4);
-          i++;
-      }
-
-      JsonArray ds18b205 = values.createNestedArray("T5");
-      i = 0;
-      for (int j = 0; j < numMeasurements; j += ds18b20Interval)
-      {
-          ds18b205.add(measurement[j].DS18B20_5);
-          i++;
-      }
-
-      JsonArray humi = values.createNestedArray("Hum");
-      i = 0;
-      for (int j = 0; j < numMeasurements; j += dht22_humInterval)
-      {
-          humi.add(measurement[j].humidity);
-          i++;
-      }
-
-      JsonArray ec = values.createNestedArray("Cond");
-      i = 0;
-      for (int j = 0; j < numMeasurements; j += ecValueInterval)
-      {
-          ec.add(measurement[j].ecValue);
-          i++;
-      }
-
-      JsonArray flowRate = values.createNestedArray("Flow1");
-      i = 0;
-      for (int j = 0; j < numMeasurements; j += flowRateInterval)
-      {
-          flowRate.add(measurement[j].flowRate);
-          i++;
-      }
-
-      JsonArray flowRate2 = values.createNestedArray("Flow2");
-      i = 0;
-      for (int j = 0; j < numMeasurements; j += flowRate2Interval)
-      {
-          flowRate2.add(measurement[j].flowRate2);
-          i++;
-      }
-
-      JsonArray ppmCO = values.createNestedArray("CO");
-      i = 0;
-      for (int j = 0; j < numMeasurements; j += coInterval)
-      {
-          ppmCO.add(measurement[j].ppmCO);
-          i++;
-      }
-
-      JsonArray ppmH = values.createNestedArray("H2");
-      i = 0;
-      for (int j = 0; j < numMeasurements; j += h2Interval)
-      {
-          ppmH.add(measurement[j].ppmH);
-          i++;
-      }
-
-      if (xSemaphoreTake(fileMutex, pdMS_TO_TICKS(3000)) == pdTRUE)
-      {
-       if (doc != nullptr)
-      {
-       //logMeasurement((&doc)->as<String>().c_str());
-       xSemaphoreGive(fileMutex);
-      }
-      }
-      else
-      {
-       Serial.println("sendArrayTask: logMeusurement could not take fileMutex");
-      }
-
-      currentMeasurementIndex = 0;
-      temperatureCount = 0;
-      phValueCount = 0;
-      humidityCount = 0;
-      ecValueCount = 0;
-      flowRateCount = 0;
-      flowRateCount2 = 0;
-      acsValueFCount = 0;
-      ds18b20Count = 0;
-      h2Count = 0;
-      voltCount = 0;
-      // printCMD();
-
-      TickType_t endTimeFormArray = xTaskGetTickCount();
-      Serial.println("FormArray duration: " + String(endTimeFormArray - startTimeFormArray));
-      Serial.println("Measurement duration: " + String(measureTime));
-      Serial.println("DHT22 Humidity duration: " + String(endTimeDHTtemp));
-      Serial.println("pH duration: " + String(endTimepH));
-      Serial.println("DHT22 Humidity duration: " + String(endTimeDHThum));
-      Serial.println("ASC712 duration: " + String(endTimeEC));
-      Serial.println("Flowrate duration: " + String(endTimeFlow1));
-      Serial.println("Flowrate2 duration: " + String(endTimeFlow2));
-      Serial.println("DS18B20 duration: " + String(endTimeDS18B20));
-      Serial.println("MQ8 H2 duration: " + String(endTimeH2));
-      Serial.println("MQ7 Co duration: " + String(endTimeCO));
-      Serial.println("Volt duration: " + String(endTimeVolt));
-      // printBufferInChunks(buffer, bufferIndex);
-      // Add linebreaks and whitespaces to the end of the JSON document
-      //serializeJsonPretty(doc, jsonBuffer);
-
-      // Minifies the JSON document e.g. no linebreaks and no whitespaces
-      serializeJson(doc, jsonBuffer);
-      Serial.println("jsonBuffer created in Measuring task and sent to queue: ");
-      Serial.println(jsonBuffer);
-
-      // Send an item
-      if (measurementQueue != NULL)
-      {
-        if (xQueueSend(measurementQueue, &jsonBuffer, portMAX_DELAY) == pdPASS)
-        {
-          Serial.println("Successfully posted buffer to queue");
-          int queueSize = uxQueueMessagesWaiting(measurementQueue);
-          Serial.println("Amount in queue (sendArray): " + String(queueSize));
-          vTaskDelay(pdMS_TO_TICKS(100));
-        }
-        else
-        {
-          Serial.println("Failed to post buffer to queue, deleting this buffer.");
-          delete &doc;
-        }
-      }
-    }
-    else
-    {
-      currentMeasurementIndex++;
-    }
-    vTaskDelay(50 / portTICK_PERIOD_MS);
-    // Monitor stack and heap usage
-    // UBaseType_t highWaterMark = uxTaskGetStackHighWaterMark(NULL);
-    // size_t freeHeap = xPortGetFreeHeapSize();
-    // Serial.print("MeasuringTask stack high water mark: ");
-    // Serial.println(highWaterMark);
-    // Serial.print("Free heap size MeasuringTask: ");
-    // Serial.println(freeHeap);
-  }
-  Serial.println("Measuring task has ended.");
-}
-*/
-
 float t, phvalue, stroom, Volt, DS18B20_1, DS18B20_2, DS18B20_3, DS18B20_4, DS18B20_5, humidity, ecValue, ppmCO, ppmH;
+float* ds18b20Sensors[] = {&DS18B20_1, &DS18B20_2, &DS18B20_3, &DS18B20_4, &DS18B20_5};
 
 void Measuring(void *parameter)
 {
   vTaskDelay(10 / portTICK_PERIOD_MS);
   Serial.println("Inside Measuring task.");
   Serial.println("MaxMeasurements: " + String(numMeasurements));
-  static int temperatureCount = 0, phValueCount = 0, humidityCount = 0, ecValueCount = 0, flowRateCount2 = 0, flowRateCount = 0, acsValueFCount = 0, ds18b20Count = 0, voltCount = 0, coCount = 0, h2Count = 0, FTCount =0;
+  static int temperatureCount = 0, phValueCount = 0, humidityCount = 0, ecValueCount = 0, flowRateCount2 = 0, flowRateCount = 0, acsValueFCount = 0, ds18b20Count = 0, voltCount = 0, coCount = 0, h2Count = 0, FTCount =0, powerCount = 0;
   unsigned long start_time, end_time, duration_temperature, duration_phValue, duration_humidity, duration_ecValue, duration_flowRate, duration_flowRate2, duration_acsValueF, duration_ds18b20, duration_h2, duration_volt;
   duration_temperature = duration_phValue = duration_humidity = duration_ecValue = duration_flowRate = duration_acsValueF = duration_ds18b20 = duration_h2 = duration_volt = 0;
   TickType_t measureTime, stopTime, endTimeDHTtemp, endTimepH, endTimeDHThum, endTimeEC, endTimeFlow1, endTimeFlow2, endTimeStroom, endTimeDS18B20, endTimeH2, endTimeCO, endTimeVolt, endTimeFlowTemp;
@@ -627,16 +243,18 @@ void Measuring(void *parameter)
     
     for (int i = 0; i < numMeasurements; i++)
     {
-      JsonObject measurement = measurementsArray.createNestedObject();
+      //JsonObject measurement = measurementsArray.createNestedObject();
+      JsonObject measurement = measurementsArray.add<JsonObject>();
       measurement["ts"] = savedTimestamp + millis();
-      JsonObject values = measurement.createNestedObject("values");
-
+      JsonObject values = measurement["values"].to<JsonObject>();
+      
       if (i % dht22_tempInterval == 0)
       {
         t = dht_sensor.readTemperature();
         ss.str("");
-        ss << std::fixed << std::setprecision(1) << t;
-        values["T_g"] = isnan(t) || isinf(t) ? 0 : ss.str();
+        ss << std::fixed << std::setprecision(2) << t;
+        values["T_g"] = isnan(t) || isinf(t) ? 0.0 : t; //ss.str(); //Maybe just "t"
+        //values["T_g"] = isnan(t) || isinf(t) ? 0.0 : ss.str().c_str();
       }
 
       if (i % ds18b20Interval == 0)
@@ -650,8 +268,9 @@ void Measuring(void *parameter)
             float tempC = sensors.getTempC(tempDeviceAddress);
             ss.str("");
             ss << std::fixed << std::setprecision(3) << tempC;
-            values["T" + String(j+1)] = isnan(tempC) || isinf(tempC) ? 0 : ss.str();
-          }
+            values["T" + String(j+1)] = isnan(tempC) || isinf(tempC) ? 0 : tempC; //ss.str();        
+            *ds18b20Sensors[j] = tempC; // save tempC to corresponding sensor variable    
+          }          
         }
       }
 
@@ -660,15 +279,16 @@ void Measuring(void *parameter)
         phvalue = pH();
         ss.str("");
         ss << std::fixed << std::setprecision(3) << phvalue;
-        values["pH"] = isnan(phvalue) || isinf(phvalue) ? 0 : ss.str();
+        values["pH"] = isnan(phvalue) || isinf(phvalue) ? 0 : phvalue; //ss.str();
       }
 
       if (i % acsValueFInterval == 0)
       {
-        stroom = CurrentSensor_ACS724();
+        //stroom = CurrentSensor_ACS724();
+        stroom = CurrentSensor_quick();
         ss.str("");
         ss << std::fixed << std::setprecision(3) << stroom;
-        values["A"] = isnan(stroom) || isinf(stroom) ? 0 : ss.str();
+        values["A"] = isnan(stroom) || isinf(stroom) ? 0 : stroom; //ss.str();
       }
 
       if (i % dht22_humInterval == 0)
@@ -676,7 +296,7 @@ void Measuring(void *parameter)
         humidity = dht_sensor.readHumidity();
         ss.str("");
         ss << std::fixed << std::setprecision(3) << humidity;
-        values["Hum"] = isnan(humidity) || isinf(humidity) ? 0 : ss.str();
+        values["Hum"] = isnan(humidity) || isinf(humidity) ? 0 : humidity; //ss.str();
       }
 
       if (i % ecValueInterval == 0)
@@ -684,20 +304,21 @@ void Measuring(void *parameter)
         ecValue = Cond();
         ss.str("");
           ss << std::fixed << std::setprecision(3) << ecValue;
-        values["Cond"] = isnan(ecValue) || isinf(ecValue) ? 0 : ss.str();
+        values["Cond"] = isnan(ecValue) || isinf(ecValue) ? 0 : ecValue; //ss.str();
       }
 
       if (i % flowRateInterval == 0)
       {
+        //flowRate = flowSens();
         ss.str("");
-        ss << std::fixed << std::setprecision(3) << flowRate; 
-        values["Flow1"] = isnan(flowRate) || isinf(flowRate) ? 0 : ss.str();
+        ss << std::fixed << std::setprecision(2) << flowRate; 
+        values["Flow1"] = isnan(flowRate) || isinf(flowRate) ? 0 : flowRate; //ss.str();
       }
 
       if (i % flowRate2Interval == 0)
       {
         ss.str("");
-        ss << std::fixed << std::setprecision(3) << flowRate2;
+        ss << std::fixed << std::setprecision(2) << flowRate2;
         values["Flow2"] = isnan(flowRate2) || isinf(flowRate2) ? 0 : ss.str();
       }
 
@@ -706,8 +327,8 @@ void Measuring(void *parameter)
         startFlowTempTime = xTaskGetTickCount();
         temp_flow = Read_NTC();   // Read temperature
         ss.str("");
-        ss << std::fixed << std::setprecision(3) << temp_flow;
-        values["FT"] = isnan(temp_flow) || isinf(temp_flow) ? 0 : ss.str();
+        ss << std::fixed << std::setprecision(1) << temp_flow;
+        values["FT"] = isnan(temp_flow) || isinf(temp_flow) ? 0 : temp_flow; //ss.str();
       }
       
       if (i % coInterval == 0)
@@ -716,7 +337,7 @@ void Measuring(void *parameter)
         ppmCO = MQ7.readSensor();
         ss.str("");
         ss << std::fixed << std::setprecision(3) << ppmCO;
-        values["CO"] = isnan(ppmCO) || isinf(ppmCO) ? 0 : ss.str();
+        values["CO"] = isnan(ppmCO) || isinf(ppmCO) ? 0 : ppmCO; //ss.str();
       }
 
       if (i % h2Interval == 0)
@@ -725,7 +346,7 @@ void Measuring(void *parameter)
         ppmH = MQ8.readSensor();
         ss.str("");
         ss << std::fixed << std::setprecision(3) << ppmH; 
-        values["H2"] = isnan(ppmH) || isinf(ppmH) ? 0 : ss.str();
+        values["H2"] = isnan(ppmH) || isinf(ppmH) ? 0 : ppmH; //ss.str();
       }
 
       if (i % voltInterval == 0)
@@ -733,7 +354,15 @@ void Measuring(void *parameter)
         Volt = readVoltage();
         ss.str("");
         ss << std::fixed << std::setprecision(3) << Volt;
-        values["V"] = isnan(Volt) || isinf(Volt) ? 0 : ss.str();        
+        values["V"] = isnan(Volt) || isinf(Volt) ? 0 : Volt; //ss.str();        
+      }
+      
+      if (i % powerInterval == 0)
+      {
+        float power = Volt * stroom;
+        ss.str("");
+        ss << std::fixed << std::setprecision(3) << power;
+        values["P"] = isnan(power) || isinf(power) ? 0 : power; ;//ss.str();
       }
       currentMeasurementIndex++;
       vTaskDelay(500 / portTICK_PERIOD_MS);
@@ -743,22 +372,7 @@ void Measuring(void *parameter)
     vTaskDelay(50 / portTICK_PERIOD_MS);
 
     if (currentMeasurementIndex >= (numMeasurements - 1)) // MaxMeasurements -1
-    {
-      if (xSemaphoreTake(fileMutex, pdMS_TO_TICKS(3000)) == pdTRUE)
-      {
-        if (doc2 != nullptr)
-        {
-          // logMeasurement((&doc)->as<String>().c_str());
-          xSemaphoreGive(fileMutex);
-        }
-      }
-      else
-      {
-        Serial.println("Measuring Task: logMeasurement could not take fileMutex");
-      }
-
-      currentMeasurementIndex = 0, temperatureCount = 0, phValueCount = 0, humidityCount = 0, ecValueCount = 0, flowRateCount = 0, flowRateCount2 = 0, acsValueFCount = 0, ds18b20Count = 0, h2Count = 0, voltCount = 0, FTCount = 0, coCount = 0;
-      
+    {    
       // printCMD();
 /*
       Serial.println("Measurement duration: " + String(measureTime));
@@ -777,12 +391,26 @@ void Measuring(void *parameter)
       Serial.println("jsonBuffer created in Measuring task and sent to queue: ");
       Serial.println(jsonBuffer);
 
+      if (xSemaphoreTake(fileMutex, pdMS_TO_TICKS(3000)) == pdTRUE)
+      {
+        if (doc2 != nullptr)
+        {
+          logMeasurement((&doc2)->as<String>().c_str());
+          xSemaphoreGive(fileMutex);
+        }
+      }
+      else
+      {
+        Serial.println("Measuring Task: logMeasurement could not take fileMutex");
+      }
+
       // Send an item
       if (measurementQueue != NULL)
       {
         if (xQueueSend(measurementQueue, &jsonBuffer, portMAX_DELAY) == pdPASS)
         {
           Serial.println("Successfully posted buffer to queue");
+          Serial.println("Flowsensor2 Frequency: " + String(frequency2));
           int queueSize = uxQueueMessagesWaiting(measurementQueue);
           Serial.println("Amount in queue (MeauringTask): " + String(queueSize));
           vTaskDelay(pdMS_TO_TICKS(10));
@@ -795,6 +423,7 @@ void Measuring(void *parameter)
         }
       }      
     }
+    currentMeasurementIndex = 0, temperatureCount = 0, phValueCount = 0, humidityCount = 0, ecValueCount = 0, flowRateCount = 0, flowRateCount2 = 0, acsValueFCount = 0, ds18b20Count = 0, h2Count = 0, voltCount = 0, FTCount = 0, coCount = 0, powerCount = 0;
 
     vTaskDelay(50 / portTICK_PERIOD_MS);
     // Monitor stack and heap usage
@@ -904,7 +533,7 @@ void DisplayMeasurements(void *parameter)
         bigOled.drawStr(0, 104, DS18B20_5_Dis.c_str());
         bigOled.drawStr(0, 112, flowDis.c_str());
         bigOled.drawStr(0, 120, flowDis2.c_str());
-        bigOled.drawStr(0, 128, flowDis3.c_str());
+        bigOled.drawStr(0, 120, temp_flowDis.c_str());
       } while (bigOled.nextPage());
     }
     vTaskDelay(500 / portTICK_PERIOD_MS);
@@ -1027,7 +656,7 @@ void Counting(void *parameter)
     pcnt_get_counter_value(PCNT_UNIT2, &count2);
     // pcnt_get_counter_value(PCNT_UNIT3, &count3);
     uint32_t elapsed_time = current_time - last_time; // Time in milliseconds
-
+    
     // Calculate frequency for PCNT_UNIT1
     if (elapsed_time > 0)
     {
@@ -1044,7 +673,7 @@ void Counting(void *parameter)
     if (elapsed_time > 0)
     {
       int16_t pulses2 = count2 - last_count2;
-      float frequency2 = (float)pulses2 / (elapsed_time / 1000.0); // Frequency in Hz
+      frequency2 = (float)pulses2 / (elapsed_time / 1000.0); // Frequency in Hz
       flowRate2 = frequency2 / flowSensorCalibration2;
       // Update last count for unit 2
       last_count2 = count2;
@@ -1413,11 +1042,11 @@ void setup()
   if (SD.begin(CS_PIN))
   {
     //Serial.println("Reading config file.");
-     //read_configuration();
+    //read_configuration();
+    //Serial.println("All values after setup:");
+    //printVariables(); 
   }
-  //Serial.println("All values after setup:");
-  //printVariables(); 
-
+  
   init_displays();
   vTaskDelay(100 / portTICK_PERIOD_MS);
   bigOled.firstPage();
@@ -1442,7 +1071,7 @@ void setup()
   // gsmSerial.println("AT&V"); //Show saved GSM settings
   nvs_flash_init();
   stateBigOled = 1;
-  //getTime();
+  getTime();
   savedTimestamp = getSavedTimestamp();
   vTaskDelay(100 / portTICK_PERIOD_MS);
   initialize_gsm();
@@ -1561,10 +1190,10 @@ void setup()
   Serial.println("Temperature of flowsenor: ");
   Serial.println(temp_flow);
   vTaskDelay(100 / portTICK_PERIOD_MS);
-  xTaskCreatePinnedToCore(sendArray, "Send Array", 8192, NULL, 3, &Task1, 0); // 8192
-  xTaskCreatePinnedToCore(Measuring, "Measuring", 6144, NULL, 2, &Task2, 1);
+  xTaskCreatePinnedToCore(sendArray, "Send Array", 8192, NULL, 3, &Task1, 0); // 8192 (Stack overflow)
+  xTaskCreatePinnedToCore(Measuring, "Measuring", 6144, NULL, 2, &Task2, 1); //6144
   xTaskCreatePinnedToCore(DisplayMeasurements, "Display Measurements", 2048, NULL, 0, &Task3, 0);
-  xTaskCreatePinnedToCore(BluetoothListen, "Listen to Bluetooth", 5120, NULL, 0, &Task4, 0);
+  xTaskCreatePinnedToCore(BluetoothListen, "Listen to Bluetooth", 3072, NULL, 0, &Task4, 0); //5120
   xTaskCreatePinnedToCore(Counting, "Count pulses", 1024, NULL, 1, &Task5, 1);
 
   free_size = heap_caps_get_free_size(MALLOC_CAP_INTERNAL | MALLOC_CAP_8BIT);
