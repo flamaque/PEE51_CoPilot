@@ -524,8 +524,7 @@ void SD_init()
     Serial.println("SD Card initialization failed!");
     Serial.println("Log file not created and configuration not read.");
     Serial.println("Restart ESP32!");
-    return;
-    // Light up RED LED
+    return; //Continuing for now, production version should halt indefinitely
   }
   Serial.println("SD Card initialized.");
   uint8_t cardType = SD.cardType();

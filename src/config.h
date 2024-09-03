@@ -29,6 +29,7 @@
 #include <sstream>
 #include <iomanip>
 
+
 extern int voltPin, CurrentPin, EC_PIN, PH_PIN;
 
 float flowSens();
@@ -76,7 +77,6 @@ extern String datetime_gsm;
 extern String apn, apn_User, apn_Pass;
 extern char httpapi[];
 
-//void GA6_init();
 void getTime();
 void getTimeNow();  
 void post_http(String j); 
@@ -84,9 +84,11 @@ void post_http2(String a);
 time_t convertToUnixTimestamp(String date, String time);
 void readGsmResponse();
 String readGsmResponse3();
+String readGsmResponse4();
 void initialize_gsm();
 void initialize_gsm2();
 extern String response;
+extern int GSMType;
 
 /*      Display Setup     */
 void init_displays();
