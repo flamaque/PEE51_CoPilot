@@ -175,11 +175,8 @@ void getTime()
         
         while (!validResponse)
         {
-            printf("Requesting datetime...\n");
-            
-
             if (GSMType ==1){
-            printf("SIM800 requesting defined...\n");
+            printf("SIM800 requesting datetime...\n");
             gsmSerial.println("AT+CIPGSMLOC=2,1");
             String timeTest = readGsmResponse3();
             Serial.println("timeTest= " + timeTest);
@@ -232,7 +229,7 @@ void getTime()
             }
         }
             else if (GSMType ==2){
-                printf("SIM808 requesting defined...\n");
+                printf("SIM808 requesting datetime...\n");
                 gsmSerial.println("AT+CLTS=1"); //+CLTS: OK
                 vTaskDelay(500 / portTICK_PERIOD_MS);
                 gsmSerial.println("AT+CLTS=?"); //+CLTS: "yy/MM/dd,hh:mm:ss+/-zz"
@@ -281,20 +278,27 @@ void getTime()
                     Serial.println("Parsed Time: " + time_gsm);
                     break; // Exit the inner loop and retry GPRS setup
                 }
+                uint64_t unixTimestamp = convertToUnixTimestamp(date, time_gsm);
+                    Serial.println("Timestamp before comparison: " + String(unixTimestamp));
+
+                if (unixTimestamp <= 1609459200000ULL || unixTimestamp >= 2524608000000ULL) 
+                { // 1609459200 is 2021-01-01, 2524608000 is 2050-01-01
+                    Serial.println("Error: Invalid timestamp, trying again...");
+                    Serial.println("Timestamp: " + String(unixTimestamp));
+                    break; // Exit the inner loop and retry GPRS setup
+                } 
             }
 
             // If all validations pass, set validResponse to true
-            validResponse = true;
-            Serial.println("Valid datetime received.");
-            Serial.println("Parsed Date: " + date);
-            Serial.println("Parsed Time: " + time_gsm);
-            Serial.println("time_gsm created in parseDatetime: " + time_gsm);
-            datetime_gsm = date + " " + time_gsm;
-            Serial.println("datetime_gsm created in parseDatetime: " + datetime_gsm);
+            validResponse = true;            
         }
     }
 
-    convertToUnixTimestamp(date, time_gsm);
+    datetime_gsm = date + " " + time_gsm;
+    Serial.println("Valid datetime received. " + datetime_gsm);
+    Serial.println("Parsed Date: " + date);
+    Serial.println("Parsed Time: " + time_gsm);
+    //convertToUnixTimestamp(date, time_gsm);
     vTaskDelay(100 / portTICK_PERIOD_MS);
 }
 
@@ -479,7 +483,7 @@ uint64_t getSavedTimestamp()
     return timestamp_ms;
 }
 
-time_t convertToUnixTimestamp(String date, String time)
+uint64_t convertToUnixTimestamp(String date, String time)
 {
     uint64_t timestamp_ms = 0;
     int year = 0;
@@ -527,7 +531,7 @@ time_t convertToUnixTimestamp(String date, String time)
 
     // Print the final timestamp with milliseconds
     Serial.println("Final timestamp with milliseconds: " + String(timestamp_ms));
-    saveTimestamp(timestamp_ms);
+    //saveTimestamp(timestamp_ms);
     return timestamp_ms;
 }
 
@@ -676,7 +680,27 @@ void post_http2(String jsonPayload)
     readGsmResponse();
     vTaskDelay(50 / portTICK_PERIOD_MS);
     gsmSerial.println("AT+HTTPREAD");
-    readGsmResponse();
+    //readGsmResponse();
+    String response = readGsmResponse3();
+        
+        if (response.indexOf("+HTTPREAD: 1,200,0") != -1) {
+            Serial.println("correct");
+            // Continue with normal operation
+        } else if (response.indexOf("+HTTPREAD: 1,400,0") != -1 || response.indexOf("+HTTPREAD: 1,601,0") != -1) {
+            Serial.println("error");
+            
+            // Send SMS
+            //gsmSerial.println("AT+CMGF=1"); // Set SMS text mode
+            //delay(100);
+            //gsmSerial.println("AT+CMGS=\"+31614504283\""); // Set recipient number
+            //delay(100);
+            //gsmSerial.println("HTTP Error: " + response); // SMS content
+            //delay(100);
+            //gsmSerial.write(26); // Ctrl+Z to send SMS
+            
+            // Wait for SMS to be sent
+            //delay(5000);
+        }
     vTaskDelay(50 / portTICK_PERIOD_MS);
 
     TickType_t endTime = xTaskGetTickCount();

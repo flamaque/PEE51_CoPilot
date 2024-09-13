@@ -28,7 +28,7 @@
 #include <ArduinoJson.h>
 #include <sstream>
 #include <iomanip>
-
+#include <algorithm>
 
 extern int voltPin, CurrentPin, EC_PIN, PH_PIN;
 
@@ -81,7 +81,7 @@ void getTime();
 void getTimeNow();  
 void post_http(String j); 
 void post_http2(String a); 
-time_t convertToUnixTimestamp(String date, String time);
+uint64_t convertToUnixTimestamp(String date, String time);
 void readGsmResponse();
 String readGsmResponse3();
 String readGsmResponse4();
@@ -95,7 +95,6 @@ void init_displays();
 
 /* voltage sensor */
 float readVoltage();
-float Dennis();
 
 /*      DS18B20 sensor       */
 //extern struct Measurement measurement;
@@ -107,9 +106,12 @@ void AllDS18B20Sensors();
 void pcnt_example_init(pcnt_unit_t unit, int pulse_gpio_num);
 extern volatile float flowRate, flowRate2;
 /*      NTC sensor       */
-extern float steinhart;
-extern float temp_flow;
+extern float steinhart, temp_flow;
+extern int NTC_PIN, serialResistance, TEMPERATURENOMINAL, NUMSAMPLES;
+extern uint16_t nominalResistance, bCoefficient;
+
 float Read_NTC();
+float Read_NTC2();
 
 /*      Bluetooth          */
 extern BluetoothSerial SerialBT;
@@ -117,24 +119,25 @@ extern String message;
 extern char incomingChar;
 void sendFileOverBluetooth(const char* path);
 void readFileAndSendOverBluetooth(fs::FS &fs, const char *path);
-void sendFileOverBluetoothInOneGo2(const char* path);
+void sendLargeFileOverBluetooth(const char *path);
 
 /*        SD Card         */
 extern int CS_PIN;
 void SD_init();
+void printDirectory(File dir, int numTabs);
+void read_configuration();
 void listDir(fs::FS &fs, const char * dirname, uint8_t levels);
-//void createDir(fs::FS &fs, const char * path);
-//void removeDir(fs::FS &fs, const char * path);
 void writeFile(fs::FS &fs, const char * path, const char * message);
 void appendFile(fs::FS &fs, const char * path, const char * message);
-//void renameFile(fs::FS &fs, const char * path1, const char * path2);
-//void deleteFile(fs::FS &fs, const char * path);
-//void testFileIO(fs::FS &fs, const char * path);
 void readFile(fs::FS &fs, const char * path);
 void logMeasurement(String measurement);
-void sendFileOverBluetoothInOneGo(const char* path);
+//void renameFile(fs::FS &fs, const char * path1, const char * path2);
+//void deleteFile(fs::FS &fs, const char * path);
+//void removeDir(fs::FS &fs, const char * path);
+//void createDir(fs::FS &fs, const char * path);
+//void testFileIO(fs::FS &fs, const char * path);
 
-/*      Configuration     */
+/*      Button Setup     */
 extern int buttonbigOled;
 void buttonInterrupt_bigOled();
 
@@ -152,8 +155,6 @@ float Cond();
 
 /*      Current Sensor   */
 extern int CurrentPin;
-float CurrentSensor_quick();
-float CurrentSensor_ACS724();
-
+float CurrentSensor_724();
 
 #endif // CONFIG_H

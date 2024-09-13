@@ -1,23 +1,54 @@
 #include "config.h"
+#include <algorithm>
 
-/**      Flow sensor Dennis     */
-
-#define ADC_PIN 36
-#define NUM_SAMPLES 10
-float flowSens(){
-  int adcValue = 0;
-  int sumAdcValue = 0;
-
-  for (int i = 0; i < NUM_SAMPLES; i++) {
-    adcValue = analogRead(ADC_PIN);
-    sumAdcValue += adcValue;
-    delay(10);  // Small delay between samples
+/*        Flor sensor temperature     */
+float Read_NTC()
+{
+  uint8_t i;
+  uint16_t sample;
+  float average = 0;
+  
+  // take N samples in a row, with a slight delay
+  for (i=0; i< NUMSAMPLES; i++)
+  {
+    sample = analogRead(NTC_PIN);
+    average += sample;
+    delay(5);
   }
+  average /= NUMSAMPLES;
 
-  int avgAdcValue = sumAdcValue / NUM_SAMPLES;
-  float voltage = (avgAdcValue / 4095.0) * 3.3;  // Convert average ADC value to voltage
+  #ifdef DEBUG_MODE  
+  Serial.print("1 sample analog reading "); 
+  Serial.println(sample);
+  Serial.printf("Average analog reading: %.2f\n", average);
+  #endif
+ 
+  // convert the value to resistance
+  float resistance = 4095 / average - 1;
+  resistance = serialResistance * resistance;
 
+  #ifdef DEBUG_MODE
+  Serial.printf("Thermistor resistance: %.2f\n", resistance);
+  #endif
+ 
+ //resistance  / nominalResistance = 10 graden
+ //nominalResistance / resistance = 43.25 graden
+  float steinhart;
+  steinhart = nominalResistance / (resistance - nominalResistance);     // (R/Ro)
+  //steinhart = resistance  / nominalResistance;     // (R/Ro)
+  steinhart = log(steinhart);                  // ln(R/Ro)
+  steinhart /= bCoefficient;                   // 1/B * ln(R/Ro)
+  steinhart += 1.0 / (TEMPERATURENOMINAL + 273.15); // + (1/To)
+  steinhart = 1.0 / steinhart;                 // Invert
+  steinhart -= 273.15;                         // convert to C
+ 
+  #ifdef DEBUG_MODE
+  Serial.printf("Temperature: %.3f *C\n", steinhart);
+  #endif
+  
+  return steinhart;
 }
+
 /* voltage sensor   */
 float voltage = 0.00;
 extern int voltPin;
@@ -257,105 +288,67 @@ U8G2_SSD1306_128X64_NONAME_1_HW_I2C bigOled(U8G2_R0, /* reset=*/U8X8_PIN_NONE, /
 #define U8LOG_HEIGHT 6 // 8+
 uint8_t u8log_buffer[U8LOG_WIDTH * U8LOG_HEIGHT];
 U8G2LOG u8g2log;
+
 void init_displays()
-{
-  // Serial.println("Display hight: " + String(bigOled.getDisplayHeight()) + "Display width: " + String(bigOled.getDisplayWidth()));
-  bigOled.setI2CAddress(0x3C * 2);
-  bigOled.setBusClock(400000);
+  {
+    // Serial.println("Display hight: " + String(bigOled.getDisplayHeight()) + "Display width: " + String(bigOled.getDisplayWidth()));
+    bigOled.setI2CAddress(0x3C * 2);
+    bigOled.setBusClock(400000);
+    bigOled.begin();
+    bigOled.clearBuffer();
+    bigOled.setFont(u8g2_font_6x12_mf); // set the font for the terminal window
+    bigOled.setDisplayRotation(U8G2_R1);
+    u8g2log.begin(bigOled, U8LOG_WIDTH, U8LOG_HEIGHT, u8log_buffer);
+    u8g2log.setLineHeightOffset(2); // set extra space between lines in pixel, this can be negative
+    u8g2log.setRedrawMode(1);       // 0: Update screen with newline, 1: Update screen for every char
+    Serial.println("Displays initialized!"); // Serial.println("Big Display height: " + bigOled.getDisplayHeight() + " Big Display Width: "  + bigOled.getDisplayHeight());
+  }
 
-  bigOled.begin();
-  bigOled.clearBuffer();
-  bigOled.setFont(u8g2_font_6x12_mf); // set the font for the terminal window
-  bigOled.setDisplayRotation(U8G2_R1);
-  u8g2log.begin(bigOled, U8LOG_WIDTH, U8LOG_HEIGHT, u8log_buffer);
-  u8g2log.setLineHeightOffset(2); // set extra space between lines in pixel, this can be negative
-  u8g2log.setRedrawMode(1);       // 0: Update screen with newline, 1: Update screen for every char
-  Serial.println("Displays initialized!");
-  // Serial.println("Big Display height: " + bigOled.getDisplayHeight() + " Big Display Width: "  + bigOled.getDisplayHeight());
-
-}
 /*      Switching screens           */
 volatile bool buttonBigPressed, buttonSmallPressed = false;
 
-
 /*              Setup Currentsensor    */
 extern int CurrentPin;
-float CurrentSensor_quick()
+float CurrentSensor_724()
 {
   float current_voltage, current = 0.0;
 
   float R1 = 3300.0; //1000.0;
   float R2 = 6800.0; //2000.0;
-
+  float RatioVolDiv = (R1 + R2) / R2;
   const int numSamples = 100;
-  float adc_voltage_sum = 0.0;
+  long adc_voltage_sum = 0;
 
   // Read ADC value multiple times to average
   for (int i = 0; i < numSamples; i++)
   {
-    int adc = analogRead(CurrentPin);
-    adc_voltage_sum += adc * (3.3 / 4095.0);
+    int adc = analogReadMilliVolts(33);
+    adc_voltage_sum += adc; //3.3
     vTaskDelay(2 / portTICK_PERIOD_MS);// Small delay to allow for better averaging
   }
-
+  //Serial.println("ADC voltage raw: " + String(analogReadRaw(CurrentPin)));
+  //Serial.println("ADC mV Quick: " + String(analogReadMilliVolts(CurrentPin)));
   // Average the ADC voltage
-  float adc_voltage = adc_voltage_sum / numSamples;
+  float adc_voltage = (adc_voltage_sum / numSamples);// * (3300 / 4095.0);
+  //Serial.println("ADC voltage Quick: " + String(adc_voltage));
   // Serial.println("ADC voltage: " + String(adc_voltage));
 
   // Calculate the sensor voltage
-  current_voltage = (adc_voltage * R2) / (R1 + R2);
-  // Serial.println("Current voltage: " + String(current_voltage));
+  current_voltage = adc_voltage * RatioVolDiv;
+  //Serial.println("Current voltage Quick: " + String(current_voltage));
 
   // Measure this value when no current is flowing to calibrate zeroCurrentVoltage
   //float zeroCurrentVoltage = 0.48; // Use the previously measured value or measure again
   
-  // ACS712 sensitivity (e.g., 185mV/A for ACS712-05B)
   //float sensitivity = 0.066; // Change this value based on your specific ACS712 model
 
-  //ACS724
-  float zeroCurrentVoltage = 2.38; //Or 1.58V after voltage divider
-  // ACS724 sensitivity 
-  float sensitivity = 0.040; // Change this value based on your specific ACS712 model
+  float zeroCurrentVoltage = 2500;//2500; //Or 1.58V after voltage divider
+  float sensitivity = 40; //0.040; //ACS724 sensitivity Change this value based on your specific ACS712 model
 
   // Calculate the current
   current = (current_voltage - zeroCurrentVoltage) / sensitivity;
   // Serial.println("Current: " + String(current));
   //printf("R1: %f, R2: %f, sampling: %d, ADC voltage: %f\n", R1, R2, numSamples, adc_voltage);
-
-  return current;
-}
-float CurrentSensor_ACS724()
-{
-  float current_voltage, current = 0.0;
-  float R1 = 3300.0; //1000.0;
-  float R2 = 6800.0; //2000.0;
-  const int numSamples = 100;
-  float adc_voltage_sum = 0.0;
-
-  // Read ADC value multiple times to average
-  for (int i = 0; i < numSamples; i++)
-  {
-    int adc = analogRead(CurrentPin);
-    adc_voltage_sum += adc * (3.3 / 4095.0);
-    vTaskDelay(2 / portTICK_PERIOD_MS);// Small delay to allow for better averaging
-  }
-
-  // Average the ADC voltage
-  float adc_voltage = adc_voltage_sum / numSamples;
-  // Serial.println("ADC voltage: " + String(adc_voltage));
-
-  // Calculate the sensor voltage
-  current_voltage = (adc_voltage * R2) / (R1 + R2);
-  // Serial.println("Current voltage: " + String(current_voltage));
-
-  // Measure this value when no current is flowing to calibrate zeroCurrentVoltage
-  float zeroCurrentVoltage = 1.58; //2.38; //Or 1.58V after voltage divider
-  float sensitivity = 0.040; // Change this value based on your specific model
-
-  // Calculate the current
-  current = (current_voltage - zeroCurrentVoltage) / sensitivity;
-  // Serial.println("Current: " + String(current));
-  // printf("R1: %f, R2: %f, sampling: %d, ADC voltage: %f\n", R1, R2, numSamples, adc_voltage);
 
   return current;
 }
@@ -432,7 +425,6 @@ void listDir(fs::FS &fs, const char *dirname, uint8_t levels)
     Serial.println("Not a directory");
     return;
   }
-
   File file = root.openNextFile();
   while (file)
   {
@@ -574,9 +566,30 @@ void SD_init()
   Serial.printf("Used space: %lluMB\n", SD.usedBytes() / (1024 * 1024));
 }
 
+void printDirectory(File dir, int numTabs) {
+  while (true) {
+    File entry =  dir.openNextFile();
+    if (! entry) {
+      // no more files
+      break;
+    }
+    for (uint8_t i = 0; i < numTabs; i++) {
+      Serial.print('\t');
+    }
+    Serial.print(entry.name());
+    if (entry.isDirectory()) {
+      Serial.println("/");
+      printDirectory(entry, numTabs + 1);
+    } else {
+      // files have sizes, directories do not
+      Serial.print("\t\t");
+      Serial.println(entry.size(), DEC);
+    }
+    entry.close();
+  }
+}
+
 /*
-
-
 void renameFile(fs::FS &fs, const char * path1, const char * path2){
   Serial.printf("Renaming file %s to %s\n", path1, path2);
   if (fs.rename(path1, path2)) {
@@ -619,7 +632,6 @@ void testFileIO(fs::FS &fs, const char * path){
   } else {
     Serial.println("Failed to open file for reading");
   }
-
 
   file = fs.open(path, FILE_WRITE);
   if(!file){
@@ -708,67 +720,44 @@ void readFileAndSendOverBluetooth(fs::FS &fs, const char *path)
 
   file.close();
 }
-void sendFileOverBluetoothInOneGo(const char *path)
-{
-  File file = SD.open(path, FILE_READ);
-  if (!file)
-  {
-    Serial.println("Failed to open file for reading: " + String(path));
-    return;
-  }
 
-  size_t fileSize = file.size();
-  uint8_t *buffer = new uint8_t[fileSize];
+#define CHUNK_SIZE 4096 //9182 met 9216 stacksize results in stack overflow
+void sendLargeFileOverBluetooth(const char *path) {
+    File file = SD.open(path, FILE_READ);
+    if (!file) {
+        Serial.println("Failed to open file for reading");
+        return;
+    }
+    Serial.println("test");
+    Serial.println("Received file name: " + String(path));
 
-  if (buffer == nullptr)
-  {
-    Serial.println("Failed to allocate memory for buffer");
+    size_t fileSize = file.size();
+    Serial.println("File size: " + String(fileSize));
+    size_t bytesRemaining = fileSize;
+    uint8_t buffer[CHUNK_SIZE];
+
+    // Send file size first
+    SerialBT.write((uint8_t*)&fileSize, sizeof(fileSize));
+
+    while (bytesRemaining > 0) {
+        size_t bytesToRead = std::min(static_cast<size_t>(CHUNK_SIZE), bytesRemaining);
+        size_t bytesRead = file.read(buffer, bytesToRead);
+
+        if (bytesRead == 0) {
+            Serial.println("Error reading file");
+            break;
+        }
+
+        size_t bytesWritten = SerialBT.write(buffer, bytesRead);
+        if (bytesWritten != bytesRead) {
+            Serial.println("Error sending data over Bluetooth");
+            break;
+        }
+        bytesRemaining -= bytesRead;
+        vTaskDelay(10 / portTICK_PERIOD_MS);
+    }
     file.close();
-    return;
-  }
-
-  size_t bytesRead = file.read(buffer, fileSize);
-  if (bytesRead != fileSize)
-  {
-    Serial.println("Failed to read file: " + String(path) + ", bytesRead: " + String(bytesRead) + ", fileSize: " + String(fileSize));
-    delete[] buffer;
-    file.close();
-    return;
-  }
-
-  file.close();
-
-  SerialBT.write(buffer, fileSize);
-  delete[] buffer;
-
-  Serial.println("File sent over Bluetooth: " + String(path));
-}
-void sendFileOverBluetoothInOneGo2(const char *path)
-{
-  File file = SD.open(path, FILE_READ);
-  if (!file)
-  {
-    Serial.println("Failed to open file for reading");
-    return;
-  }
-
-  size_t fileSize = file.size();
-  uint8_t *buffer = new uint8_t[fileSize];
-
-  if (file.read(buffer, fileSize) != fileSize)
-  {
-    Serial.println("Failed to read file");
-    delete[] buffer;
-    file.close();
-    return;
-  }
-
-  file.close();
-
-  SerialBT.write(buffer, fileSize);
-  delete[] buffer;
-
-  Serial.println("File sent over Bluetooth");
+    Serial.println("File sent over Bluetooth");
 }
 
 unsigned long button_time = 0;
@@ -782,8 +771,3 @@ void buttonInterrupt_bigOled()
     buttonBigPressed = true; // Set button press flag
   }
 }
-
-// void buttonInterrupt_smallOled()
-// {
-//   buttonSmallPressed = true; // Set button press flag
-// }
