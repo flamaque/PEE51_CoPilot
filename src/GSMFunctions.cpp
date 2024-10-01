@@ -4,6 +4,16 @@ volatile int stateBigOled = 1;
 String response, longitude, latitude, date, time_gsm, jsonPayload, datetime_gsm = "";
 bool Posting = false;
 
+
+void sendCmd(const char* cmd)
+{
+    //serialSIM800.listen();
+    gsmSerial.flush();
+    delay(500);
+    gsmSerial.write(cmd);
+    gsmSerial.flush();
+}
+
 void readGsmResponse()
 {
     char c;
@@ -33,6 +43,7 @@ void readGsmResponse()
     }        
     printf("(printf) Response: %s\n", response.c_str());            
 }
+char command[20];
 
 void readGsmResponse2() {
     char c;
@@ -117,6 +128,7 @@ String readGsmResponse3()
     }
     return response;
 }
+
 String readGsmResponse4() {
     String response = "";
     unsigned long startTime = millis();
@@ -440,6 +452,8 @@ void getTime()
     convertToUnixTimestamp(date, time_gsm);
 } 
 */
+
+/*
 void getTimeNow()
 {
     Serial.println("Get time now().");
@@ -461,6 +475,7 @@ void getTimeNow()
     convertToUnixTimestamp(date, time_gsm);
     vTaskDelay(100 / portTICK_PERIOD_MS);
 }
+*/
 
 void saveTimestamp(uint64_t timestamp_ms)
 {
@@ -535,6 +550,7 @@ uint64_t convertToUnixTimestamp(String date, String time)
     return timestamp_ms;
 }
 
+/*
 void post_http(String jsonPayload)
 {
     TickType_t startTime = xTaskGetTickCount();
@@ -548,7 +564,7 @@ void post_http(String jsonPayload)
         return;
     }
 
-    /*          Post HTTP data                */
+    //          Post HTTP data                
     Serial.println("Post http data...");
     gsmSerial.println("AT+HTTPINIT=?"); // Initialize HTTP service
     readGsmResponse();
@@ -590,24 +606,33 @@ void post_http(String jsonPayload)
     printf("Time for post_http: %d ms \n", endTime - startTime);
 }
 
-void post_http2(String jsonPayload)
+*/
+
+void http_init(){
+
+}
+void post_http2(const char* jsonPayload)
 {
     TickType_t startTime = xTaskGetTickCount();
-    int dataSize = jsonPayload.length();
-    Serial.print("Buffer in post_http: ");
-    Serial.println(jsonPayload);
-    Serial.print("Data size: ");
-    Serial.println(String(dataSize));
+    int dataSize = strlen(jsonPayload);
+    Serial.println("Buffer in post_http: " + String(jsonPayload));
+    Serial.println("Data size: " + String(dataSize));
+    Serial.println();
 
     if (dataSize <= 0)
     {
         Serial.println("No data to post.");
         return;
     }
-    
-    gsmSerial.println("AT+HTTPINIT=?");
+    sendCmd(HTTP_INIT);
+    //snprintf(command, sizeof(command), "AT+HTTPINIT=?");
+    //gsmSerial.println(command);
+    //gsmSerial.println("AT+HTTPINIT=?");
     readGsmResponse();
-    gsmSerial.println("AT+HTTPINIT");
+    sendCmd(HTTP_INIT2);
+    //snprintf(command, sizeof(command), "AT+HTTPINIT");
+    //gsmSerial.println(command);
+    //gsmSerial.println("AT+HTTPINIT");
     readGsmResponse();
     TickType_t EndTime1 = xTaskGetTickCount();
     printf("httpinit=? and httpinit: %d ms \n", EndTime1 - startTime);
@@ -647,7 +672,9 @@ void post_http2(String jsonPayload)
     } */
 
     vTaskDelay(10 / portTICK_PERIOD_MS);
-    gsmSerial.println("AT+HTTPPARA=\"CID\",1");
+    snprintf(command, sizeof(command), "AT+HTTPPARA=\"CID\",1");
+    gsmSerial.println(command);
+    //gsmSerial.println("AT+HTTPPARA=\"CID\",1");
     readGsmResponse();
     vTaskDelay(10 / portTICK_PERIOD_MS);
     gsmSerial.println("AT+HTTPPARA=\"URL\", " + String(httpapi));
@@ -661,7 +688,7 @@ void post_http2(String jsonPayload)
 
     String httpDataCommand = "AT+HTTPDATA=" + String(dataSize) + ",20000";
     vTaskDelay(50 / portTICK_PERIOD_MS);
-     TickType_t EndTime3 = xTaskGetTickCount();
+    TickType_t EndTime3 = xTaskGetTickCount();
     printf("httppara=content and httpdata: %d ms \n", EndTime3 - startTime);
 
     gsmSerial.println(httpDataCommand);
@@ -670,7 +697,7 @@ void post_http2(String jsonPayload)
     TickType_t endTimeBeforejsonInjection = xTaskGetTickCount();
     printf("Time for post_http before json injection: %d ms \n", endTimeBeforejsonInjection - startTime);
 
-    gsmSerial.println(String(jsonPayload));
+    gsmSerial.println(jsonPayload);
     readGsmResponse();
     vTaskDelay(500 / portTICK_PERIOD_MS);
     TickType_t endTimeHalf = xTaskGetTickCount();
@@ -680,7 +707,6 @@ void post_http2(String jsonPayload)
     readGsmResponse();
     vTaskDelay(50 / portTICK_PERIOD_MS);
     gsmSerial.println("AT+HTTPREAD");
-    //readGsmResponse();
     String response = readGsmResponse3();
         
         if (response.indexOf("+HTTPREAD: 1,200,0") != -1) {
@@ -844,6 +870,7 @@ void initialize_gsm()
     }
 }
 
+/*
 void initialize_gsm2()
 {
     Serial.println("Configure APN settings.");
@@ -877,6 +904,7 @@ void initialize_gsm2()
 
     Serial.println("GPRS settings configured.");
 }
+*/
 
 /*
 void GA6_init()

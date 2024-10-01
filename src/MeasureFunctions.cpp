@@ -289,8 +289,8 @@ U8G2_SSD1306_128X64_NONAME_1_HW_I2C bigOled(U8G2_R0, /* reset=*/U8X8_PIN_NONE, /
 uint8_t u8log_buffer[U8LOG_WIDTH * U8LOG_HEIGHT];
 U8G2LOG u8g2log;
 
-void init_displays()
-  {
+
+void init_displays(){
     // Serial.println("Display hight: " + String(bigOled.getDisplayHeight()) + "Display width: " + String(bigOled.getDisplayWidth()));
     bigOled.setI2CAddress(0x3C * 2);
     bigOled.setBusClock(400000);
@@ -305,7 +305,7 @@ void init_displays()
   }
 
 /*      Switching screens           */
-volatile bool buttonBigPressed, buttonSmallPressed = false;
+volatile bool buttonBigPressed, buttonDebugPressed = false;
 
 /*              Setup Currentsensor    */
 extern int CurrentPin;
@@ -511,13 +511,27 @@ void appendFile(fs::FS &fs, const char *path, const char *message)
 
 void SD_init()
 {
-  if (!SD.begin(CS_PIN))
+  //spi.begin();
+  if (!SD.begin(CS_PIN,spi,80000000)) {
+  Serial.println("Card Mount Failed");
+  return;
+}
+  if (SD.begin(CS_PIN, spi, 25000000))
   {
-    Serial.println("SD Card initialization failed!");
-    Serial.println("Log file not created and configuration not read.");
-    Serial.println("Restart ESP32!");
-    return; //Continuing for now, production version should halt indefinitely
+    Serial.println("Reading config file.");
+    // read_configuration();
+    // Serial.println("All values after setup:");
+    // printVariables();
+    // Serial.println("");
+    File root;
+    root = SD.open("/");
+    printDirectory(root, 0);
+    root.close();
   }
+  else {
+    Serial.println("SD initialization failed.");
+  }
+  
   Serial.println("SD Card initialized.");
   uint8_t cardType = SD.cardType();
 
@@ -670,22 +684,6 @@ void removeDir(fs::FS &fs, const char * path){
 */
 
 /*      Bluetooth Setup   */
-void sendFileOverBluetooth(const char *path)
-{
-  File file = SD.open(path, FILE_READ);
-  if (!file)
-  {
-    Serial.println("Failed to open file for reading");
-    return;
-  }
-  while (file.available())
-  {
-    SerialBT.write(file.read());
-  }
-  file.close();
-  Serial.println("File sent over Bluetooth");
-}
-
 void logMeasurement(String s)
 {
   File dataFile = SD.open("/log.txt", FILE_APPEND);
@@ -703,62 +701,25 @@ void logMeasurement(String s)
   }
 }
 
-void readFileAndSendOverBluetooth(fs::FS &fs, const char *path)
+
+void sendFileOverBluetooth(const char *path)
 {
   Serial.printf("Reading file: %s\n", path);
-  File file = fs.open(path, FILE_READ);
+  File file = SD.open(path, FILE_READ);
   if (!file)
   {
     Serial.println("Failed to open file for reading");
     return;
   }
-
   while (file.available())
   {
     SerialBT.write(file.read());
   }
-
   file.close();
+  Serial.println("File sent over Bluetooth");
 }
 
-#define CHUNK_SIZE 4096 //9182 met 9216 stacksize results in stack overflow
-void sendLargeFileOverBluetooth(const char *path) {
-    File file = SD.open(path, FILE_READ);
-    if (!file) {
-        Serial.println("Failed to open file for reading");
-        return;
-    }
-    Serial.println("test");
-    Serial.println("Received file name: " + String(path));
 
-    size_t fileSize = file.size();
-    Serial.println("File size: " + String(fileSize));
-    size_t bytesRemaining = fileSize;
-    uint8_t buffer[CHUNK_SIZE];
-
-    // Send file size first
-    SerialBT.write((uint8_t*)&fileSize, sizeof(fileSize));
-
-    while (bytesRemaining > 0) {
-        size_t bytesToRead = std::min(static_cast<size_t>(CHUNK_SIZE), bytesRemaining);
-        size_t bytesRead = file.read(buffer, bytesToRead);
-
-        if (bytesRead == 0) {
-            Serial.println("Error reading file");
-            break;
-        }
-
-        size_t bytesWritten = SerialBT.write(buffer, bytesRead);
-        if (bytesWritten != bytesRead) {
-            Serial.println("Error sending data over Bluetooth");
-            break;
-        }
-        bytesRemaining -= bytesRead;
-        vTaskDelay(10 / portTICK_PERIOD_MS);
-    }
-    file.close();
-    Serial.println("File sent over Bluetooth");
-}
 
 unsigned long button_time = 0;
 unsigned long last_button_time = 0;
@@ -771,3 +732,16 @@ void buttonInterrupt_bigOled()
     buttonBigPressed = true; // Set button press flag
   }
 }
+
+unsigned long button_time2 = 0;
+unsigned long last_button_time2 = 0;
+void buttonInterrupt_debug()
+{
+  button_time2 = millis();
+  if (button_time2 - last_button_time2 > 500)
+  {
+    last_button_time2 = button_time2;
+    buttonDebugPressed = true; // Set button press flag
+  }
+}
+
