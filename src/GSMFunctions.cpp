@@ -1,9 +1,12 @@
 #include "config.h"
 extern HardwareSerial gsmSerial;
-volatile int stateBigOled = 1;
+volatile uint8_t stateBigOled = 1;
 String response, longitude, latitude, date, time_gsm, jsonPayload, datetime_gsm = "";
 bool Posting = false;
-
+#define ARDUINOJSON_STRING_LENGTH_SIZE 2      //Max characters 65,635
+#define ARDUINOJSON_SLOT_ID_SIZE 2            //Max-nodes 65,635
+#define ARDUINOJSON_USE_LONG_LONG 0           //Store jsonVariant as long
+#define ARDUINOJSON_USE_DOUBLE 0              //Store floating point NOT as double 
 
 void sendCmd(const char* cmd)
 {
@@ -154,15 +157,37 @@ String readGsmResponse4() {
     return "Error: Invalid time";
 }
 
+String readGsmResponse5() {
+    String response = "";
+    unsigned long startTime = millis();
+    while (millis() - startTime < 2000) {  // Increased timeout to 2 seconds
+        if (gsmSerial.available()) {
+            char c = gsmSerial.read();
+            response += c;
+            if (response.endsWith("\r\n")) {
+                response.trim();
+                if (response.startsWith("+CCLK:") || response.startsWith("AT+CCLK?+CCLK:")) {
+                    return response; // Return the entire response string
+                }
+            }
+        }
+    }
+    Serial.println("Error invalid time: " + response);
+    return "Error: Invalid time";
+}
+
+String date_getTime="";
+uint64_t unixTimestamp;
+
 void getTime()
 {
     bool validResponse = false;
     while (!validResponse)
     { 
         // Setup GPRS
-        gsmSerial.println("AT+SAPBR=3,1,\"Contype\",\"GPRS\""); // Sets the mode to GPRS
-        readGsmResponse();
-        vTaskDelay(500 / portTICK_PERIOD_MS);
+        // gsmSerial.println("AT+SAPBR=3,1,\"Contype\",\"GPRS\""); // Sets the mode to GPRS
+        // readGsmResponse();
+        // vTaskDelay(500 / portTICK_PERIOD_MS);
 
         gsmSerial.println("AT+SAPBR=3,1,\"APN\"," + apn); // Set APN parameters
         readGsmResponse();
@@ -183,7 +208,7 @@ void getTime()
         gsmSerial.println("AT+SAPBR=2,1"); // Query the status of previously opened GPRS carrier
         readGsmResponse();
 
-        vTaskDelay(2000 / portTICK_PERIOD_MS);
+        // vTaskDelay(2000 / portTICK_PERIOD_MS);
         
         while (!validResponse)
         {
@@ -221,21 +246,21 @@ void getTime()
 
             if (firstComma == -1 || secondComma == -1)
             {
-                Serial.println("Error: Malformed response, trying again...");
+                Serial.println("Error: Malformed response line 244, trying again...");
                 printf("(printf) Malformed response: %s\n", data.c_str());
                 printf("(printf) resp: %s\n", timeTestChar.c_str());
                 printf("firstComma: %d, secondComma: %d, \n", firstComma, secondComma);
                 break; // Exit the inner loop and retry GPRS setup
             }
 
-            date = data.substring(firstComma + 1, secondComma);
+            date_getTime = data.substring(firstComma + 1, secondComma);
             time_gsm = data.substring(secondComma + 1);
 
             // Check if the date and time are valid
-            if (date.toDouble() == 0.000000 || time_gsm.toDouble() == 0.000000)
+            if (date_getTime.toDouble() == 0.000000 || time_gsm.toDouble() == 0.000000)
             {
                 Serial.println("Error: Invalid date/time, trying again...");
-                Serial.println("Parsed Date: " + date);
+                Serial.println("Parsed Date: " + date_getTime);
                 Serial.println("Parsed Time: " + time_gsm);
                 break; // Exit the inner loop and retry GPRS setup
             }
@@ -244,54 +269,68 @@ void getTime()
                 printf("SIM808 requesting datetime...\n");
                 gsmSerial.println("AT+CLTS=1"); //+CLTS: OK
                 vTaskDelay(500 / portTICK_PERIOD_MS);
+                readGsmResponse();
                 gsmSerial.println("AT+CLTS=?"); //+CLTS: "yy/MM/dd,hh:mm:ss+/-zz"
                 vTaskDelay(500 / portTICK_PERIOD_MS);
+                readGsmResponse();
                 gsmSerial.println("AT+CLTS?");  //+CLTS: 1
                 vTaskDelay(500 / portTICK_PERIOD_MS);
-                gsmSerial.println("AT+CCLK?"); //+CCLK: "04/01/01,00:43:35+08"
                 readGsmResponse();
-                String timeTestChar = response;
-                Serial.println("Timestamp: " + timeTestChar);
-                //gsmSerial.println("AT+CCLK=?"); //+CCLK: "04/01/01,00:43:35+08"
-                //String timeStamp = readGsmResponse4();
+                gsmSerial.println("AT+CCLK?"); //+CCLK: "04/01/01,00:43:35+08"
+                vTaskDelay(10 / portTICK_PERIOD_MS);
+                String response = readGsmResponse5();
+                Serial.println("Response: " + response); // Print the entire response for debugging
 
-                vTaskDelay(500 / portTICK_PERIOD_MS);
-                
-                int startIndex = timeTestChar.indexOf("+CCLK: \"");
-                if (startIndex == -1) 
-                {
+                // Find the index of the "+CCLK: "
+                int startIndex = response.indexOf("+CCLK: \"");
+                if (startIndex == -1) {
                     printf("Error: Invalid time, trying again...\n");
-                    printf("Response: %s\n", timeTestChar.c_str());
+                    printf("Response: %s\n", response.c_str());
                     break; // Exit the inner loop and retry GPRS setup
                 }
-                int endIndex = timeTestChar.indexOf("\"", startIndex + 8);
-                String data = timeTestChar.substring(startIndex + 8, endIndex);
-                int commaIndex = data.indexOf(','); // Split the response string by comma
-                if (commaIndex == -1)
-                {
+
+                // Adjust the start index to capture the actual date/time string
+                startIndex += 8; // Move to the start of the date/time string
+
+                // Find the end index of the closing quote
+                int endIndex = response.indexOf("\"", startIndex);
+                if (endIndex == -1) {
                     Serial.println("Error: Malformed response, trying again...");
-                    printf("(printf) Malformed response: %s\n", data.c_str());
-                    printf("(printf) resp: %s\n", timeTestChar.c_str());
+                    printf("(printf) Malformed response: %s\n", response.c_str());
                     break; // Exit the inner loop and retry GPRS setup
                 }
-                date = data.substring(0, commaIndex);
-                time_gsm = data.substring(commaIndex + 1);
+
+                // Extract the date/time string
+                String data = response.substring(startIndex, endIndex);
+                int commaIndex = data.indexOf(','); // Split the response string by comma
+                if (commaIndex == -1) {
+                    Serial.println("Error: Malformed response on line 296, trying again...");
+                    printf("(printf) Malformed response: %s\n", data.c_str());
+                    printf("(printf) resp: %s\n", response.c_str());
+                    break; // Exit the inner loop and retry GPRS setup
+                }
+
+                date_getTime = data.substring(0, commaIndex);
+                String time_gsm = data.substring(commaIndex + 1);
 
                 // Remove the timezone offset from time_gsm
                 int plusIndex = time_gsm.indexOf('+');
                 if (plusIndex != -1) {
                     time_gsm = time_gsm.substring(0, plusIndex);
                 }
+
                 // Check if the date and time are valid
-                if (date.length() != 8 || time_gsm.length() != 8)
-                {
+                if (date_getTime.length() != 8 || time_gsm.length() != 8) {
                     Serial.println("Error: Invalid date/time format, trying again...");
-                    Serial.println("Parsed Date: " + date);
+                    Serial.println("Parsed Date: " + date_getTime);
                     Serial.println("Parsed Time: " + time_gsm);
                     break; // Exit the inner loop and retry GPRS setup
                 }
-                uint64_t unixTimestamp = convertToUnixTimestamp(date, time_gsm);
-                    Serial.println("Timestamp before comparison: " + String(unixTimestamp));
+
+                Serial.println("Parsed Date: " + date_getTime);
+                Serial.println("Parsed Time: " + time_gsm);
+                unixTimestamp = convertToUnixTimestamp(date_getTime, time_gsm);
+                Serial.println("Timestamp before comparison: " + String(unixTimestamp));
 
                 if (unixTimestamp <= 1609459200000ULL || unixTimestamp >= 2524608000000ULL) 
                 { // 1609459200 is 2021-01-01, 2524608000 is 2050-01-01
@@ -306,176 +345,13 @@ void getTime()
         }
     }
 
-    datetime_gsm = date + " " + time_gsm;
+    datetime_gsm = date_getTime + " " + time_gsm;
     Serial.println("Valid datetime received. " + datetime_gsm);
-    Serial.println("Parsed Date: " + date);
-    Serial.println("Parsed Time: " + time_gsm);
-    //convertToUnixTimestamp(date, time_gsm);
+    Serial.println("Date: " + date_getTime);
+    Serial.println("Time: " + time_gsm);
+    saveTimestamp(unixTimestamp);
     vTaskDelay(100 / portTICK_PERIOD_MS);
 }
-
-/*
-void parseDatetime()
-{
-    bool validResponse = false;
-    while (!validResponse)
-    {
-        Serial.println("Requesting datetime...");
-        gsmSerial.println("AT+CIPGSMLOC=1,1");
-        vTaskDelay(100 / portTICK_PERIOD_MS);
-        readGsmResponse2();
-        String resp = response;
-        vTaskDelay(100 / portTICK_PERIOD_MS);
-
-        int startIndex = resp.indexOf("+CIPGSMLOC:");
-        if (startIndex == -1)
-        {
-            Serial.println("Error: Invalid time, trying again...");
-            Serial.println("Response: " + resp);
-            gsmSerial.println("AT+CSQ");
-            readGsmResponse();
-            
-            continue; // Retry
-        }
-
-        int endIndex = resp.indexOf("\r\n", startIndex);
-        String data = resp.substring(startIndex + 12, endIndex);
-
-        // Split the response string by commas
-        int firstComma = data.indexOf(',');
-        int secondComma = data.indexOf(',', firstComma + 1);
-        int thirdComma = data.indexOf(',', secondComma + 1);
-        int fourthComma = data.indexOf(',', thirdComma + 1);
-
-        if (firstComma == -1 || secondComma == -1 || thirdComma == -1 || fourthComma == -1)
-        {
-            Serial.println("Error: Malformed response, trying again...");
-            continue; // Retry
-        }
-
-        latitude = data.substring(firstComma + 1, secondComma);
-        longitude = data.substring(secondComma + 1, thirdComma);
-        date = data.substring(thirdComma + 1, fourthComma);
-        time_gsm = data.substring(fourthComma + 1);
-
-        // Check if the date and time are valid
-        if (date.toDouble() == 0.000000 || time_gsm.toDouble() == 0.000000)
-        {
-            Serial.println("Error: Invalid date/time, trying again...");
-            Serial.println("Parsed Date: " + date);
-            Serial.println("Parsed Time: " + time_gsm);
-
-            gsmSerial.println("AT+CIPGSMLOC=1,1");
-            vTaskDelay(100 / portTICK_PERIOD_MS);
-            readGsmResponse();
-            resp = response;
-            vTaskDelay(100 / portTICK_PERIOD_MS);
-
-            startIndex = resp.indexOf("+CIPGSMLOC:");
-            if (startIndex == -1)
-            {
-                Serial.println("Error: Invalid time, trying again...");
-                Serial.println("Response: " + resp);
-                continue; // Retry
-            }
-
-            endIndex = resp.indexOf("\r\n", startIndex);
-            data = resp.substring(startIndex + 12, endIndex);
-
-            // Split the response string by commas
-            firstComma = data.indexOf(',');
-            secondComma = data.indexOf(',', firstComma + 1);
-
-            if (firstComma == -1 || secondComma == -1)
-            {
-                Serial.println("Error: Malformed response, trying again...");
-                continue; // Retry
-            }
-
-            date = data.substring(firstComma + 1, secondComma);
-            time_gsm = data.substring(secondComma + 1);
-        }
-
-        // Check if the date and time are reasonable values
-        // long long ts = convertToUnixTimestamp(date, time_gsm);
-        // if (ts < 0) {
-        //  Serial.println("Error: Invalid date/time, trying again...");
-        //  Serial.println("Parsed ts: " + ts);
-        //  continue;  // Retry
-        //} 
-
-        // If all validations pass, set validResponse to true
-        validResponse = true;
-        Serial.println("Valid datetime received.");
-        Serial.println("Parsed Date: " + date);
-        Serial.println("Parsed Time: " + time_gsm);
-        Serial.println("Parsed Latitude: " + latitude);
-        Serial.println("Parsed Longitude: " + longitude);
-        Serial.println("time_gsm created in parseDatetime: " + time_gsm);
-        datetime_gsm = date + " " + time_gsm;
-        Serial.println("datetime_gsm created in parseDatetime: " + datetime_gsm);
-    }
-}
-*/
-
-/*
-void getTime()
-{
-    //gsmSerial.println("AT+SAPBR=3,1,\"Contype\",\"GPRS\", \"IP\""); // Sets the mode to GPRS
-    //vTaskDelay(500 / portTICK_PERIOD_MS);
-    //readGsmResponse();
-
-    gsmSerial.println("AT+SAPBR=3,1,\"APN\"," + apn); // Set APN parameters
-    vTaskDelay(500 / portTICK_PERIOD_MS);
-    readGsmResponse();
-
-    gsmSerial.println("AT+SAPBR=3,1,\"USER\"," + apn_User); // Set APN username
-    vTaskDelay(500 / portTICK_PERIOD_MS);
-    readGsmResponse();
-
-    gsmSerial.println("AT+SAPBR=3,1,\"PWD\"," + apn_Pass); // Set APN password
-    vTaskDelay(500 / portTICK_PERIOD_MS);
-    readGsmResponse();
-
-    gsmSerial.println("AT+SAPBR=1,1"); // Open the carrier with previously defined parameters "start command"
-    vTaskDelay(500 / portTICK_PERIOD_MS);
-    readGsmResponse();
-
-    gsmSerial.println("AT+SAPBR=2,1"); // Query the status of previously opened GPRS carrier
-    vTaskDelay(500 / portTICK_PERIOD_MS);
-    readGsmResponse();
-
-    gsmSerial.println("AT+CIPGSMLOC=1,1");
-    readGsmResponse();
-    vTaskDelay(500 / portTICK_PERIOD_MS);
-    parseDatetime();
-    convertToUnixTimestamp(date, time_gsm);
-} 
-*/
-
-/*
-void getTimeNow()
-{
-    Serial.println("Get time now().");
-    vTaskDelay(100 / portTICK_PERIOD_MS);
-    gsmSerial.println("AT+CIPGSMLOC=1,1");
-    readGsmResponse();
-    vTaskDelay(100 / portTICK_PERIOD_MS);
-    parseDatetime();
-    vTaskDelay(100 / portTICK_PERIOD_MS);
-    Serial.println("Lat: " + latitude + " Long: " + longitude + " Date: " + date + " Time: " + time_gsm);
-    vTaskDelay(100 / portTICK_PERIOD_MS);
-    Serial.println("convertToUnixTimestamp with 1,1: ");
-    convertToUnixTimestamp(date, time_gsm);
-    Serial.println("In case that didn't work: ");
-    gsmSerial.println("AT+CIPGSMLOC=1,1");
-    readGsmResponse();
-    vTaskDelay(100 / portTICK_PERIOD_MS);
-    Serial.println("Lat: " + latitude + " Long: " + longitude + " Date: " + date + " Time: " + time_gsm);
-    convertToUnixTimestamp(date, time_gsm);
-    vTaskDelay(100 / portTICK_PERIOD_MS);
-}
-*/
 
 void saveTimestamp(uint64_t timestamp_ms)
 {
@@ -501,29 +377,38 @@ uint64_t getSavedTimestamp()
 uint64_t convertToUnixTimestamp(String date, String time)
 {
     uint64_t timestamp_ms = 0;
-    int year = 0;
-    // Extract year, month, day from date
-    if (GSMType ==1){
-        year = date.substring(0, 4).toInt();
-    }
-    else if (GSMType ==2){
-        year = date.substring(0, 2).toInt();
-        year += (year >= 0 && year < 100) ? 2000 : 1900;  // Adjust for two-digit year
-    }
-    int month = date.substring(5, 7).toInt();
-    int day = date.substring(8, 10).toInt();
+    int year, month, day = 0;
 
-    // Extract hour, minute, second, millisecond from time
+    // Extract year, month, day from date
+    if (GSMType == 1) {
+        year = date.substring(0, 4).toInt();
+        // Ensure correct substring positions based on your date format "DD/MM/YY"
+        month = date.substring(3, 5).toInt();
+        day = date.substring(0, 2).toInt(); // Extract day from the start
+    }
+    else if (GSMType == 2) {
+        String yearStr = date.substring(0, 2);
+        if (yearStr.toInt() > 70) {
+            year = (yearStr.toInt() + 1900);
+        }
+        else {
+            year = (yearStr.toInt() + 2000);
+        }
+        // Ensure correct substring positions based on your date format "YY/MM/DD"
+        month = date.substring(3, 5).toInt();
+        day = date.substring(6, 8).toInt(); // Extract day from the start
+    }
+
+    // Extract hour, minute, second from time
     int hour = time.substring(0, 2).toInt();
     int minute = time.substring(3, 5).toInt();
     int second = time.substring(6, 8).toInt();
-    int millisecond = time.substring(9, 12).toInt(); // Assuming time is formatted as HH:MM:SS.mmm
 
     // Create a tm struct
     struct tm t;
     memset(&t, 0, sizeof(t)); // Initialize to zero
-    t.tm_year = year - 1900;  // tm_year is years since 1900
-    t.tm_mon = month - 1;     // tm_mon is 0-11
+    t.tm_year = year - 1900;   // tm_year is years since 1900
+    t.tm_mon = month - 1;      // tm_mon is 0-11
     t.tm_mday = day;
     t.tm_hour = hour;
     t.tm_min = minute;
@@ -532,85 +417,30 @@ uint64_t convertToUnixTimestamp(String date, String time)
 
     // Convert to time_t (UNIX timestamp)
     time_t timestamp = mktime(&t);
-    if (timestamp == -1)
-    {
+    if (timestamp == -1) {
         Serial.println("Failed to convert time using mktime.");
         return -1;
     }
-
+    Serial.println("Data in convertToUnixTimestamp: ");
+    Serial.println("Parsed day: " + String(day));
+    Serial.println("Parsed month: " + String(month));
+    Serial.println("Parsed year: " + String(year));
+    Serial.println("Parsed Date: " + date);
+    Serial.println("Parsed hour: " + String(hour));
+    Serial.println("Parsed minute: " + String(minute));
+    Serial.println("Parsed second: " + String(second));
+    Serial.println("Parsed Time: " + time);
     // Print the intermediate timestamp
     Serial.println("Intermediate timestamp: " + String(timestamp));
 
-    // Calculate the timestamp with milliseconds
-    timestamp_ms = timestamp * 1000LL; // + millisecond;
+    // Calculate the timestamp in milliseconds
+    timestamp_ms = timestamp * 1000LL; // No milliseconds provided in time string
 
-    // Print the final timestamp with milliseconds
+    // Print the final timestamp in milliseconds
     Serial.println("Final timestamp with milliseconds: " + String(timestamp_ms));
-    //saveTimestamp(timestamp_ms);
     return timestamp_ms;
 }
 
-/*
-void post_http(String jsonPayload)
-{
-    TickType_t startTime = xTaskGetTickCount();
-    int dataSize = jsonPayload.length();
-    printf("Buffer in post_http: %s\n", jsonPayload.c_str());
-    printf("Data size: %d\n", dataSize);
-
-    if (dataSize <= 0)
-    {
-        Serial.println("No data to post.");
-        return;
-    }
-
-    //          Post HTTP data                
-    Serial.println("Post http data...");
-    gsmSerial.println("AT+HTTPINIT=?"); // Initialize HTTP service
-    readGsmResponse();
-    
-    gsmSerial.println("AT+HTTPINIT"); // Initialize HTTP service
-    readGsmResponse();
-    vTaskDelay(10 / portTICK_PERIOD_MS);
-    gsmSerial.println("AT+HTTPPARA=\"CID\",1"); // Define carrier profile zeker
-    readGsmResponse();
-    vTaskDelay(10 / portTICK_PERIOD_MS);
-    gsmSerial.println("AT+HTTPPARA=\"URL\", " + String(httpapi)); // Pass URL to be called
-    readGsmResponse();
-    vTaskDelay(10 / portTICK_PERIOD_MS);
-    gsmSerial.println("AT+HTTPPARA=\"CONTENT\",\"application/json\""); // Define content type
-    readGsmResponse();
-    vTaskDelay(10 / portTICK_PERIOD_MS);
-    TickType_t endTime = xTaskGetTickCount();
-    printf("Time initialize and setting: %d ms \n", endTime - startTime);
-
-    String httpDataCommand = "AT+HTTPDATA=" + String(dataSize) + ",5000"; //5000
-    gsmSerial.println(httpDataCommand);
-    readGsmResponse();
-    vTaskDelay(500 / portTICK_PERIOD_MS);
-    Posting = true;
-    gsmSerial.println(String(jsonPayload));
-    readGsmResponse();
-    endTime = xTaskGetTickCount();
-    printf("Time injecting buffer to gsm: %d ms \n", endTime - startTime);
-    vTaskDelay(500 / portTICK_PERIOD_MS); // 5000
-    Posting = false;
-
-    gsmSerial.println("AT+HTTPACTION=1"); // Post HTTP data
-    readGsmResponse();
-    vTaskDelay(50 / portTICK_PERIOD_MS); // 50
-    gsmSerial.println("AT+HTTPREAD");    // Read HTTP response
-    readGsmResponse();
-    vTaskDelay(50 / portTICK_PERIOD_MS); // 50
-    endTime = xTaskGetTickCount();
-    printf("Time for post_http: %d ms \n", endTime - startTime);
-}
-
-*/
-
-void http_init(){
-
-}
 void post_http2(const char* jsonPayload)
 {
     TickType_t startTime = xTaskGetTickCount();

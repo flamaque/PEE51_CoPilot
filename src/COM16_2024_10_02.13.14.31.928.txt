@@ -1,0 +1,797 @@
+ets Jul 29 2019 12:21:46
+
+rst:0x1 (POWERON_RESET),boot:0x13 (SPI_FAST_FLASH_BOOT)
+configsip: 0, SPIWP:0xee
+clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+mode:DIO, clock div:1
+load:0x3fff0030,len:1344
+load:0x40078000,len:13964
+load:0x40080400,len:3600
+entry 0x400805f0
+CPU frequency set to: 240 MHz
+getXtalFrequencyMhz: 40
+getCpuFrequencyMhz: 240
+getApbFrequency: 80000000
+Reading config file.
+System Volume Information/
+	WPSettings.dat		12
+	IndexerVolumeGuid		76
+Test7_2MB.txt		2020000
+Test6_1MB.txt		1010000
+Test5_500k.txt		505000
+Test4_100k.txt		101000
+Test3_10k.txt		10100
+Test2_1k.txt		1010
+Tetst1_100.txt		101
+config.txt		909
+foo.txt		13
+log_copy4096.txt		1281540
+log_copy512.txt		1281540
+log_copy1024.txt		0
+log.txt		1281540
+test.txt		1048576
+Test8_5MB.txt		1048576
+TestFile.txt		1048576
+log_copy.txt		0
+SD Card initialized.
+SD Card Type: SDHC
+SD Card Size: 59344MB
+Log.txt file already exists
+Total space: 32756MB
+Used space: 10MB
+Displays initialized!
+Configure APN settings.
+readGsmResponse timeout
+(printf) Response: AT
+OK
+AT+IPR=115200
+OK
+AT&W
+OK
+AT+CSQ
++CSQ: 20,0
+
+OK
+AT+SAPBR=3,1,"Contype","GPRS","IP"
+ERROR
+AT+CCID=?
+OK
+AT+CCID
+8931090200035587547f
+
+OK
+AT+SAPBR=3,1,"Contype","GPRS"
+OK
+
+readGsmResponse timeout
+(printf) Response: AT+SAPBR=3,1,"APN",data.lycamobile.nl
+OK
+
+readGsmResponse timeout
+(printf) Response: AT+SAPBR=3,1,"USER",lmnl
+OK
+
+readGsmResponse timeout
+(printf) Response: AT+SAPBR=3,1,"PWD",plus
+OK
+
+readGsmResponse timeout
+(printf) Response: AT+SAPBR=1,1
+OK
+
+readGsmResponse timeout
+(printf) Response: AT+SAPBR=2,1
++SAPBR: 1,1,"10.170.106.153"
+
+OK
+
+SIM808 requesting datetime...
+readGsmResponse timeout
+(printf) Response: AT+CLTS=1
+OK
+AT+CLTS=?
++CLTS: "yy/MM/dd,hh:mm:ss+/-zz"
+
+OK
+AT+CLTS?
++CLTS: 1
+
+OK
+AT+CCLK?
++CCLK: "24/10/02,13:15:01+08"
+
+OK
+
+Timestamp: AT+CLTS=1
+OK
+AT+CLTS=?
++CLTS: "yy/MM/dd,hh:mm:ss+/-zz"
+
+OK
+AT+CLTS?
++CLTS: 1
+
+OK
+AT+CCLK?
++CCLK: "24/10/02,13:15:01+08"
+
+OK
+
+Intermediate timestamp: 1701350101
+Final timestamp with milliseconds: 1701350101000
+Timestamp before comparison: 1701350101000
+Valid datetime received. 24/10/02 13:15:01
+Parsed Date: 24/10/02
+Parsed Time: 13:15:01
+..........Done calculating R0 for MQ7!.
+MQ7 Warning: Conection issue, R0 is infinite (Open circuit detected) please check your wiring and supply
+MQ7 initialized!
+
+************************************************************************************************************************************************
+MQ sensor reading library for arduino
+Note: remember that all the parameters below can be modified during the program execution with the methods:
+setR0, setRL, setA, setB where you will have to send as parameter the new value, example: mySensor.setR0(20); //R0 = 20KΩ
+Authors: Miguel A. Califa U - Yersson R. Carrillo A - Ghiordy F. Contreras C
+Contributors: Andres A. Martinez - Juan A. Rodríguez - Mario A. Rodríguez O 
+Sensor: MQ-7
+Supply voltage: 5.00 VDC
+ADC Resolution: 12 Bits
+R0: inf KΩ
+RL: 10.00 KΩ
+Model: Exponential
+MQ-7 -> a: 99.04 | b: -1.52
+Development board: ESP32
+Calibrating MQ8 please wait...........R0 for MQ8 calculation done!.
+MQ8 Warning: Conection issue, R0 is infinite (Open circuit detected) please check your wiring and supply
+MQ8 initialized!
+
+************************************************************************************************************************************************
+MQ sensor reading library for arduino
+Note: remember that all the parameters below can be modified during the program execution with the methods:
+setR0, setRL, setA, setB where you will have to send as parameter the new value, example: mySensor.setR0(20); //R0 = 20KΩ
+Authors: Miguel A. Califa U - Yersson R. Carrillo A - Ghiordy F. Contreras C
+Contributors: Andres A. Martinez - Juan A. Rodríguez - Mario A. Rodríguez O 
+Sensor: MQ-8
+Supply voltage: 5.00 VDC
+ADC Resolution: 12 Bits
+R0: inf KΩ
+RL: 10.00 KΩ
+Model: Exponential
+MQ-8 -> a: 976.97 | b: -0.69
+Development board: ESP32
+Found device 0 with address: 28A000CA0F00003F
+Found device 1 with address: 288823C90F000016
+Found device 2 with address: 284422C90F000039
+Found device 3 with address: 28E565C90F0000EA
+Found device 4 with address: 28FB20C90F000099
+Bluetooth initialized with 1843200
+measurementQueue created successfully.
+measurementQueue created with size: 4 bytes.
+Sizes before creating tasks:
+239 Kb
+Free heap size: 67800, largest free block: 65524
+Now running sendArray task.
+Sizes after creating tasks:
+239 Kb
+Free heap size: 40320, largest free block: 38900
+heap with MALLOC_CAP_DEFAULT: 38900
+Inside Display Measurements task.
+Inside Bluetooth task.
+Counting task has started.
+Inside Measuring task.
+MaxMeasurements: 60
+Now running for 60 measurements.
+highWaterMark and freeHeap at beginning: 
+MeasuringTask stack high water mark: 4796
+Free heap size MeasuringTask: 39392
+
+highWaterMark and freeHeap at end: 
+MeasuringTask stack high water mark: 3468
+Free heap size MeasuringTask: 29932
+
+Successfully posted buffer to queue
+Size of doc in measuring: 5558
+Now running for 120 measurements.
+highWaterMark and freeHeap at beginning: 
+MeasuringTask stack high water mark: 3468
+Free heap size MeasuringTask: 33356
+
+
+Buffer in sendArray: [{"ts":1701350138429,"values":{"T_g":"21.40","T1":"22.375","T2":"22.375","T3":"22.375","T4":"22.375","T5":"22.250","pH":"0.000","A":"-57.227","Hum":"56.300","Cond":"0.000","Flow1":"0.00","Flow2":"0.00","FT":"39.1","CO":"0.00","H2":"0.00","V":"0.000","P":"-0.000"}},{"ts":1701350140158,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350140708,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350141258,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350141808,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350142358,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350142908,"values":{"A":"-57.227","Flow1":"0.00","Flow2":"0.00","V":"0.000","P":"-0.000"}},{"ts":1701350143458,"values":{"T1":"22.375","T2":"22.375","T3":"22.375","T4":"22.375","T5":"22.250","A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350144599,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350145149,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350145699,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350146249,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350146799,"values":{"T_g":"22.20","A":"-57.227","Flow1":"0.00","Flow2":"0.00","FT":"39.1","CO":"0.00","H2":"0.00","V":"0.000","P":"-0.000"}},{"ts":1701350147935,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350148485,"values":{"T1":"22.375","T2":"22.375","T3":"22.375","T4":"22.375","T5":"22.375","A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350149626,"values":{"A":"-57.227","Hum":"54.100","V":"0.000","P":"-0.000"}},{"ts":1701350150182,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350150732,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350151282,"values":{"A":"-57.227","Flow1":"0.00","Flow2":"0.00","V":"0.000","P":"-0.000"}},{"ts":1701350151832,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350152382,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350152932,"values":{"T1":"22.375","T2":"22.375","T3":"22.375","T4":"22.375","T5":"22.375","A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350154073,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350154623,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350155173,"values":{"T_g":"22.20","A":"-57.227","Flow1":"0.00","Flow2":"0.00","FT":"39.0","CO":"0.00","H2":"0.00","V":"0.000","P":"-0.000"}},{"ts":1701350156309,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350156859,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350157409,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350157959,"values":{"T1":"22.375","T2":"22.375","T3":"22.375","T4":"22.375","T5":"22.250","A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350159100,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350159650,"values":{"pH":"15.452","A":"-57.227","Hum":"54.000","Cond":"0.000","Flow1":"0.00","Flow2":"0.00","V":"0.000","P":"-0.000"}},{"ts":1701350160207,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350160757,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350161307,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350161857,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350162407,"values":{"T1":"22.375","T2":"22.375","T3":"22.375","T4":"22.375","T5":"22.250","A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350163548,"values":{"T_g":"22.30","A":"-57.227","Flow1":"0.00","Flow2":"0.00","FT":"39.1","CO":"0.00","H2":"0.00","V":"0.000","P":"-0.000"}},{"ts":1701350164684,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350165234,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350165784,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350166334,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350166884,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350167434,"values":{"T1":"22.375","T2":"22.375","T3":"22.375","T4":"22.375","T5":"22.250","A":"-57.227","Flow1":"0.00","Flow2":"0.00","V":"0.000","P":"-0.000"}},{"ts":1701350168575,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350169125,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350169675,"values":{"A":"-57.227","Hum":"54.000","V":"0.000","P":"-0.000"}},{"ts":1701350170231,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350170781,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350171331,"values":{"T_g":"22.30","A":"-57.227","Flow1":"0.00","Flow2":"0.00","FT":"39.1","CO":"0.00","H2":"0.00","V":"0.000","P":"-0.000"}},{"ts":1701350172461,"values":{"T1":"22.375","T2":"22.375","T3":"22.375","T4":"22.375","T5":"22.250","A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350173602,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350174152,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350174702,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350175252,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350175802,"values":{"A":"-57.227","Flow1":"0.00","Flow2":"0.00","V":"0.000","P":"-0.000"}},{"ts":1701350176352,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350176903,"values":{"T1":"22.375","T2":"22.375","T3":"22.375","T4":"22.375","T5":"22.375","A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350178044,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350178594,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350179144,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}}]
+readGsmResponse timeout
+(printf) Response: AT+HTTPINIT
+ERROR
+
+readGsmResponse timeout
+(printf) Response: AT+HTTPINIT=?
+OK
+
+Post http data...
+readGsmResponse timeout
+(printf) Response: AT+HTTPPARA="CID",1
+OK
+
+readGsmResponse timeout
+(printf) Response: AT+HTTPPARA="URL", http://jrbubuntu.ddns.net:5000/api/telemetry
+OK
+
+readGsmResponse timeout
+(printf) Response: AT+HTTPPARA="CONTENT","application/json"
+OK
+
+readGsmResponse timeout
+(printf) Response: AT+HTTPDATA=5558,20000
+DOWNLOAD
+
+readGsmResponse timeout
+(printf) Response: 
+OK
+
+readGsmResponse timeout
+(printf) Response: AT+HTTPACTION=1
+OK
+
+AT+HTTPREAD
+OK
+Time between usage: 1 min 18 sec.
+highWaterMark and freeHeap at end: 
+MeasuringTask stack high water mark: 3468
+Free heap size MeasuringTask: 22420
+
+Successfully posted buffer to queue
+
+Buffer in sendArray: [{"ts":1701350179772,"values":{"T_g":"22.30","T1":"22.375","T2":"22.375","T3":"22.375","T4":"22.375","T5":"22.375","pH":"15.452","A":"-57.227","Hum":"54.000","Cond":"0.000","Flow1":"0.00","Flow2":"0.00","FT":"39.5","CO":"0.00","H2":"0.00","V":"0.000","P":"-0.000"}},{"ts":1701350181530,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350182081,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350182631,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350183181,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350183731,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350184281,"values":{"A":"-57.227","Flow1":"0.00","Flow2":"0.00","V":"0.000","P":"-0.000"}},{"ts":1701350184831,"values":{"T1":"22.375","T2":"22.375","T3":"22.375","T4":"22.375","T5":"22.375","A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350185972,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350186522,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350187072,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350187622,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350188172,"values":{"T_g":"22.30","A":"-57.227","Flow1":"0.00","Flow2":"0.00","FT":"39.8","CO":"0.00","H2":"0.00","V":"0.000","P":"-0.000"}},{"ts":1701350189308,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350189858,"values":{"T1":"22.375","T2":"22.375","T3":"22.375","T4":"22.375","T5":"22.375","A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350190999,"values":{"A":"-57.227","Hum":"54.000","V":"0.000","P":"-0.000"}},{"ts":1701350191555,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350192105,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350192655,"values":{"A":"-57.227","Flow1":"0.00","Flow2":"0.00","V":"0.000","P":"-0.000"}},{"ts":1701350193205,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350193755,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350194305,"values":{"T1":"22.375","T2":"22.375","T3":"22.375","T4":"22.375","T5":"22.375","A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350195446,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350195996,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350196546,"values":{"T_g":"22.30","A":"-57.227","Flow1":"0.00","Flow2":"0.00","FT":"40.2","CO":"0.00","H2":"0.00","V":"0.000","P":"-0.000"}},{"ts":1701350197682,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350198232,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350198782,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350199332,"values":{"T1":"22.375","T2":"22.375","T3":"22.375","T4":"22.375","T5":"22.375","A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350200473,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350201023,"values":{"pH":"15.452","A":"-57.227","Hum":"54.000","Cond":"0.000","Flow1":"0.00","Flow2":"0.00","V":"0.000","P":"-0.000"}},{"ts":1701350201580,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350202130,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350202680,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350203230,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350203780,"values":{"T1":"22.375","T2":"22.250","T3":"22.375","T4":"22.375","T5":"22.250","A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350204921,"values":{"T_g":"22.30","A":"-57.227","Flow1":"0.00","Flow2":"0.00","FT":"39.1","CO":"0.00","H2":"0.00","V":"0.000","P":"-0.000"}},{"ts":1701350206057,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350206607,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350207157,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350207707,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350208257,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350208807,"values":{"T1":"22.375","T2":"22.250","T3":"22.375","T4":"22.250","T5":"22.250","A":"-57.227","Flow1":"0.00","Flow2":"0.00","V":"0.000","P":"-0.000"}},{"ts":1701350209948,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350210498,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350211048,"values":{"A":"-57.227","Hum":"54.000","V":"0.000","P":"-0.000"}},{"ts":1701350211604,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350212154,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350212704,"values":{"T_g":"22.30","A":"-57.227","Flow1":"0.00","Flow2":"0.00","FT":"39.1","CO":"0.00","H2":"0.00","V":"0.000","P":"-0.000"}},{"ts":1701350213835,"values":{"T1":"22.375","T2":"22.250","T3":"22.375","T4":"22.250","T5":"22.250","A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350214976,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350215526,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350216076,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350216626,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350217176,"values":{"A":"-57.227","Flow1":"0.00","Flow2":"0.00","V":"0.000","P":"-0.000"}},{"ts":1701350217726,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350218277,"values":{"T1":"22.375","T2":"22.250","T3":"22.375","T4":"22.250","T5":"22.250","A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350219418,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350219968,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350220518,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350221068,"values":{"T_g":"22.30","pH":"15.452","A":"-57.227","Hum":"54.000","Cond":"0.000","Flow1":"0.00","Flow2":"0.00","FT":"39.1","CO":"0.00","H2":"0.00","V":"0.000","P":"-0.000"}},{"ts":1701350222206,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350222756,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350223306,"values":{"T1":"22.375","T2":"22.250","T3":"22.375","T4":"22.250","T5":"22.250","A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350224447,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350224997,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350225547,"values":{"A":"-57.227","Flow1":"0.00","Flow2":"0.00","V":"0.000","P":"-0.000"}},{"ts":1701350226098,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350226648,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350227199,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350227749,"values":{"T1":"22.375","T2":"22.250","T3":"22.375","T4":"22.250","T5":"22.250","A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350228890,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350229440,"values":{"T_g":"22.30","A":"-57.227","Flow1":"0.00","Flow2":"0.00","FT":"39.0","CO":"0.00","H2":"0.00","V":"0.000","P":"-0.000"}},{"ts":1701350230576,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350231126,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350231676,"values":{"A":"-57.227","Hum":"54.100","V":"0.000","P":"-0.000"}},{"ts":1701350232232,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350232782,"values":{"T1":"22.375","T2":"22.250","T3":"22.375","T4":"22.250","T5":"22.250","A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350233923,"values":{"A":"-57.227","Flow1":"0.00","Flow2":"0.00","V":"0.000","P":"-0.000"}},{"ts":1701350234473,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350235023,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350235573,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350236123,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350236674,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350237224,"values":{"T_g":"22.30","T1":"22.375","T2":"22.250","T3":"22.375","T4":"22.250","T5":"22.250","A":"-57.227","Flow1":"0.00","Flow2":"0.00","FT":"38.8","CO":"0.00","H2":"0.00","V":"0.000","P":"-0.000"}},{"ts":1701350238953,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350239503,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350240053,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350240603,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350241153,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350241703,"values":{"pH":"15.452","A":"-57.227","Hum":"54.100","Cond":"0.000","Flow1":"0.00","Flow2":"0.00","V":"0.000","P":"-0.000"}},{"ts":1701350242260,"values":{"T1":"22.375","T2":"22.250","T3":"22.375","T4":"22.125","T5":"22.250","A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350243401,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350243951,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350244501,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350245051,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350245601,"values":{"T_g":"22.20","A":"-57.227","Flow1":"0.00","Flow2":"0.00","FT":"39.0","CO":"0.00","H2":"0.00","V":"0.000","P":"-0.000"}},{"ts":1701350246738,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350247288,"values":{"T1":"22.375","T2":"22.250","T3":"22.375","T4":"22.250","T5":"22.250","A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350248429,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350248979,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350249529,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350250079,"values":{"A":"-57.227","Flow1":"0.00","Flow2":"0.00","V":"0.000","P":"-0.000"}},{"ts":1701350250629,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350251179,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350251729,"values":{"T1":"22.375","T2":"22.250","T3":"22.500","T4":"22.250","T5":"22.250","A":"-57.227","Hum":"54.100","V":"0.000","P":"-0.000"}},{"ts":1701350252876,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350253426,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350253976,"values":{"T_g":"22.20","A":"-57.227","Flow1":"0.00","Flow2":"0.00","FT":"38.9","CO":"0.00","H2":"0.00","V":"0.000","P":"-0.000"}},{"ts":1701350255106,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350255656,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350256206,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350256756,"values":{"T1":"22.375","T2":"22.375","T3":"22.375","T4":"22.375","T5":"22.250","A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350257897,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350258447,"values":{"A":"-57.227","Flow1":"0.00","Flow2":"0.00","V":"0.000","P":"-0.000"}},{"ts":1701350258997,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350259547,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350260097,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350260647,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350261197,"values":{"T1":"22.375","T2":"22.375","T3":"22.375","T4":"22.250","T5":"22.375","A":"-57.227","V":"0.000","P":"-0.000"}}]
+Size of doc in measuring: 11117
+Now running for 180 measurements.
+highWaterMark and freeHeap at beginning: 
+MeasuringTask stack high water mark: 3468
+Free heap size MeasuringTask: 27788
+
+readGsmResponse timeout
+(printf) Response: 
++HTTPACTION: 1,200,44
+AT+HTTPINIT
+ERROR
+
+readGsmResponse timeout
+(printf) Response: AT+HTTPINIT=?
+OK
+
+Post http data...
+readGsmResponse timeout
+(printf) Response: AT+HTTPPARA="CID",1
+OK
+
+readGsmResponse timeout
+(printf) Response: AT+HTTPPARA="URL", http://jrbubuntu.ddns.net:5000/api/telemetry
+OK
+
+readGsmResponse timeout
+(printf) Response: AT+HTTPPARA="CONTENT","application/json"
+OK
+
+readGsmResponse timeout
+(printf) Response: AT+HTTPDATA=11117,20000
+DOWNLOAD
+
+readGsmResponse timeout
+(printf) Response: 
+OK
+
+readGsmResponse timeout
+(printf) Response: AT+HTTPACTION=1
+OK
+
+AT+HTTPREAD
+OK
+Time between usage: 1 min 22 sec.
+highWaterMark and freeHeap at end: 
+MeasuringTask stack high water mark: 3468
+Free heap size MeasuringTask: 14800
+
+
+abort() was called at PC 0x4019ab1b on core 1
+
+
+Backtrace: 0x40083d41:0x3fff2840 0x40095f39:0x3fff2860 0x4009b521:0x3fff2880 0x4019ab1b:0x3fff2900 0x4019ab62:0x3fff2920 0x4019aac3:0x3fff2940 0x4019ae1a:0x3fff2960 0x4019b645:0x3fff2980 0x400da233:0x3fff29a0
+
+
+
+
+ELF file SHA256: 29bd30cce6a673d3
+
+Rebooting...
+ets Jul 29 2019 12:21:46
+
+rst:0xc (SW_CPU_RESET),boot:0x13 (SPI_FAST_FLASH_BOOT)
+configsip: 0, SPIWP:0xee
+clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+mode:DIO, clock div:1
+load:0x3fff0030,len:1344
+load:0x40078000,len:13964
+load:0x40080400,len:3600
+entry 0x400805f0
+CPU frequency set to: 240 MHz
+getXtalFrequencyMhz: 40
+getCpuFrequencyMhz: 240
+getApbFrequency: 80000000
+Reading config file.
+System Volume Information/
+	WPSettings.dat		12
+	IndexerVolumeGuid		76
+Test7_2MB.txt		2020000
+Test6_1MB.txt		1010000
+Test5_500k.txt		505000
+Test4_100k.txt		101000
+Test3_10k.txt		10100
+Test2_1k.txt		1010
+Tetst1_100.txt		101
+config.txt		909
+foo.txt		13
+log.txt		1281540
+log_copy512.txt		1281540
+log_copy1024.txt		0
+log_copy4096.txt		1281540
+test.txt		1048576
+Test8_5MB.txt		1048576
+TestFile.txt		1048576
+log_copy.txt		0
+SD Card initialized.
+SD Card Type: SDHC
+SD Card Size: 59344MB
+Log.txt file already exists
+Total space: 32756MB
+Used space: 10MB
+Displays initialized!
+Configure APN settings.
+readGsmResponse timeout
+(printf) Response: AT
+OK
+AT+IPR=115200
+OK
+AT&W
+OK
+AT+CSQ
++CSQ: 22,0
+
+OK
+AT+SAPBR=3,1,"Contype","GPRS","IP"
+ERROR
+AT+CCID=?
+OK
+AT+CCID
+8931090200035587547f
+
+OK
+AT+SAPBR=3,1,"Contype","GPRS"
+OK
+
+readGsmResponse timeout
+(printf) Response: AT+SAPBR=3,1,"APN",data.lycamobile.nl
+OK
+
+readGsmResponse timeout
+(printf) Response: AT+SAPBR=3,1,"USER",lmnl
+OK
+
+readGsmResponse timeout
+(printf) Response: AT+SAPBR=3,1,"PWD",plus
+OK
+
+readGsmResponse timeout
+(printf) Response: AT+SAPBR=1,1
+ERROR
+
+readGsmResponse timeout
+(printf) Response: AT+SAPBR=2,1
++SAPBR: 1,1,"10.170.106.153"
+
+OK
+
+SIM808 requesting datetime...
+readGsmResponse timeout
+(printf) Response: AT+CLTS=1
+OK
+AT+CLTS=?
++CLTS: "yy/MM/dd,hh:mm:ss+/-zz"
+
+OK
+AT+CLTS?
++CLTS: 1
+
+OK
+AT+CCLK?
++CCLK: "24/10/02,13:19:47+08"
+
+OK
+
+Timestamp: AT+CLTS=1
+OK
+AT+CLTS=?
++CLTS: "yy/MM/dd,hh:mm:ss+/-zz"
+
+OK
+AT+CLTS?
++CLTS: 1
+
+OK
+AT+CCLK?
++CCLK: "24/10/02,13:19:47+08"
+
+OK
+
+Intermediate timestamp: 1701350387
+Final timestamp with milliseconds: 1701350387000
+Timestamp before comparison: 1701350387000
+Valid datetime received. 24/10/02 13:19:47
+Parsed Date: 24/10/02
+Parsed Time: 13:19:47
+..........Done calculating R0 for MQ7!.
+MQ7 Warning: Conection issue, R0 is infinite (Open circuit detected) please check your wiring and supply
+MQ7 initialized!
+
+************************************************************************************************************************************************
+MQ sensor reading library for arduino
+Note: remember that all the parameters below can be modified during the program execution with the methods:
+setR0, setRL, setA, setB where you will have to send as parameter the new value, example: mySensor.setR0(20); //R0 = 20KΩ
+Authors: Miguel A. Califa U - Yersson R. Carrillo A - Ghiordy F. Contreras C
+Contributors: Andres A. Martinez - Juan A. Rodríguez - Mario A. Rodríguez O 
+Sensor: MQ-7
+Supply voltage: 5.00 VDC
+ADC Resolution: 12 Bits
+R0: inf KΩ
+RL: 10.00 KΩ
+Model: Exponential
+MQ-7 -> a: 99.04 | b: -1.52
+Development board: ESP32
+Calibrating MQ8 please wait...........R0 for MQ8 calculation done!.
+MQ8 Warning: Conection issue, R0 is infinite (Open circuit detected) please check your wiring and supply
+MQ8 initialized!
+
+************************************************************************************************************************************************
+MQ sensor reading library for arduino
+Note: remember that all the parameters below can be modified during the program execution with the methods:
+setR0, setRL, setA, setB where you will have to send as parameter the new value, example: mySensor.setR0(20); //R0 = 20KΩ
+Authors: Miguel A. Califa U - Yersson R. Carrillo A - Ghiordy F. Contreras C
+Contributors: Andres A. Martinez - Juan A. Rodríguez - Mario A. Rodríguez O 
+Sensor: MQ-8
+Supply voltage: 5.00 VDC
+ADC Resolution: 12 Bits
+R0: inf KΩ
+RL: 10.00 KΩ
+Model: Exponential
+MQ-8 -> a: 976.97 | b: -0.69
+Development board: ESP32
+Found device 0 with address: 28A000CA0F00003F
+Found device 1 with address: 288823C90F000016
+Found device 2 with address: 284422C90F000039
+Found device 3 with address: 28E565C90F0000EA
+Found device 4 with address: 28FB20C90F000099
+Bluetooth initialized with 1843200
+measurementQueue created successfully.
+measurementQueue created with size: 4 bytes.
+Sizes before creating tasks:
+239 Kb
+Free heap size: 67844, largest free block: 65524
+Now running sendArray task.
+Sizes after creating tasks:
+239 Kb
+Free heap size: 40364, largest free block: 38900
+heap with MALLOC_CAP_DEFAULT: 38900
+Inside Display Measurements task.
+Inside Bluetooth task.
+Counting task has started.
+Inside Measuring task.
+MaxMeasurements: 60
+Now running for 60 measurements.
+highWaterMark and freeHeap at beginning: 
+MeasuringTask stack high water mark: 4800
+Free heap size MeasuringTask: 39432
+
+highWaterMark and freeHeap at end: 
+MeasuringTask stack high water mark: 3472
+Free heap size MeasuringTask: 29912
+
+Successfully posted buffer to queue
+Size of doc in measuring: 5558
+Now running for 120 measurements.
+highWaterMark and freeHeap at beginning: 
+MeasuringTask stack high water mark: 3472
+Free heap size MeasuringTask: 33376
+
+
+Buffer in sendArray: [{"ts":1701350424488,"values":{"T_g":"22.50","T1":"22.500","T2":"22.375","T3":"22.500","T4":"22.375","T5":"22.375","pH":"0.000","A":"-57.227","Hum":"54.500","Cond":"0.000","Flow1":"0.00","Flow2":"0.00","FT":"39.2","CO":"0.00","H2":"0.00","V":"0.000","P":"-0.000"}},{"ts":1701350426217,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350426767,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350427317,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350427867,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350428417,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350428967,"values":{"A":"-57.227","Flow1":"0.00","Flow2":"0.00","V":"0.000","P":"-0.000"}},{"ts":1701350429517,"values":{"T1":"22.500","T2":"22.375","T3":"22.500","T4":"22.375","T5":"22.375","A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350430658,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350431208,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350431758,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350432308,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350432858,"values":{"T_g":"22.40","A":"-57.227","Flow1":"0.00","Flow2":"0.00","FT":"39.3","CO":"0.00","H2":"0.00","V":"0.000","P":"-0.000"}},{"ts":1701350433994,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350434544,"values":{"T1":"22.500","T2":"22.500","T3":"22.625","T4":"22.500","T5":"22.375","A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350435685,"values":{"A":"-57.227","Hum":"54.800","V":"0.000","P":"-0.000"}},{"ts":1701350436241,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350436791,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350437341,"values":{"A":"-57.227","Flow1":"0.00","Flow2":"0.00","V":"0.000","P":"-0.000"}},{"ts":1701350437891,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350438441,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350438991,"values":{"T1":"22.500","T2":"22.375","T3":"22.625","T4":"22.375","T5":"22.375","A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350440132,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350440682,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350441232,"values":{"T_g":"22.50","A":"-57.227","Flow1":"0.00","Flow2":"0.00","FT":"39.2","CO":"0.00","H2":"0.00","V":"0.000","P":"-0.000"}},{"ts":1701350442368,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350442918,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350443468,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350444018,"values":{"T1":"22.500","T2":"22.375","T3":"22.625","T4":"22.375","T5":"22.375","A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350445159,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350445709,"values":{"pH":"15.452","A":"-57.227","Hum":"55.000","Cond":"0.000","Flow1":"0.00","Flow2":"0.00","V":"0.000","P":"-0.000"}},{"ts":1701350446265,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350446815,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350447365,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350447915,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350448465,"values":{"T1":"22.500","T2":"22.375","T3":"22.625","T4":"22.375","T5":"22.375","A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350449606,"values":{"T_g":"22.50","A":"-57.227","Flow1":"0.00","Flow2":"0.00","FT":"39.2","CO":"0.00","H2":"0.00","V":"0.000","P":"-0.000"}},{"ts":1701350450742,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350451292,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350451842,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350452392,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350452942,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350453492,"values":{"T1":"22.500","T2":"22.375","T3":"22.625","T4":"22.375","T5":"22.375","A":"-57.227","Flow1":"0.00","Flow2":"0.00","V":"0.000","P":"-0.000"}},{"ts":1701350454633,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350455183,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350455733,"values":{"A":"-57.227","Hum":"54.900","V":"0.000","P":"-0.000"}},{"ts":1701350456289,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350456839,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350457389,"values":{"T_g":"22.50","A":"-57.227","Flow1":"0.00","Flow2":"0.00","FT":"39.2","CO":"0.00","H2":"0.00","V":"0.000","P":"-0.000"}},{"ts":1701350458519,"values":{"T1":"22.625","T2":"22.500","T3":"22.625","T4":"22.375","T5":"22.375","A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350459660,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350460210,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350460760,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350461310,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350461860,"values":{"A":"-57.227","Flow1":"0.00","Flow2":"0.00","V":"0.000","P":"-0.000"}},{"ts":1701350462410,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350462960,"values":{"T1":"22.625","T2":"22.500","T3":"22.625","T4":"22.500","T5":"22.500","A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350464101,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350464651,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350465201,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}}]
+readGsmResponse timeout
+(printf) Response: AT+HTTPINIT
+ERROR
+
+readGsmResponse timeout
+(printf) Response: AT+HTTPINIT=?
+OK
+
+Post http data...
+readGsmResponse timeout
+(printf) Response: AT+HTTPPARA="CID",1
+OK
+
+readGsmResponse timeout
+(printf) Response: AT+HTTPPARA="URL", http://jrbubuntu.ddns.net:5000/api/telemetry
+OK
+
+readGsmResponse timeout
+(printf) Response: AT+HTTPPARA="CONTENT","application/json"
+OK
+
+readGsmResponse timeout
+(printf) Response: AT+HTTPDATA=5558,20000
+DOWNLOAD
+
+readGsmResponse timeout
+(printf) Response: 
+OK
+
+readGsmResponse timeout
+(printf) Response: AT+HTTPACTION=1
+OK
+
+AT+HTTPREAD
+OK
+Time between usage: 1 min 18 sec.
+highWaterMark and freeHeap at end: 
+MeasuringTask stack high water mark: 3472
+Free heap size MeasuringTask: 22368
+
+Successfully posted buffer to queue
+
+Buffer in sendArray: [{"ts":1701350465829,"values":{"T_g":"22.50","T1":"22.625","T2":"22.500","T3":"22.625","T4":"22.500","T5":"22.500","pH":"15.452","A":"-57.227","Hum":"54.800","Cond":"0.000","Flow1":"0.00","Flow2":"0.00","FT":"39.6","CO":"0.00","H2":"0.00","V":"0.000","P":"-0.000"}},{"ts":1701350467589,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350468139,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350468689,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350469239,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350469789,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350470339,"values":{"A":"-57.227","Flow1":"0.00","Flow2":"0.00","V":"0.000","P":"-0.000"}},{"ts":1701350470889,"values":{"T1":"22.625","T2":"22.500","T3":"22.625","T4":"22.500","T5":"22.500","A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350472030,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350472581,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350473131,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350473681,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350474231,"values":{"T_g":"22.50","A":"-57.227","Flow1":"0.00","Flow2":"0.00","FT":"40.3","CO":"0.00","H2":"0.00","V":"0.000","P":"-0.000"}},{"ts":1701350475367,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350475917,"values":{"T1":"22.625","T2":"22.500","T3":"22.625","T4":"22.500","T5":"22.500","A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350477058,"values":{"A":"-57.227","Hum":"54.600","V":"0.000","P":"-0.000"}},{"ts":1701350477614,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350478164,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350478714,"values":{"A":"-57.227","Flow1":"0.00","Flow2":"0.00","V":"0.000","P":"-0.000"}},{"ts":1701350479264,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350479814,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350480364,"values":{"T1":"22.625","T2":"22.625","T3":"22.625","T4":"22.625","T5":"22.500","A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350481505,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350482056,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350482606,"values":{"T_g":"22.50","A":"-57.227","Flow1":"0.00","Flow2":"0.00","FT":"40.5","CO":"0.00","H2":"0.00","V":"0.000","P":"-0.000"}},{"ts":1701350483742,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350484293,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350484843,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350485393,"values":{"T1":"22.625","T2":"22.625","T3":"22.750","T4":"22.750","T5":"22.625","A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350486534,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350487084,"values":{"pH":"15.452","A":"-57.227","Hum":"54.700","Cond":"0.000","Flow1":"0.00","Flow2":"0.00","V":"0.000","P":"-0.000"}},{"ts":1701350487640,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350488190,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350488740,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350489290,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350489840,"values":{"T1":"22.625","T2":"22.625","T3":"22.625","T4":"22.750","T5":"22.625","A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350490981,"values":{"T_g":"22.50","A":"-57.227","Flow1":"0.00","Flow2":"0.00","FT":"39.6","CO":"0.00","H2":"0.00","V":"0.000","P":"-0.000"}},{"ts":1701350492117,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350492667,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350493217,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350493767,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350494317,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350494867,"values":{"T1":"22.625","T2":"22.625","T3":"22.750","T4":"22.750","T5":"22.625","A":"-57.227","Flow1":"0.00","Flow2":"0.00","V":"0.000","P":"-0.000"}},{"ts":1701350496008,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350496558,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350497108,"values":{"A":"-57.227","Hum":"54.800","V":"0.000","P":"-0.000"}},{"ts":1701350497664,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350498214,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350498764,"values":{"T_g":"22.50","A":"-57.227","Flow1":"0.00","Flow2":"0.00","FT":"39.7","CO":"0.00","H2":"0.00","V":"0.000","P":"-0.000"}},{"ts":1701350499894,"values":{"T1":"22.625","T2":"22.625","T3":"22.750","T4":"22.750","T5":"22.625","A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350501035,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350501585,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350502135,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350502685,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350503235,"values":{"A":"-57.227","Flow1":"0.00","Flow2":"0.00","V":"0.000","P":"-0.000"}},{"ts":1701350503785,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350504335,"values":{"T1":"22.625","T2":"22.625","T3":"22.750","T4":"22.625","T5":"22.625","A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350505476,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350506026,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350506576,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350507126,"values":{"T_g":"22.50","pH":"15.452","A":"-57.227","Hum":"55.300","Cond":"0.000","Flow1":"0.00","Flow2":"0.00","FT":"39.7","CO":"0.00","H2":"0.00","V":"0.000","P":"-0.000"}},{"ts":1701350508263,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350508813,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350509363,"values":{"T1":"22.750","T2":"22.625","T3":"22.750","T4":"22.625","T5":"22.625","A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350510504,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350511054,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350511605,"values":{"A":"-57.227","Flow1":"0.00","Flow2":"0.00","V":"0.000","P":"-0.000"}},{"ts":1701350512155,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350512705,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350513255,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350513805,"values":{"T1":"22.750","T2":"22.625","T3":"22.750","T4":"22.625","T5":"22.625","A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350514947,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350515497,"values":{"T_g":"22.50","A":"-57.227","Flow1":"0.00","Flow2":"0.00","FT":"39.9","CO":"0.00","H2":"0.00","V":"0.000","P":"-0.000"}},{"ts":1701350516633,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350517183,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350517733,"values":{"A":"-57.227","Hum":"55.000","V":"0.000","P":"-0.000"}},{"ts":1701350518289,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350518839,"values":{"T1":"22.750","T2":"22.625","T3":"22.750","T4":"22.750","T5":"22.625","A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350519981,"values":{"A":"-57.227","Flow1":"0.00","Flow2":"0.00","V":"0.000","P":"-0.000"}},{"ts":1701350520531,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350521081,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350521631,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350522182,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350522732,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350523282,"values":{"T_g":"22.50","T1":"22.625","T2":"22.625","T3":"22.750","T4":"22.625","T5":"22.625","A":"-57.227","Flow1":"0.00","Flow2":"0.00","FT":"39.8","CO":"0.00","H2":"0.00","V":"0.000","P":"-0.000"}},{"ts":1701350525009,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350525559,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350526109,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350526659,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350527209,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350527759,"values":{"pH":"15.452","A":"-57.227","Hum":"55.000","Cond":"0.000","Flow1":"0.00","Flow2":"0.00","V":"0.000","P":"-0.000"}},{"ts":1701350528315,"values":{"T1":"22.750","T2":"22.625","T3":"22.750","T4":"22.625","T5":"22.625","A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350529456,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350530006,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350530556,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350531106,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350531656,"values":{"T_g":"22.60","A":"-57.227","Flow1":"0.00","Flow2":"0.00","FT":"39.8","CO":"0.00","H2":"0.00","V":"0.000","P":"-0.000"}},{"ts":1701350532792,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350533342,"values":{"T1":"22.750","T2":"22.750","T3":"22.750","T4":"22.750","T5":"22.625","A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350534483,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350535033,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350535583,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350536133,"values":{"A":"-57.227","Flow1":"0.00","Flow2":"0.00","V":"0.000","P":"-0.000"}},{"ts":1701350536683,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350537233,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350537783,"values":{"T1":"22.750","T2":"22.750","T3":"22.750","T4":"22.750","T5":"22.625","A":"-57.227","Hum":"55.000","V":"0.000","P":"-0.000"}},{"ts":1701350538930,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350539480,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350540030,"values":{"T_g":"22.60","A":"-57.227","Flow1":"0.00","Flow2":"0.00","FT":"40.0","CO":"0.00","H2":"0.00","V":"0.000","P":"-0.000"}},{"ts":1701350541160,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350541710,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350542260,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350542810,"values":{"T1":"22.750","T2":"22.750","T3":"22.750","T4":"22.625","T5":"22.625","A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350543951,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"ts":1701350544501,"values":{"A":"-57.227","Flow1":"0.00","Flow2":"0.00","V":"0.000","P":"-0.000"}},{"ts":170:"-0.000"}},{"ts":1701350546701,"values":{"A":"-57.227","V":"0.00"}},{"ts":1701350546151,"values":{"A":"-57.227","V":"0.000","P"ts":1701350545601,"values":{"A":"-57.227","V":"0.000","P":"-0.001350545051,"values":{"A":"-57.227","V":"0.000","P":"-0.000"}},{"00","P":"-0.000"}},{"ts":1701350547251,"values":{"T1":"22.750","T2":"22.625","T3":"22.750","T4":"22.625","T5":"22.625","A":"-57.227","V":"0.000","P":"-0.000"}}]
+Size of doc in measuring: 11117
+Now running for 180 measurements.
+highWaterMark and freeHeap at beginning: 
+MeasuringTask stack high water mark: 3472
+Free heap size MeasuringTask: 27796
+
+readGsmResponse timeout
+(printf) Response: 
++HTTPACTION: 1,200,44
+AT+HTTPINIT
+ERROR
+
+readGsmResponse timeout
+(printf) Response: AT+HTTPINIT=?
+OK
+
+Post http data...
+readGsmResponse timeout
+(printf) Response: AT+HTTPPARA="CID",1
+OK
+
+readGsmResponse timeout
+(printf) Response: AT+HTTPPARA="URL", http://jrbubuntu.ddns.net:5000/api/telemetry
+OK
+
+readGsmResponse timeout
+(printf) Response: AT+HTTPPARA="CONTENT","application/json"
+OK
+
+readGsmResponse timeout
+(printf) Response: AT+HTTPDATA=11117,20000
+DOWNLOAD
+
+readGsmResponse timeout
+(printf) Response: 
+OK
+
+readGsmResponse timeout
+(printf) Response: AT+HTTPACTION=1
+OK
+
+AT+HTTPREAD
+OK
+Time between usage: 1 min 22 sec.
+highWaterMark and freeHeap at end: 
+MeasuringTask stack high water mark: 3472
+Free heap size MeasuringTask: 14604
+
+
+abort() was called at PC 0x4019ab1b on core 1
+
+
+Backtrace: 0x40083d41:0x3fff28b0 0x40095f39:0x3fff28d0 0x4009b521:0x3fff28f0 0x4019ab1b:0x3fff2970 0x4019ab62:0x3fff2990 0x4019aac3:0x3fff29b0 0x4019ae1a:0x3fff29d0 0x4019b645:0x3fff29f0 0x400da233:0x3fff2a10
+
+
+
+
+ELF file SHA256: 29bd30cce6a673d3
+
+Rebooting...
+ets Jul 29 2019 12:21:46
+
+rst:0xc (SW_CPU_RESET),boot:0x13 (SPI_FAST_FLASH_BOOT)
+configsip: 0, SPIWP:0xee
+clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+mode:DIO, clock div:1
+load:0x3fff0030,len:1344
+load:0x40078000,len:13964
+load:0x40080400,len:3600
+entry 0x400805f0
+CPU frequency set to: 240 MHz
+getXtalFrequencyMhz: 40
+getCpuFrequencyMhz: 240
+getApbFrequency: 80000000
+Reading config file.
+System Volume Information/
+	WPSettings.dat		12
+	IndexerVolumeGuid		76
+Test7_2MB.txt		2020000
+Test6_1MB.txt		1010000
+Test5_500k.txt		505000
+Test4_100k.txt		101000
+Test3_10k.txt		10100
+Test2_1k.txt		1010
+Tetst1_100.txt		101
+config.txt		909
+foo.txt		13
+log.txt		1281540
+log_copy512.txt		1281540
+log_copy1024.txt		0
+log_copy4096.txt		1281540
+test.txt		1048576
+Test8_5MB.txt		1048576
+TestFile.txt		1048576
+log_copy.txt		0
+SD Card initialized.
+SD Card Type: SDHC
+SD Card Size: 59344MB
+Log.txt file already exists
+Total space: 32756MB
+Used space: 10MB
+Displays initialized!
+Configure APN settings.
+readGsmResponse timeout
+(printf) Response: AT
+OK
+AT+IPR=115200
+OK
+AT&W
+OK
+AT+CSQ
++CSQ: 23,0
+
+OK
+AT+SAPBR=3,1,"Contype","GPRS","IP"
+ERROR
+AT+CCID=?
+OK
+AT+CCID
+8931090200035587547f
+
+OK
+AT+SAPBR=3,1,"Contype","GPRS"
+OK
+
+readGsmResponse timeout
+(printf) Response: AT+SAPBR=3,1,"APN",data.lycamobile.nl
+OK
+
+readGsmResponse timeout
+(printf) Response: AT+SAPBR=3,1,"USER",lmnl
+OK
+
+readGsmResponse timeout
+(printf) Response: AT+SAPBR=3,1,"PWD",plus
+OK
+
+readGsmResponse timeout
+(printf) Response: AT+SAPBR=1,1
+ERROR
+
+readGsmResponse timeout
+(printf) Response: AT+SAPBR=2,1
++SAPBR: 1,1,"10.170.106.153"
+
+OK
+
+SIM808 requesting datetime...
+readGsmResponse timeout
+(printf) Response: AT+CLTS=1
+OK
+AT+CLTS=?
++CLTS: "yy/MM/dd,hh:mm:ss+/-zz"
+
+OK
+AT+CLTS?
++CLTS: 1
+
+OK
+AT+CCLK?
++CCLK: "24/10/02,13:24:34+08"
+
+OK
+
+Timestamp: AT+CLTS=1
+OK
+AT+CLTS=?
++CLTS: "yy/MM/dd,hh:mm:ss+/-zz"
+
+OK
+AT+CLTS?
++CLTS: 1
+
+OK
+AT+CCLK?
++CCLK: "24/10/02,13:24:34+08"
+
+OK
+
+Intermediate timestamp: 1701350674
+Final timestamp with milliseconds: 1701350674000
+Timestamp before comparison: 1701350674000
+Valid datetime received. 24/10/02 13:24:34
+Parsed Date: 24/10/02
+Parsed Time: 13:24:34
+..........Done calculating R0 for MQ7!.
+MQ7 Warning: Conection issue, R0 is infinite (Open circuit detected) please check your wiring and supply
+MQ7 initialized!
+
+************************************************************************************************************************************************
+MQ sensor reading library for arduino
+Note: remember that all the parameters below can be modified during the program execution with the methods:
+setR0, setRL, setA, setB where you will have to send as parameter the new value, example: mySensor.setR0(20); //R0 = 20KΩ
+Authors: Miguel A. Califa U - Yersson R. Carrillo A - Ghiordy F. Contreras C
+Contributors: Andres A. Martinez - Juan A. Rodríguez - Mario A. Rodríguez O 
+Sensor: MQ-7
+Supply voltage: 5.00 VDC
+ADC Resolution: 12 Bits
+R0: inf KΩ
+RL: 10.00 KΩ
+Model: Exponential
+MQ-7 -> a: 99.04 | b: -1.52
+Development board: ESP32
+Calibrating MQ8 please wait...........R0 for MQ8 calculation done!.
+MQ8 Warning: Conection issue, R0 is infinite (Open circuit detected) please check your wiring and supply
+MQ8 initialized!
+
+************************************************************************************************************************************************
+MQ sensor reading library for arduino
+Note: remember that all the parameters below can be modified during the program execution with the methods:
+setR0, setRL, setA, setB where you will have to send as parameter the new value, example: mySensor.setR0(20); //R0 = 20KΩ
+Authors: Miguel A. Califa U - Yersson R. Carrillo A - Ghiordy F. Contreras C
+Contributors: Andres A. Martinez - Juan A. Rodríguez - Mario A. Rodríguez O 
+Sensor: MQ-8
+Supply voltage: 5.00 VDC
+ADC Resolution: 12 Bits
+R0: inf KΩ
+RL: 10.00 KΩ
+Model: Exponential
+MQ-8 -> a: 976.97 | b: -0.69
+Development board: ESP32
+Found device 0 with address: 28A000CA0F00003F
+Found device 1 with address: 288823C90F000016
+Found device 2 with address: 284422C90F000039
+Found device 3 with address: 28E565C90F0000EA
+Found device 4 with address: 28FB20C90F000099
+Bluetooth initialized with 1843200
+measurementQueue created successfully.
+measurementQueue created with size: 4 bytes.
+Sizes before creating tasks:
+239 Kb
+Free heap size: 67844, largest free block: 65524
+Now running sendArray task.
+Sizes after creating tasks:
+239 Kb
+Free heap size: 40364, largest free block: 38900
+heap with MALLOC_CAP_DEFAULT: 38900
+Inside Display Measurements task.
+Inside Bluetooth task.
+Counting task has started.
+Inside Measuring task.
+MaxMeasurements: 60
+Now running for 60 measurements.
+highWaterMark and freeHeap at beginning: 
+MeasuringTask stack high water mark: 4804
+Free heap size MeasuringTask: 39420
+
+ets Jul 29 2019 12:21:46
+
+rst:0x1 (POWERON_RESET),boot:0x3 (DOWNLOAD_BOOT(UART0/UART1/SDIO_REI_REO_V2))
+waiting for download

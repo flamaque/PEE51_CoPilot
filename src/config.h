@@ -31,6 +31,9 @@
 #include <esp_task_wdt.h>
 #include <vector>
 
+// #include "JsonStreamingParser.h"
+// #include "JsonListener.h"
+
 extern char command[20];
 void sendCmd(const char* cmd);
 #define BEARER_PROFILE_GPRS "AT+SAPBR=3,1,\"Contype\",\"GPRS\"\r\n"
@@ -60,7 +63,7 @@ void sendCmd(const char* cmd);
 #define READ_GPS "AT+CIPGSMLOC=1,1\r\n"
 #define READ_GPS_2 "AT+CIPGSMLOC=2,1\r\n"
 
-extern int voltPin, CurrentPin, EC_PIN, PH_PIN;
+extern uint8_t voltPin;
 
 void BluetoothListen(void *parameter);
 void DisplayMeasurements(void *parameter);
@@ -91,21 +94,21 @@ void mq8_init(MQUnifiedsensor& MQ8);
 
 //For GSMSerial output on OLED
 extern U8G2LOG u8g2log;
-extern volatile int stateBigOled, stateDebug;
+extern volatile uint8_t stateBigOled, stateDebug;
 
 /*      GSM Functions    */
 void saveTimestamp(uint64_t timestamp);
 uint64_t getSavedTimestamp();
-extern uint64_t savedTimestamp;
+extern uint64_t savedTimestamp, timestamp_ms, unixTimestamp;
 void parseDatetime();
 extern String datetime_gsm;
 
 extern String apn, apn_User, apn_Pass;
 extern char httpapi[];
 
+void parseCLTSResponse();
+String readGsmResponse5();
 void getTime();
-void getTimeNow();  
-//void post_http(String j); 
 void post_http2(const char* jsonPayload); 
 uint64_t convertToUnixTimestamp(String date, String time);
 void readGsmResponse();
@@ -114,7 +117,8 @@ String readGsmResponse4();
 void initialize_gsm();
 void initialize_gsm2();
 extern String response;
-extern int GSMType;
+extern uint8_t GSMType;
+extern String date_getTime;
 
 /*      Display Setup     */
 void init_displays();
@@ -123,8 +127,7 @@ void init_displays();
 float readVoltage();
 
 /*      DS18B20 sensor       */
-//extern struct Measurement measurement;
-extern int DS18B20_PIN;
+extern uint8_t DS18B20_PIN;
 void printDS18B20Address();
 //void AllDS18B20Sensors();
 
@@ -133,7 +136,9 @@ void pcnt_example_init(pcnt_unit_t unit, int pulse_gpio_num);
 extern volatile float flowRate, flowRate2;
 /*      NTC sensor       */
 extern float steinhart, temp_flow;
-extern int NTC_PIN, serialResistance, TEMPERATURENOMINAL, NUMSAMPLES;
+extern uint8_t NTC_PIN, TEMPERATURENOMINAL;
+extern int serialResistance;
+extern const uint8_t NUMSAMPLES;
 extern uint16_t nominalResistance, bCoefficient;
 
 float Read_NTC();
@@ -148,7 +153,7 @@ void sendLargeFileOverBluetooth(const char *path);
 void sendLargeFileOverBluetooth2(const char *path);
 /*        SD Card         */
 extern SPIClass spi;
-extern int CS_PIN;
+extern uint8_t CS_PIN;
 void SD_init();
 void printDirectory(File dir, int numTabs);
 void read_configuration();
@@ -160,32 +165,31 @@ void logMeasurement(String measurement);
 void SD_Card_Speed_Test();
 bool copyFile(int chunkSize, const char *destinationFile);
 
-//void renameFile(fs::FS &fs, const char * path1, const char * path2);
-//void deleteFile(fs::FS &fs, const char * path);
+void renameFile(fs::FS &fs, const char * path1, const char * path2);
+void deleteFile(fs::FS &fs, const char * path);
 //void removeDir(fs::FS &fs, const char * path);
 //void createDir(fs::FS &fs, const char * path);
-//void testFileIO(fs::FS &fs, const char * path);
 
 /*      Button Setup     */
-extern int buttonbigOled, ButtonDebug;
+extern uint8_t buttonbigOled, ButtonDebug;
 extern volatile bool buttonDebugPressed;
 void buttonInterrupt_bigOled();
 void buttonInterrupt_debug();
 
 /*      Ph Sensor         */
 extern ESP_PH ph;
-extern int PH_PIN;
+extern uint8_t PH_PIN;
 float pH();
 //float readTemperature();
 
 /*      Conductivity Sensor   */
 extern DFRobot_ESP_EC ec;
 //extern float voltage_cond, temperature_cond;
-extern int EC_PIN; // Potentiometer is connected to GPIO 34 (Analog ADC1_CH6) 
+extern uint8_t EC_PIN; // Potentiometer is connected to GPIO 34 (Analog ADC1_CH6) 
 float Cond();
 
 /*      Current Sensor   */
-extern int CurrentPin;
+extern uint8_t CurrentPin;
 float CurrentSensor_724();
 
 #endif // CONFIG_H

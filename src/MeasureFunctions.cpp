@@ -1,5 +1,9 @@
 #include "config.h"
 #include <algorithm>
+#define ARDUINOJSON_STRING_LENGTH_SIZE 2      //Max characters 65,635
+#define ARDUINOJSON_SLOT_ID_SIZE 2            //Max-nodes 65,635
+#define ARDUINOJSON_USE_LONG_LONG 0           //Store jsonVariant as long
+#define ARDUINOJSON_USE_DOUBLE 0              //Store floating point NOT as double 
 
 /*        Flor sensor temperature     */
 float Read_NTC()
@@ -17,7 +21,7 @@ float Read_NTC()
   }
   average /= NUMSAMPLES;
 
-  #ifdef DEBUG_MODE  
+  #ifdef DEBUG_MODE_3  
   Serial.print("1 sample analog reading "); 
   Serial.println(sample);
   Serial.printf("Average analog reading: %.2f\n", average);
@@ -27,7 +31,7 @@ float Read_NTC()
   float resistance = 4095 / average - 1;
   resistance = serialResistance * resistance;
 
-  #ifdef DEBUG_MODE
+  #ifdef DEBUG_MODE_3
   Serial.printf("Thermistor resistance: %.2f\n", resistance);
   #endif
  
@@ -42,7 +46,7 @@ float Read_NTC()
   steinhart = 1.0 / steinhart;                 // Invert
   steinhart -= 273.15;                         // convert to C
  
-  #ifdef DEBUG_MODE
+  #ifdef DEBUG_MODE_3
   Serial.printf("Temperature: %.3f *C\n", steinhart);
   #endif
   
@@ -51,7 +55,7 @@ float Read_NTC()
 
 /* voltage sensor   */
 float voltage = 0.00;
-extern int voltPin;
+
 float readVoltage()
 {
   const int numSamples = 100;
@@ -308,7 +312,7 @@ void init_displays(){
 volatile bool buttonBigPressed, buttonDebugPressed = false;
 
 /*              Setup Currentsensor    */
-extern int CurrentPin;
+// extern int CurrentPin;
 float CurrentSensor_724()
 {
   float current_voltage, current = 0.0;
@@ -322,7 +326,7 @@ float CurrentSensor_724()
   // Read ADC value multiple times to average
   for (int i = 0; i < numSamples; i++)
   {
-    int adc = analogReadMilliVolts(33);
+    int adc = analogReadMilliVolts(CurrentPin);
     adc_voltage_sum += adc; //3.3
     vTaskDelay(2 / portTICK_PERIOD_MS);// Small delay to allow for better averaging
   }
@@ -356,7 +360,7 @@ float CurrentSensor_724()
 /*      Conductivity Sensor   */
 DFRobot_ESP_EC ec;
 volatile float voltage_cond, temperature_cond = 25; // variable for storing the potentiometer value
-extern int EC_PIN;
+// extern int EC_PIN;
 float ecValueFloat = 0;
 float Cond()
 {
@@ -382,7 +386,7 @@ float Cond()
 /*      pH Sensor             */
 #define ESPADC 4096.0   // the esp Analog Digital Conversion value
 #define ESPVOLTAGE 3300 // the esp voltage supply value
-extern int PH_PIN;
+// extern int PH_PIN;
 float voltage_pH, phValue;
 float temperature_pH = 20.0; // Fixed temperature value kan vervangen worden wanneer temp sensor gebruikt wordt
 
@@ -572,7 +576,7 @@ void SD_init()
   }
   else
   {
-    Serial.println("File already exists");
+    Serial.println("Log.txt file already exists");
   }
   file.close();
 
@@ -603,16 +607,6 @@ void printDirectory(File dir, int numTabs) {
   }
 }
 
-/*
-void renameFile(fs::FS &fs, const char * path1, const char * path2){
-  Serial.printf("Renaming file %s to %s\n", path1, path2);
-  if (fs.rename(path1, path2)) {
-    Serial.println("File renamed");
-  } else {
-    Serial.println("Rename failed");
-  }
-}
-
 void deleteFile(fs::FS &fs, const char * path){
   Serial.printf("Deleting file: %s\n", path);
   if(fs.remove(path)){
@@ -621,49 +615,15 @@ void deleteFile(fs::FS &fs, const char * path){
     Serial.println("Delete failed");
   }
 }
-
-void testFileIO(fs::FS &fs, const char * path){
-  File file = fs.open(path);
-  static uint8_t buf[512];
-  size_t len = 0;
-  uint32_t start = millis();
-  uint32_t end = start;
-  if(file){
-    len = file.size();
-    size_t flen = len;
-    start = millis();
-    while(len){
-      size_t toRead = len;
-      if(toRead > 512){
-        toRead = 512;
-      }
-      file.read(buf, toRead);
-      len -= toRead;
-    }
-    end = millis() - start;
-    Serial.printf("%u bytes read for %u ms\n", flen, end);
-    file.close();
+void renameFile(fs::FS &fs, const char * path1, const char * path2){
+  Serial.printf("Renaming file %s to %s\n", path1, path2);
+  if (fs.rename(path1, path2)) {
+    Serial.println("File renamed");
   } else {
-    Serial.println("Failed to open file for reading");
+    Serial.println("Rename failed");
   }
-
-  file = fs.open(path, FILE_WRITE);
-  if(!file){
-    Serial.println("Failed to open file for writing");
-    return;
-  }
-
-  size_t i;
-  start = millis();
-  for(i=0; i<2048; i++){
-    file.write(buf, 512);
-  }
-  end = millis() - start;
-  Serial.printf("%u bytes written for %u ms\n", 2048 * 512, end);
-  file.close();
 }
-
-
+/*
 void createDir(fs::FS &fs, const char * path){
   Serial.printf("Creating Dir: %s\n", path);
   if(fs.mkdir(path)){
@@ -718,8 +678,6 @@ void sendFileOverBluetooth(const char *path)
   file.close();
   Serial.println("File sent over Bluetooth");
 }
-
-
 
 unsigned long button_time = 0;
 unsigned long last_button_time = 0;

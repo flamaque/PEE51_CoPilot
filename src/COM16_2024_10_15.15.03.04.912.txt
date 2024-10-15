@@ -1,0 +1,486 @@
+ets Jul 29 2019 12:21:46
+
+rst:0x1 (POWERON_RESET),boot:0x12 (SPI_FAST_FLASH_BOOT)
+configsip: 0, SPIWP:0xee
+clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+mode:DIO, clock div:1
+load:0x3fff0030,len:1344
+load:0x40078000,len:13964
+load:0x40080400,len:3600
+entry 0x400805f0
+CPU frequency set to: 240 MHz
+getXtalFrequencyMhz: 40
+getCpuFrequencyMhz: 240
+getApbFrequency: 80000000
+Reading config file.
+System Volume Information/
+	WPSettings.dat		12
+	IndexerVolumeGuid		76
+Test7_2MB.txt		2020000
+Test6_1MB.txt		1010000
+Test5_500k.txt		505000
+Test4_100k.txt		101000
+Test3_10k.txt		10100
+Test2_1k.txt		1010
+Tetst1_100.txt		101
+config.txt		909
+foo.txt		13
+log.txt		1281540
+log_copy512.txt		1281540
+log_copy1024.txt		0
+log_copy4096.txt		1281540
+test.txt		1048576
+Test8_5MB.txt		1048576
+TestFile.txt		1048576
+log_copy.txt		0
+SD Card initialized.
+SD Card Type: SDHC
+SD Card Size: 59344MB
+Log.txt file already exists
+Total space: 32756MB
+Used space: 10MB
+Displays initialized!
+Configure APN settings.
+readGsmResponse timeout
+(printf) Response: AT
+OK
+AT+IPR=115200
+OK
+AT&W
+OK
+AT+CSQ
++CSQ: 21,0
+
+OK
+AT+SAPBR=3,1,"Contype","GPRS","IP"
+ERROR
+AT+CCID=?
+OK
+AT+CCID
+8931090200035587547f
+
+OK
+AT+SAPBR=3,1,"APN",data.lycamobile.nl
+OK
+
+readGsmResponse timeout
+(printf) Response: AT+SAPBR=3,1,"USER",lmnl
+OK
+
+readGsmResponse timeout
+(printf) Response: AT+SAPBR=3,1,"PWD",plus
+OK
+
+readGsmResponse timeout
+(printf) Response: AT+SAPBR=1,1
+ERROR
+
+readGsmResponse timeout
+(printf) Response: AT+SAPBR=2,1
++SAPBR: 1,1,"10.167.98.249"
+
+OK
+
+SIM808 requesting datetime...
+readGsmResponse timeout
+(printf) Response: AT+CLTS=1
+OK
+
+readGsmResponse timeout
+(printf) Response: AT+CLTS=?
++CLTS: "yy/MM/dd,hh:mm:ss+/-zz"
+
+OK
+
+readGsmResponse timeout
+(printf) Response: AT+CLTS?
++CLTS: 1
+
+OK
+
+Response: AT+CCLK?+CCLK: "24/10/15,15:03:32+08"
+Parsed Date: 24/10/15
+Parsed Time: 15:03:32
+Data in convertToUnixTimestamp: 
+Parsed day: 15
+Parsed month: 10
+Parsed year: 2024
+Parsed Date: 24/10/15
+Parsed hour: 15
+Parsed minute: 3
+Parsed second: 32
+Parsed Time: 15:03:32
+Intermediate timestamp: 1729004612
+Final timestamp with milliseconds: 1729004612000
+Timestamp before comparison: 1729004612000
+Valid datetime received. 24/10/15 
+Date: 24/10/15
+Time: 
+Saved timestamp in setup: 1729004612000
+..........Done calculating R0 for MQ7!.
+MQ7 initialized!
+
+************************************************************************************************************************************************
+MQ sensor reading library for arduino
+Note: remember that all the parameters below can be modified during the program execution with the methods:
+setR0, setRL, setA, setB where you will have to send as parameter the new value, example: mySensor.setR0(20); //R0 = 20KΩ
+Authors: Miguel A. Califa U - Yersson R. Carrillo A - Ghiordy F. Contreras C
+Contributors: Andres A. Martinez - Juan A. Rodríguez - Mario A. Rodríguez O 
+Sensor: MQ-7
+Supply voltage: 5.00 VDC
+ADC Resolution: 12 Bits
+R0: 23.43 KΩ
+RL: 10.00 KΩ
+Model: Exponential
+MQ-7 -> a: 99.04 | b: -1.52
+Development board: ESP32
+Calibrating MQ8 please wait...........R0 for MQ8 calculation done!.
+MQ8 initialized!
+
+************************************************************************************************************************************************
+MQ sensor reading library for arduino
+Note: remember that all the parameters below can be modified during the program execution with the methods:
+setR0, setRL, setA, setB where you will have to send as parameter the new value, example: mySensor.setR0(20); //R0 = 20KΩ
+Authors: Miguel A. Califa U - Yersson R. Carrillo A - Ghiordy F. Contreras C
+Contributors: Andres A. Martinez - Juan A. Rodríguez - Mario A. Rodríguez O 
+Sensor: MQ-8
+Supply voltage: 5.00 VDC
+ADC Resolution: 12 Bits
+R0: 3.19 K��
+RL: 10.00 KΩ
+Model: Exponential
+MQ-8 -> a: 976.97 | b: -0.69
+Development board: ESP32
+Found device 0 with address: 28A000CA0F00003F
+Found device 1 with address: 288823C90F000016
+Found device 2 with address: 284422C90F000039
+Found device 3 with address: 28E565C90F0000EA
+Found device 4 with address: 28FB20C90F000099
+Bluetooth initialized with 1843200
+measurementQueue created successfully.
+measurementQueue created with size: 24 bytes.
+Sizes before creating tasks:
+239 Kb
+Free heap size: 92560, largest free block: 90100
+Now running sendArray task.
+Sizes after creating tasks:
+239 Kb
+Free heap size: 63032, largest free block: 61428
+heap with MALLOC_CAP_DEFAULT: 61428
+Inside Display Measurements task.
+SavedTimestamp in DisplayMeasurements: 1729004612000
+Inside Bluetooth task.
+Counting task has started.
+Inside Measuring task.
+MaxMeasurements: 20
+Now running for 110 measurements.
+highWaterMark and freeHeap at beginning: 
+MeasuringTask stack high water mark: 6840
+Free heap size MeasuringTask: 61936
+
+Measurement: 0
+jsonBuffer size: 15
+doc size with .size(): 1 Size with measureJson: 265
+Free heap size MeasuringTask: 61936 highWater mark: 6840
+Free heap ESP.getFreeHeap JSON: 71344
+
+Measurement: 10
+jsonBuffer size: 15
+doc size with .size(): 11 Size with measureJson: 1613
+Free heap size MeasuringTask: 61936 highWater mark: 6840
+Free heap ESP.getFreeHeap JSON: 69472
+
+Measurement: 20
+jsonBuffer size: 15
+doc size with .size(): 21 Size with measureJson: 3014
+Free heap size MeasuringTask: 61936 highWater mark: 6840
+Free heap ESP.getFreeHeap JSON: 66848
+
+Measurement: 30
+jsonBuffer size: 15
+doc size with .size(): 31 Size with measureJson: 4362
+Free heap size MeasuringTask: 61936 highWater mark: 6840
+Free heap ESP.getFreeHeap JSON: 64080
+
+Measurement: 40
+jsonBuffer size: 15
+doc size with .size(): 41 Size with measureJson: 5763
+Free heap size MeasuringTask: 61936 highWater mark: 6840
+Free heap ESP.getFreeHeap JSON: 61616
+
+Measurement: 50
+jsonBuffer size: 15
+doc size with .size(): 51 Size with measureJson: 7111
+Free heap size MeasuringTask: 61936 highWater mark: 6840
+Free heap ESP.getFreeHeap JSON: 60112
+
+Measurement: 60
+jsonBuffer size: 15
+doc size with .size(): 61 Size with measureJson: 8512
+Free heap size MeasuringTask: 61936 highWater mark: 6840
+Free heap ESP.getFreeHeap JSON: 57776
+
+Measurement: 70
+jsonBuffer size: 15
+doc size with .size(): 71 Size with measureJson: 9860
+Free heap size MeasuringTask: 61936 highWater mark: 6840
+Free heap ESP.getFreeHeap JSON: 55472
+
+Measurement: 80
+jsonBuffer size: 15
+doc size with .size(): 81 Size with measureJson: 11261
+Free heap size MeasuringTask: 61936 highWater mark: 6840
+Free heap ESP.getFreeHeap JSON: 54208
+
+Measurement: 90
+jsonBuffer size: 15
+doc size with .size(): 91 Size with measureJson: 12609
+Free heap size MeasuringTask: 61936 highWater mark: 6840
+Free heap ESP.getFreeHeap JSON: 51840
+
+Measurement: 100
+jsonBuffer size: 15
+doc size with .size(): 101 Size with measureJson: 14010
+Free heap size MeasuringTask: 61936 highWater mark: 6840
+Free heap ESP.getFreeHeap JSON: 49280
+
+highWaterMark and freeHeap at end: 
+MeasuringTask stack high water mark: 5512
+Free heap size MeasuringTask: 36484
+
+jsonBuffer size before serialization: 15
+Free heap before serialize JSON: 48080
+Free heap after serialize JSON: 32700
+jsonBuffer size after serialization: 15360
+Successfully posted buffer to queue
+Size of doc in measuring: 15146
+Size of doc in measuring with .size(): 110
+Now running for 120 measurements.
+highWaterMark and freeHeap at beginning: 
+MeasuringTask stack high water mark: 5512
+Free heap size MeasuringTask: 45944
+
+
+Buffer in sendArray: [{"ts":1729004644181,"values":{"T_g":"24.00","T1":"23.375","T2":"23.000","T3":"23.500","T4":"23.000","T5":"23.125","pH":"0.000","A":"-57.23","Hum":"46.20","Cond":"0.000","Flow1":"4.72","Flow2":"13.33","FT":"0.00","CO":"0.591","H2":"52.375","V":"0.02","P":"-1.42"}},{"ts":1729004645920,"values":{"A":"-57.23","V":"0.02","P":"-1.32"}},{"ts":1729004646470,"values":{"T1":"23.375","T2":"23.000","T3":"23.500","T4":"23.000","T5":"23.125","A":"-57.23","Flow1":"4.77","Flow2":"13.34","V":"0.03","P":"-1.79"}},{"ts":1729004647611,"values":{"A":"-57.23","V":"0.02","P":"-1.38"}},{"ts":1729004648161,"values":{"T_g":"23.90","T1":"23.375","T2":"23.000","T3":"23.500","T4":"23.000","T5":"23.125","A":"-57.23","Flow1":"4.76","Flow2":"13.33","FT":"0.00","CO":"0.614","H2":"51.404","V":"0.02","P":"-1.33"}},{"ts":1729004649888,"values":{"A":"-57.23","Hum":"46.60","V":"0.02","P":"-1.29"}},{"ts":1729004650444,"values":{"T1":"23.375","T2":"23.000","T3":"23.500","T4":"23.000","T5":"23.125","A":"-57.23","Flow1":"4.76","Flow2":"13.33","V":"0.02","P":"-1.33"}},{"ts":1729004651585,"values":{"A":"-57.23","V":"0.02","P":"-1.27"}},{"ts":1729004652135,"values":{"T_g":"23.90","T1":"23.500","T2":"23.000","T3":"23.500","T4":"23.000","T5":"23.125","A":"-57.23","Flow1":"4.78","Flow2":"13.39","FT":"0.00","CO":"0.568","H2":"51.295","V":"0.02","P":"-0.96"}},{"ts":1729004653856,"values":{"A":"-57.23","V":"0.02","P":"-1.01"}},{"ts":1729004654406,"values":{"T1":"23.500","T2":"23.000","T3":"23.500","T4":"23.125","T5":"23.125","pH":"13.159","A":"-57.23","Hum":"46.60","Cond":"1.327","Flow1":"4.75","Flow2":"13.31","V":"0.02","P":"-1.10"}},{"ts":1729004655566,"values":{"A":"-57.23","V":"0.02","P":"-1.29"}},{"ts":1729004656116,"values":{"T_g":"23.90","T1":"23.500","T2":"23.000","T3":"23.500","T4":"23.000","T5":"23.125","A":"-57.23","Flow1":"4.77","Flow2":"13.35","FT":"0.00","CO":"0.598","H2":"52.267","V":"0.03","P":"-1.55"}},{"ts":1729004657837,"values":{"A":"-57.23","V":"0.03","P":"-1.60"}},{"ts":1729004658387,"values":{"T1":"23.375","T2":"23.000","T3":"23.500","T4":"23.125","T5":"23.125","A":"-57.23","Flow1":"4.76","Flow2":"13.32","V":"0.02","P":"-1.22"}},{"ts":1729004659528,"values":{"A":"-57.23","Hum":"46.60","V":"0.02","P":"-1.16"}},{"ts":1729004660084,"values":{"T_g":"23.90","T1":"23.500","T2":"23.000","T3":"23.500","T4":"23.125","T5":"23.125","A":"-57.23","Flow1":"4.77","Flow2":"13.34","FT":"0.00","CO":"0.560","H2":"51.836","V":"0.03","P":"-1.55"}},{"ts":1729004661805,"values":{"A":"-57.23","V":"0.02","P":"-1.29"}},{"ts":1729004662355,"values":{"T1":"23.500","T2":"23.000","T3":"23.500","T4":"23.125","T5":"23.125","A":"-57.23","Flow1":"4.75","Flow2":"13.31","V":"0.02","P":"-0.91"}},{"ts":1729004663496,"values":{"A":"-57.23","V":"0.01","P":"-0.80"}},{"ts":1729004664046,"values":{"T_g":"23.90","T1":"23.500","T2":"23.000","T3":"23.500","T4":"23.125","T5":"23.125","pH":"11.212","A":"-57.23","Hum":"46.60","Cond":"1.587","Flow1":"4.76","Flow2":"13.33","FT":"0.00","CO":"0.646","H2":"51.836","V":"0.02","P":"-1.39"}},{"ts":1729004665787,"values":{"A":"-57.23","V":"0.02","P":"-1.28"}},{"ts":1729004666337,"values":{"T1":"23.500","T2":"23.000","T3":"23.500","T4":"23.125","T5":"23.125","A":"-57.23","Flow1":"4.76","Flow2":"13.33","V":"0.02","P":"-1.11"}},{"ts":1729004667478,"values":{"A":"-57.23","V":"0.02","P":"-1.21"}},{"ts":1729004668028,"values":{"T_g":"23.80","T1":"23.500","T2":"23.000","T3":"23.500","T4":"23.000","T5":"23.125","A":"-57.23","Flow1":"4.77","Flow2":"13.34","FT":"0.00","CO":"0.622","H2":"51.728","V":"0.02","P":"-1.31"}},{"ts":1729004669755,"values":{"A":"-57.23","Hum":"46.60","V":"0.03","P":"-1.78"}},{"ts":1729004670311,"values":{"T1":"23.500","T2":"23.000","T3":"23.500","T4":"23.125","T5":"23.125","A":"-57.23","Flow1":"4.73","Flow2":"13.24","V":"0.03","P":"-1.47"}},{"ts":1729004671452,"values":{"A":"-57.23","V":"0.02","P":"-1.21"}},{"ts":1729004672002,"values":{"T_g":"23.80","T1":"23.500","T2":"23.000","T3":"23.500","T4":"23.000","T5":"23.125","A":"-57.23","Flow1":"4.79","Flow2":"13.33","FT":"0.00","CO":"0.553","H2":"51.620","V":"0.02","P":"-1.06"}},{"ts":1729004673723,"values":{"A":"-57.23","V":"0.02","P":"-0.97"}},{"ts":1729004674273,"values":{"T1":"23.500","T2":"23.000","T3":"23.500","T4":"23.125","T5":"23.125","pH":"15.452","A":"-57.23","Hum":"46.60","Cond":"0.000","Flow1":"4.75","Flow2":"13.42","V":"0.02","P":"-1.12"}},{"ts":1729004675434,"values":{"A":"-57.23","V":"0.02","P":"-0.96"}},{"ts":1729004675984,"values":{"T_g":"23.80","T1":"23.500","T2":"23.000","T3":"23.500","T4":"23.125","T5":"23.125","A":"-57.23","Flow1":"4.77","Flow2":"13.22","FT":"0.00","CO":"0.654","H2":"51.512","V":"0.03","P":"-1.48"}},{"ts":1729004677705,"values":{"A":"-57.23","V":"0.02","P":"-1.08"}},{"ts":1729004678255,"values":{"T1":"23.500","T2":"23.000","T3":"23.500","T4":"23.125","T5":"23.125","A":"-57.23","Flow1":"4.76","Flow2":"13.33","V":"0.02","P":"-1.20"}},{"ts":1729004679396,"values":{"A":"-57.23","Hum":"46.60","V":"0.02","P":"-1.28"}},{"ts":1729004679952,"values":{"T_g":"23.80","T1":"23.500","T2":"23.000","T3":"23.500","T4":"23.125","T5":"23.125","A":"-57.23","Flow1":"4.77","Flow2":"13.34","FT":"0.00","CO":"0.630","H2":"52.267","V":"0.03","P":"-1.59"}},{"ts":1729004681673,"values":{"A":"-57.23","V":"0.03","P":"-1.77"}},{"ts":1729004682223,"values":{"T1":"23.500","T2":"23.000","T3":"23.500","T4":"23.125","T5":"23.125","A":"-57.23","Flow1":"4.75","Flow2":"13.31","V":"0.02","P":"-1.28"}},{"ts":1729004683364,"values":{"A":"-57.23","V":"0.03","P":"-1.47"}},{"ts":1729004683914,"values":{"T_g":"23.80","T1":"23.500","T2":"23.000","T3":"23.500","T4":"23.125","T5":"23.125","pH":"14.930","A":"-57.23","Hum":"46.60","Cond":"0.000","Flow1":"4.76","Flow2":"13.33","FT":"0.00","CO":"0.622","H2":"52.159","V":"0.02","P":"-1.26"}},{"ts":1729004685656,"values":{"A":"-57.23","V":"0.02","P":"-1.09"}},{"ts":1729004686206,"values":{"T1":"23.500","T2":"23.000","T3":"23.500","T4":"23.125","T5":"23.125","A":"-57.23","Flow1":"4.76","Flow2":"13.32","V":"0.02","P":"-0.97"}},{"ts":1729004687347,"values":{"A":"-57.23","V":"0.02","P":"-0.90"}},{"ts":1729004687897,"values":{"T_g":"23.80","T1":"23.500","T2":"23.000","T3":"23.500","T4":"23.125","T5":"23.125","A":"-57.23","Flow1":"4.76","Flow2":"13.43","FT":"0.00","CO":"0.568","H2":"52.482","V":"0.01","P":"-0.79"}},{"ts":1729004689624,"values":{"A":"-57.23","Hum":"46.60","V":"0.02","P":"-1.22"}},{"ts":1729004690180,"values":{"T1":"23.500","T2":"23.000","T3":"23.500","T4":"23.125","T5":"23.125","A":"-57.23","Flow1":"4.73","Flow2":"13.36","V":"0.02","P":"-1.34"}},{"ts":1729004691321,"values":{"A":"-57.23","V":"0.03","P":"-1.56"}},{"ts":1729004691871,"values":{"T_g":"23.80","T1":"23.500","T2":"23.000","T3":"23.500","T4":"23.125","T5":"23.125","A":"-57.23","Flow1":"4.76","Flow2":"13.33","FT":"0.00","CO":"0.622","H2":"52.052","V":"0.02","P":"-1.28"}},{"ts":1729004693592,"values":{"A":"-57.23","V":"0.02","P":"-1.24"}},{"ts":1729004694142,"values":{"T1":"23.500","T2":"23.000","T3":"23.500","T4":"23.125","T5":"23.125","pH":"12.555","A":"-57.23","Hum":"46.60","Cond":"0.000","Flow1":"4.79","Flow2":"13.31","V":"0.03","P":"-1.45"}},{"ts":1729004695304,"values":{"A":"-57.23","V":"0.02","P":"-1.23"}},{"ts":1729004695854,"values":{"T_g":"23.80","T1":"23.500","T2":"23.000","T3":"23.500","T4":"23.125","T5":"23.125","A":"-57.23","Flow1":"4.77","Flow2":"13.35","FT":"0.00","CO":"0.654","H2":"51.728","V":"0.02","P":"-0.92"}},{"ts":1729004697575,"values":{"A":"-57.23","V":"0.02","P":"-1.25"}},{"ts":1729004698125,"values":{"T1":"23.500","T2":"23.000","T3":"23.500","T4":"23.125","T5":"23.125","A":"-57.23","Flow1":"4.76","Flow2":"13.32","V":"0.02","P":"-0.95"}},{"ts":1729004699266,"values":{"A":"-57.23","Hum":"46.70","V":"0.02","P":"-1.06"}},{"ts":1729004699822,"values":{"T_g":"23.80","T1":"23.500","T2":"23.000","T3":"23.500","T4":"23.125","T5":"23.125","A":"-57.23","Flow1":"4.76","Flow2":"13.32","FT":"0.00","CO":"0.630","H2":"52.590","V":"0.02","P":"-1.13"}},{"ts":1729004701543,"values":{"A":"-57.23","V":"0.02","P":"-0.92"}},{"ts":1729004702093,"values":{"T1":"23.500","T2":"23.000","T3":"23.500","T4":"23.125","T5":"23.125","A":"-57.23","Flow1":"4.75","Flow2":"13.31","V":"0.02","P":"-1.09"}},{"ts":1729004703234,"values":{"A":"-57.23","V":"0.02","P":"-1.06"}},{"ts":1729004703784,"values":{"T_g":"23.80","T1":"23.500","T2":"23.125","T3":"23.500","T4":"23.125","T5":"23.125","pH":"15.452","A":"-57.23","Hum":"46.70","Cond":"0.000","Flow1":"4.76","Flow2":"13.33","FT":"0.00","CO":"0.568","H2":"50.970","V":"0.02","P":"-1.31"}},{"ts":1729004705527,"values":{"A":"-57.23","V":"0.02","P":"-1.42"}},{"ts":1729004706077,"values":{"T1":"23.500","T2":"23.000","T3":"23.500","T4":"23.125","T5":"23.125","A":"-57.23","Flow1":"4.76","Flow2":"13.33","V":"0.02","P":"-1.29"}},{"ts":1729004707218,"values":{"A":"-57.23","V":"0.02","P":"-1.39"}},{"ts":1729004707768,"values":{"T_g":"23.80","T1":"23.500","T2":"23.125","T3":"23.500","T4":"23.125","T5":"23.125","A":"-57.23","Flow1":"4.76","Flow2":"13.43","FT":"0.00","CO":"0.630","H2":"52.375","V":"0.02","P":"-1.33"}},{"ts":1729004709496,"values":{"A":"-57.23","Hum":"46.70","V":"0.02","P":"-1.19"}},{"ts":1729004710052,"values":{"T1":"23.500","T2":"23.125","T3":"23.500","T4":"23.125","T5":"23.125","A":"-57.23","Flow1":"4.77","Flow2":"13.23","V":"0.02","P":"-1.16"}},{"ts":1729004711193,"values":{"A":"-57.23","V":"0.02","P":"-1.00"}},{"ts":1729004711743,"values":{"T_g":"23.80","T1":"23.500","T2":"23.000","T3":"23.500","T4":"23.125","T5":"23.125","A":"-57.23","Flow1":"4.76","Flow2":"13.40","FT":"0.00","CO":"0.646","H2":"52.052","V":"0.02","P":"-0.88"}},{"ts":1729004713464,"values":{"A":"-57.23","V":"0.02","P":"-1.06"}},{"ts":1729004714014,"values":{"T1":"23.500","T2":"23.000","T3":"23.500","T4":"23.125","T5":"23.125","pH":"12.038","A":"-57.23","Hum":"46.70","Cond":"0.000","Flow1":"4.75","Flow2":"13.42","V":"0.01","P":"-0.52"}},{"ts":1729004715177,"values":{"A":"-57.23","V":"0.02","P":"-1.01"}},{"ts":1729004715727,"values":{"T_g":"23.80","T1":"23.500","T2":"23.125","T3":"23.500","T4":"23.125","T5":"23.125","A":"-57.23","Flow1":"4.77","Flow2":"13.35","FT":"0.00","CO":"0.606","H2":"52.052","V":"0.02","P":"-1.18"}},{"ts":1729004717448,"values":{"A":"-57.23","V":"0.02","P":"-1.20"}},{"ts":1729004717998,"values":{"T1":"23.500","T2":"23.000","T3":"23.500","T4":"23.125","T5":"23.125","A":"-57.23","Flow1":"4.76","Flow2":"13.33","V":"0.02","P":"-1.42"}},{"ts":1729004719140,"values":{"A":"-57.23","Hum":"46.70","V":"0.02","P":"-1.23"}},{"ts":1729004719696,"values":{"T_g":"23.80","T1":"23.500","T2":"23.125","T3":"23.500","T4":"23.125","T5":"23.125","A":"-57.23","Flow1":"4.75","Flow2":"13.30","FT":"0.00","CO":"0.614","H2":"52.590","V":"0.02","P":"-1.27"}},{"ts":1729004721417,"values":{"A":"-57.23","V":"0.03","P":"-1.66"}},{"ts":1729004721967,"values":{"T1":"23.500","T2":"23.125","T3":"23.500","T4":"23.125","T5":"23.125","A":"-57.23","Flow1":"4.75","Flow2":"13.31","V":"0.02","P":"-1.25"}},{"ts":1729004723108,"values":{"A":"-57.23","V":"0.02","P":"-1.21"}},{"ts":1729004723658,"values":{"T_g":"23.80","T1":"23.500","T2":"23.125","T3":"23.500","T4":"23.125","T5":"23.125","pH":"11.180","A":"-57.23","Hum":"46.60","Cond":"1.528","Flow1":"4.76","Flow2":"13.33","FT":"0.00","CO":"0.614","H2":"51.728","V":"0.02","P":"-0.93"}},{"ts":1729004725403,"values":{"A":"-57.23","V":"0.02","P":"-0.91"}},{"ts":1729004725953,"values":{"T1":"23.500","T2":"23.125","T3":"23.500","T4":"23.125","T5":"23.125","A":"-57.23","Flow1":"4.76","Flow2":"13.33","V":"0.01","P":"-0.74"}},{"ts":1729004727094,"values":{"A":"-57.23","V":"0.01","P":"-0.78"}},{"ts":1729004727644,"values":{"T_g":"23.70","T1":"23.500","T2":"23.125","T3":"23.500","T4":"23.125","T5":"23.125","A":"-57.23","Flow1":"4.75","Flow2":"13.30","FT":"0.00","CO":"0.614","H2":"51.944","V":"0.02","P":"-0.98"}},{"ts":1729004729371,"values":{"A":"-57.23","Hum":"46.70","V":"0.02","P":"-1.09"}},{"ts":1729004729927,"values":{"T1":"23.500","T2":"23.125","T3":"23.625","T4":"23.125","T5":"23.125","A":"-57.23","Flow1":"4.77","Flow2":"13.36","V":"0.02","P":"-1.00"}},{"ts":1729004731068,"values":{"A":"-57.23","V":"0.02","P":"-1.36"}},{"ts":1729004731618,"values":{"T_g":"23.70","T1":"23.500","T2":"23.125","T3":"23.500","T4":"23.125","T5":"23.125","A":"-57.23","Flow1":"4.76","Flow2":"13.33","FT":"0.00","CO":"0.614","H2":"51.404","V":"0.03","P":"-1.66"}},{"ts":1729004733339,"values":{"A":"-57.23","V":"0.02","P":"-1.42"}},{"ts":1729004733889,"values":{"T1":"23.500","T2":"23.125","T3":"23.500","T4":"23.125","T5":"23.125","pH":"15.452","A":"-57.23","Hum":"46.60","Cond":"1.710","Flow1":"4.75","Flow2":"13.31","V":"0.03","P":"-1.49"}},{"ts":1729004735053,"values":{"A":"-57.23","V":"0.03","P":"-1.56"}},{"ts":1729004735603,"values":{"T_g":"23.70","T1":"23.500","T2":"23.125","T3":"23.500","T4":"23.125","T5":"23.250","A":"-57.23","Flow1":"4.77","Flow2":"13.35","FT":"0.00","CO":"0.638","H2":"51.836","V":"0.01","P":"-0.77"}},{"ts":1729004737326,"values":{"A":"-57.23","V":"0.02","P":"-0.88"}},{"ts":1729004737876,"values":{"T1":"23.625","T2":"23.125","T3":"23.625","T4":"23.125","T5":"23.125","A":"-57.23","Flow1":"4.76","Flow2":"13.32","V":"0.01","P":"-0.67"}},{"ts":1729004739018,"values":{"A":"-57.23","Hum":"46.70","V":"0.01","P":"-0.70"}},{"ts":1729004739574,"values":{"T_g":"23.70","T1":"23.625","T2":"23.125","T3":"23.500","T4":"23.125","T5":"23.250","A":"-57.23","Flow1":"4.78","Flow2":"13.39","FT":"0.00","CO":"0.575","H2":"52.159","V":"0.02","P":"-1.40"}},{"ts":1729004741295,"values":{"A":"-57.23","V":"0.02","P":"-1.26"}},{"ts":1729004741845,"values":{"T1":"23.625","T2":"23.125","T3":"23.500","T4":"23.125","T5":"23.125","A":"-57.23","Flow1":"4.75","Flow2":"13.31","V":"0.03","P":"-1.48"}},{"ts":1729004742986,"values":{"A":"-57.23","V":"0.02","P":"-1.28"}},{"ts":1729004743536,"values":{"T_g":"23.70","T1":"23.500","T2":"23.125","T3":"23.500","T4":"23.125","T5":"23.125","pH":"12.474","A":"-57.23","Hum":"46.70","Cond":"1.582","Flow1":"4.76","Flow2":"13.33","FT":"0.00","CO":"0.575","H2":"51.187","V":"0.02","P":"-1.35"}},{"ts":1729004745283,"values":{"A":"-57.23","V":"0.03","P":"-1.52"}},{"ts":1729004745833,"values":{"T1":"23.500","T2":"23.125","T3":"23.625","T4":"23.125","T5":"23.125","A":"-57.23","Flow1":"4.76","Flow2":"13.33","V":"0.02","P":"-1.15"}},{"ts":1729004746975,"values":{"A":"-57.23","V":"0.02","P":"-1.09"}},{"ts":1729004747525,"values":{"T_g":"23.70","T1":"23.500","T2":"23.125","T3":"23.625","T4":"23.125","T5":"23.125","A":"-57.23","Flow1":"4.77","Flow2":"13.26","FT":"0.00","CO":"0.622","H2":"51.620","V":"0.01","P":"-0.61"}},{"ts":1729004749252,"values":{"A":"-57.23","Hum":"46.60","V":"0.01","P":"-0.64"}},{"ts":1729004749808,"values":{"T1":"23.500","T2":"23.125","T3":"23.625","T4":"23.125","T5":"23.125","A":"-57.23","Flow1":"4.77","Flow2":"13.36","V":"0.02","P":"-1.01"}},{"ts":1729004750949,"values":{"A":"-57.23","V":"0.02","P":"-1.25"}},{"ts":1729004751499,"values":{"T_g":"23.70","T1":"23.500","T2":"23.000","T3":"23.500","T4":"23.125","T5":"23.125","A":"-57.23","Flow1":"4.76","Flow2":"13.33","FT":"0.00","CO":"0.630","H2":"52.482","V":"0.02","P":"-1.32"}},{"ts":1729004753220,"values":{"A":"-57.23","V":"0.02","P":"-1.22"}}]
+readGsmResponse timeout
+(printf) Response: 
+OK
+AT+HTTPINIT
+ERROR
+
+Measurement: 0
+jsonBuffer size: 15
+doc size with .size(): 1 Size with measureJson: 266
+Free heap size MeasuringTask: 45944 highWater mark: 5512
+Free heap ESP.getFreeHeap JSON: 55880
+
+readGsmResponse timeout
+(printf) Response: AT+HTTPINIT=?
+OK
+
+Post http data...
+readGsmResponse timeout
+(printf) Response: AT+HTTPPARA="CID",1
+OK
+
+readGsmResponse timeout
+(printf) Response: AT+HTTPPARA="URL", http://jrbubuntu.ddns.net:5000/api/telemetry
+OK
+
+readGsmResponse timeout
+(printf) Response: AT+HTTPPARA="CONTENT","application/json"
+OK
+
+readGsmResponse timeout
+(printf) Response: AT+HTTPDATA=15146,20000
+DOWNLOAD
+
+readGsmResponse timeout
+(printf) Response: 
+OK
+
+readGsmResponse timeout
+(printf) Response: AT+HTTPACTION=1
+OK
+
+AT+HTTPREAD
+OK
+Time between usage: 2 min 22 sec.
+SendArray stack high water mark: 4456
+Free heap size SendArray: 58040
+Measurement: 10
+jsonBuffer size: 15
+doc size with .size(): 11 Size with measureJson: 1614
+Free heap size MeasuringTask: 45944 highWater mark: 5512
+Free heap ESP.getFreeHeap JSON: 69664
+
+Measurement: 20
+jsonBuffer size: 15
+doc size with .size(): 21 Size with measureJson: 3015
+Free heap size MeasuringTask: 45944 highWater mark: 5512
+Free heap ESP.getFreeHeap JSON: 66804
+
+Measurement: 30
+jsonBuffer size: 15
+doc size with .size(): 31 Size with measureJson: 4363
+Free heap size MeasuringTask: 45944 highWater mark: 5512
+Free heap ESP.getFreeHeap JSON: 64068
+
+Measurement: 40
+jsonBuffer size: 15
+doc size with .size(): 41 Size with measureJson: 5764
+Free heap size MeasuringTask: 45944 highWater mark: 5512
+Free heap ESP.getFreeHeap JSON: 61648
+
+Measurement: 50
+jsonBuffer size: 15
+doc size with .size(): 51 Size with measureJson: 7112
+Free heap size MeasuringTask: 45944 highWater mark: 5512
+Free heap ESP.getFreeHeap JSON: 60256
+
+Measurement: 60
+jsonBuffer size: 15
+doc size with .size(): 61 Size with measureJson: 8513
+Free heap size MeasuringTask: 45944 highWater mark: 5512
+Free heap ESP.getFreeHeap JSON: 57792
+
+Measurement: 70
+jsonBuffer size: 15
+doc size with .size(): 71 Size with measureJson: 9861
+Free heap size MeasuringTask: 45944 highWater mark: 5512
+Free heap ESP.getFreeHeap JSON: 55328
+
+Measurement: 80
+jsonBuffer size: 15
+doc size with .size(): 81 Size with measureJson: 11262
+Free heap size MeasuringTask: 45944 highWater mark: 5512
+Free heap ESP.getFreeHeap JSON: 53936
+
+Measurement: 90
+jsonBuffer size: 15
+doc size with .size(): 91 Size with measureJson: 12610
+Free heap size MeasuringTask: 45944 highWater mark: 5512
+Free heap ESP.getFreeHeap JSON: 51428
+
+Measurement: 100
+jsonBuffer size: 15
+doc size with .size(): 101 Size with measureJson: 14011
+Free heap size MeasuringTask: 45944 highWater mark: 5512
+Free heap ESP.getFreeHeap JSON: 49092
+
+Measurement: 110
+jsonBuffer size: 15
+doc size with .size(): 111 Size with measureJson: 15359
+Free heap size MeasuringTask: 45944 highWater mark: 5512
+Free heap ESP.getFreeHeap JSON: 46820
+
+highWaterMark and freeHeap at end: 
+MeasuringTask stack high water mark: 5512
+Free heap size MeasuringTask: 34504
+
+jsonBuffer size before serialization: 15
+Free heap before serialize JSON: 45652
+
+abort() was called at PC 0x4019b8e7 on core 1
+
+
+Backtrace: 0x40083d4d:0x3ffeccc0 0x40095f89:0x3ffecce0 0x4009b571:0x3ffecd00 0x4019b8e7:0x3ffecd80 0x4019b92e:0x3ffecda0 0x4019b88f:0x3ffecdc0 0x4019bbe6:0x3ffecde0 0x4019c56d:0x3ffece00 0x4019c6ec:0x3ffece20 0x4019c869:0x3ffece60 0x400d90e7:0x3ffece80 0x400d92ab:0x3ffecea0 0x400d945d:0x3ffecec0 0x400d9428:0x3ffecef0 0x400d93e5:0x3ffecf20 0x400dacd2:0x3ffecf50
+
+
+
+
+ELF file SHA256: 2b5f8f632a4eeb5f
+
+Rebooting...
+ets Jul 29 2019 12:21:46
+
+rst:0xc (SW_CPU_RESET),boot:0x12 (SPI_FAST_FLASH_BOOT)
+configsip: 0, SPIWP:0xee
+clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+mode:DIO, clock div:1
+load:0x3fff0030,len:1344
+load:0x40078000,len:13964
+load:0x40080400,len:3600
+entry 0x400805f0
+CPU frequency set to: 240 MHz
+getXtalFrequencyMhz: 40
+getCpuFrequencyMhz: 240
+getApbFrequency: 80000000
+Reading config file.
+System Volume Information/
+	WPSettings.dat		12
+	IndexerVolumeGuid		76
+Test7_2MB.txt		2020000
+Test6_1MB.txt		1010000
+Test5_500k.txt		505000
+Test4_100k.txt		101000
+Test3_10k.txt		10100
+Test2_1k.txt		1010
+Tetst1_100.txt		101
+config.txt		909
+foo.txt		13
+log.txt		1281540
+log_copy512.txt		1281540
+log_copy1024.txt		0
+log_copy4096.txt		1281540
+test.txt		1048576
+Test8_5MB.txt		1048576
+TestFile.txt		1048576
+log_copy.txt		0
+SD Card initialized.
+SD Card Type: SDHC
+SD Card Size: 59344MB
+Log.txt file already exists
+Total space: 32756MB
+Used space: 10MB
+Displays initialized!
+Configure APN settings.
+readGsmResponse timeout
+(printf) Response: AT
+OK
+AT+IPR=115200
+OK
+AT&W
+OK
+AT+CSQ
++CSQ: 23,0
+
+OK
+AT+SAPBR=3,1,"Contype","GPRS","IP"
+ERROR
+AT+CCID=?
+OK
+AT+CCID
+8931090200035587547f
+
+OK
+AT+SAPBR=3,1,"APN",data.lycamobile.nl
+OK
+
+readGsmResponse timeout
+(printf) Response: AT+SAPBR=3,1,"USER",lmnl
+OK
+
+readGsmResponse timeout
+(printf) Response: AT+SAPBR=3,1,"PWD",plus
+OK
+
+readGsmResponse timeout
+(printf) Response: AT+SAPBR=1,1
+ERROR
+
+readGsmResponse timeout
+(printf) Response: AT+SAPBR=2,1
++SAPBR: 1,1,"10.167.98.249"
+
+OK
+
+SIM808 requesting datetime...
+readGsmResponse timeout
+(printf) Response: AT+CLTS=1
+OK
+
+ets Jul 29 2019 12:21:46
+
+rst:0x1 (POWERON_RESET),boot:0x3 (DOWNLOAD_BOOT(UART0/UART1/SDIO_REI_REO_V2))
+waiting for download
