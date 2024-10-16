@@ -1,0 +1,243 @@
+ets Jul 29 2019 12:21:46
+
+rst:0x1 (POWERON_RESET),boot:0x13 (SPI_FAST_FLASH_BOOT)
+configsip: 0, SPIWP:0xee
+clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+mode:DIO, clock div:1
+load:0x3fff0030,len:1344
+load:0x40078000,len:13964
+load:0x40080400,len:3600
+entry 0x400805f0
+E (338) psram: PSRAM ID read error: 0xffffffff
+CPU frequency set to: 240 MHz
+getXtalFrequencyMhz: 40
+getCpuFrequencyMhz: 240
+getApbFrequency: 80000000
+Reading config file.
+System Volume Information/
+	WPSettings.dat		12
+	IndexerVolumeGuid		76
+Test7_2MB.txt		2020000
+Test6_1MB.txt		1010000
+Test5_500k.txt		505000
+Test4_100k.txt		101000
+Test3_10k.txt		10100
+Test2_1k.txt		1010
+Tetst1_100.txt		101
+config.txt		909
+foo.txt		13
+log.txt		1281540
+log_copy512.txt		1281540
+log_copy1024.txt		0
+log_copy4096.txt		1281540
+test.txt		1048576
+Test8_5MB.txt		1048576
+TestFile.txt		1048576
+log_copy.txt		0
+test_with_json.txt		21993
+One_Measurement.txt		38
+SD Card initialized.
+SD Card Type: SDHC
+SD Card Size: 59344MB
+Log.txt file already exists
+One_Measurement.txt file already exists
+Total space: 32756MB
+Used space: 10MB
+Displays initialized!
+Configure APN settings.
+readGsmResponse timeout
+(printf) Response: 
+readGsmResponse timeout
+(printf) Response: AT+SAPBR=3,1,"USER",lmnl
+OK
+
+readGsmResponse timeout
+(printf) Response: AT+SAPBR=3,1,"PWD",plus
+OK
+
+readGsmResponse timeout
+(printf) Response: AT+SAPBR=1,1
+OK
+
+readGsmResponse timeout
+(printf) Response: AT+SAPBR=2,1
++SAPBR: 1,1,"10.169.141.68"
+
+OK
+
+SIM808 requesting datetime...
+readGsmResponse timeout
+(printf) Response: AT+CLTS=1
+OK
+
+readGsmResponse timeout
+(printf) Response: AT+CLTS=?
++CLTS: "yy/MM/dd,hh:mm:ss+/-zz"
+
+OK
+
+readGsmResponse timeout
+(printf) Response: AT+CLTS?
++CLTS: 1
+
+OK
+
+Response: AT+CCLK?+CCLK: "24/10/15,19:49:20+08"
+Parsed Date: 24/10/15
+Parsed Time: 19:49:20
+Data in convertToUnixTimestamp: 
+Parsed day: 15
+Parsed month: 10
+Parsed year: 2024
+Parsed Date: 24/10/15
+Parsed hour: 19
+Parsed minute: 49
+Parsed second: 20
+Parsed Time: 19:49:20
+Intermediate timestamp: 1729021760
+Final timestamp with milliseconds: 1729021760000
+Timestamp before comparison: 1729021760000
+Valid datetime received. 24/10/15 
+Date: 24/10/15
+Time: 
+Saved timestamp in setup: 1729021760000
+..........Done calculating R0 for MQ7!.
+MQ7 initialized!
+
+************************************************************************************************************************************************
+MQ sensor reading library for arduino
+Note: remember that all the parameters below can be modified during the program execution with the methods:
+setR0, setRL, setA, setB where you will have to send as parameter the new value, example: mySensor.setR0(20); //R0 = 20KΩ
+Authors: Miguel A. Califa U - Yersson R. Carrillo A - Ghiordy F. Contreras C
+Contributors: Andres A. Martinez - Juan A. Rodríguez - Mario A. Rodríguez O 
+Sensor: MQ-7
+Supply voltage: 5.00 VDC
+ADC Resolution: 12 Bits
+R0: 12.54 KΩ
+RL: 10.00 KΩ
+Model: Exponential
+MQ-7 -> a: 99.04 | b: -1.52
+Development board: ESP32
+Calibrating MQ8 please wait...........R0 for MQ8 calculation done!.
+MQ8 initialized!
+
+************************************************************************************************************************************************
+MQ sensor reading library for arduino
+Note: remember that all the parameters below can be modified during the program execution with the methods:
+setR0, setRL, setA, setB where you will have to send as parameter the new value, example: mySensor.setR0(20); //R0 = 20KΩ
+Authors: Miguel A. Califa U - Yersson R. Carrillo A - Ghiordy F. Contreras C
+Contributors: Andres A. Martinez - Juan A. Rodríguez - Mario A. Rodríguez O 
+Sensor: MQ-8
+Supply voltage: 5.00 VDC
+ADC Resolution: 12 Bits
+R0: 1.46 K��
+RL: 10.00 KΩ
+Model: Exponential
+MQ-8 -> a: 976.97 | b: -0.69
+Development board: ESP32
+Found device 0 with address: 28A000CA0F00003F
+Found device 1 with address: 288823C90F000016
+Found device 2 with address: 284422C90F000039
+Found device 3 with address: 28E565C90F0000EA
+Found device 4 with address: 28FB20C90F000099
+Bluetooth initialized with 1843200
+Sizes before creating tasks:
+234 Kb
+Free heap size: 92504, largest free block: 90100
+Now running sendArray task.
+
+Buffer in sendArray: Reading ID, Date, Hour, Temperature 
+Sizes after creating tasks:
+234 Kb
+Free heap size: 58608, largest free block: 57332
+heap with MALLOC_CAP_DEFAULT: 57332
+Inside Display Measurements task.
+SavedTimestamp in DisplayMeasurements: 1729021760000
+Inside Bluetooth task.
+Counting task has started.
+readGsmResponse timeout
+(printf) Response: 
+OK
+AT+HTTPINIT
+OK
+
+readGsmResponse timeout
+(printf) Response: AT+HTTPINIT=?
+OK
+
+Post http data...
+readGsmResponse timeout
+(printf) Response: AT+HTTPPARA="CID",1
+OK
+
+readGsmResponse timeout
+(printf) Response: AT+HTTPPARA="URL", http://jrbubuntu.ddns.net:5000/api/telemetry
+OK
+
+Inside Measuring task.
+MaxMeasurements: 20
+Now running for 150 measurements.
+highWaterMark and freeHeap at beginning: 
+MeasuringTask stack high water mark: 6832
+Free heap size MeasuringTask: 57512
+
+readGsmResponse timeout
+(printf) Response: AT+HTTPPARA="CONTENT","application/json"
+OK
+
+readGsmResponse timeout
+(printf) Response: AT+HTTPDATA=38,20000
+DOWNLOAD
+
+File sent to SIM800L
+readGsmResponse timeout
+(printf) Response: 
+Measurement: 0
+doc size with .size(): 1 Size with measureJson: 264
+Free heap size MeasuringTask: 57512 highWater mark: 6832
+Free heap ESP.getFreeHeap JSON: 62152
+, Heap fragmentation:  15%
+
+readGsmResponse timeout
+(printf) Response: 
+Time between usage: 0 min 31 sec.
+SendArray stack high water mark: 3404
+Free heap size SendArray: 59724
+
+Buffer in sendArray: Reading ID, Date, Hour, Temperature 
+readGsmResponse timeout
+(printf) Response: 
+OK
+
+readGsmResponse timeout
+(printf) Response: AT+HTTPINIT=?
+OK
+
+Post http data...
+readGsmResponse timeout
+(printf) Response: AT+HTTPPARA="CID",1
+OK
+
+readGsmResponse timeout
+(printf) Response: AT+HTTPPARA="URL", http://jrbubuntu.ddns.net:5000/api/telemetry
+OK
+
+readGsmResponse timeout
+(printf) Response: AT+HTTPPARA="CONTENT","application/json"
+OK
+
+readGsmResponse timeout
+(printf) Response: AT+HTTPDATA=38,20000
+DOWNLOAD
+
+File sent to SIM800L
+readGsmResponse timeout
+(printf) Response: 
+Measurement: 10
+doc size with .size(): 11 Size with measureJson: 1607
+Free heap size MeasuringTask: 57512 highWater mark: 6832
+Free heap ESP.getFreeHeap JSON: 65004
+, Heap fragmentation:  19%
+
+readGsmResponse timeout
+(printf) Response: 

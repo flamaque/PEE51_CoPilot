@@ -33,6 +33,10 @@
 
 // #include "JsonStreamingParser.h"
 // #include "JsonListener.h"
+#define ARDUINOJSON_STRING_LENGTH_SIZE 2      //Max characters 65,635
+#define ARDUINOJSON_SLOT_ID_SIZE 2            //Max-nodes 65,635
+#define ARDUINOJSON_USE_LONG_LONG 0           //Store jsonVariant as long
+#define ARDUINOJSON_USE_DOUBLE 0              //Store floating point NOT as double 
 
 extern char command[20];
 void sendCmd(const char* cmd);
@@ -62,6 +66,7 @@ void sendCmd(const char* cmd);
 #define SLEEP_MODE_0 "AT+CSCLK=0\r\n"
 #define READ_GPS "AT+CIPGSMLOC=1,1\r\n"
 #define READ_GPS_2 "AT+CIPGSMLOC=2,1\r\n"
+void sendFileToSIM800L(File file);
 
 extern uint8_t voltPin;
 

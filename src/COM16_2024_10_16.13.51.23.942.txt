@@ -1,0 +1,1246 @@
+ets Jul 29 2019 12:21:46
+
+rst:0x1 (POWERON_RESET),boot:0x13 (SPI_FAST_FLASH_BOOT)
+configsip: 0, SPIWP:0xee
+clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+mode:DIO, clock div:1
+load:0x3fff0030,len:1344
+load:0x40078000,len:13964
+load:0x40080400,len:3600
+entry 0x400805f0
+E (347) psram: PSRAM ID read error: 0xffffffff
+CPU frequency set to: 240 MHz
+getXtalFrequencyMhz: 40
+getCpuFrequencyMhz: 240
+getApbFrequency: 80000000
+Reading config file.
+System Volume Information/
+	WPSettings.dat		12
+	IndexerVolumeGuid		76
+Test7_2MB.txt		2020000
+Test6_1MB.txt		1010000
+Test5_500k.txt		505000
+Test4_100k.txt		101000
+Test3_10k.txt		10100
+Test2_1k.txt		1010
+Tetst1_100.txt		101
+config.txt		909
+foo.txt		13
+log.txt		1298018
+log_copy512.txt		1281540
+log_copy1024.txt		0
+log_copy4096.txt		1281540
+test.txt		1048576
+Test8_5MB.txt		1048576
+TestFile.txt		1048576
+log_copy.txt		0
+test_with_json.txt		21993
+One_Measurement.txt		27311
+SD Card initialized.
+SD Card Type: SDHC
+SD Card Size: 59344MB
+Log.txt file already exists
+One_Measurement.txt file already exists
+Total space: 32756MB
+Used space: 10MB
+Displays initialized!
+Bluetooth initialized with 1843200
+Configure APN settings.
+readGsmResponse timeout
+(printf) Response: 
+readGsmResponse timeout
+(printf) Response: AT+SAPBR=3,1,"USER",lmnl
+OK
+
+readGsmResponse timeout
+(printf) Response: AT+SAPBR=3,1,"PWD",plus
+OK
+
+readGsmResponse timeout
+(printf) Response: AT+SAPBR=1,1
+ERROR
+
+readGsmResponse timeout
+(printf) Response: AT+SAPBR=2,1
++SAPBR: 1,1,"10.239.73.21"
+
+OK
+
+SIM808 requesting datetime...
+readGsmResponse timeout
+(printf) Response: AT+CLTS=1
+OK
+
+readGsmResponse timeout
+(printf) Response: AT+CLTS=?
++CLTS: "yy/MM/dd,hh:mm:ss+/-zz"
+
+OK
+
+readGsmResponse timeout
+(printf) Response: AT+CLTS?
++CLTS: 1
+
+OK
+
+Response: AT+CCLK?+CCLK: "24/10/16,13:51:50+08"
+Parsed Date: 24/10/16
+Parsed Time: 13:51:50
+Data in convertToUnixTimestamp: 
+Parsed day: 16
+Parsed month: 10
+Parsed year: 2024
+Parsed Date: 24/10/16
+Parsed hour: 13
+Parsed minute: 51
+Parsed second: 50
+Parsed Time: 13:51:50
+Intermediate timestamp: 1729086710
+Final timestamp with milliseconds: 1729086710000
+Timestamp before comparison: 1729086710000
+Valid datetime received. 24/10/16 
+Date: 24/10/16
+Time: 
+Saved timestamp in setup: 1729086710000
+..........Done calculating R0 for MQ7!.
+MQ7 initialized!
+
+************************************************************************************************************************************************
+MQ sensor reading library for arduino
+Note: remember that all the parameters below can be modified during the program execution with the methods:
+setR0, setRL, setA, setB where you will have to send as parameter the new value, example: mySensor.setR0(20); //R0 = 20KΩ
+Authors: Miguel A. Califa U - Yersson R. Carrillo A - Ghiordy F. Contreras C
+Contributors: Andres A. Martinez - Juan A. Rodríguez - Mario A. Rodríguez O 
+Sensor: MQ-7
+Supply voltage: 5.00 VDC
+ADC Resolution: 12 Bits
+R0: 22.90 KΩ
+RL: 10.00 KΩ
+Model: Exponential
+MQ-7 -> a: 99.04 | b: -1.52
+Development board: ESP32
+Calibrating MQ8 please wait...........R0 for MQ8 calculation done!.
+MQ8 initialized!
+
+************************************************************************************************************************************************
+MQ sensor reading library for arduino
+Note: remember that all the parameters below can be modified during the program execution with the methods:
+setR0, setRL, setA, setB where you will have to send as parameter the new value, example: mySensor.setR0(20); //R0 = 20KΩ
+Authors: Miguel A. Califa U - Yersson R. Carrillo A - Ghiordy F. Contreras C
+Contributors: Andres A. Martinez - Juan A. Rodríguez - Mario A. Rodríguez O 
+Sensor: MQ-8
+Supply voltage: 5.00 VDC
+ADC Resolution: 12 Bits
+R0: 3.76 K��
+RL: 10.00 KΩ
+Model: Exponential
+MQ-8 -> a: 976.97 | b: -0.69
+Development board: ESP32
+Found device 0 with address: 28A000CA0F00003F
+Found device 1 with address: 288823C90F000016
+Found device 2 with address: 284422C90F000039
+Found device 3 with address: 28E565C90F0000EA
+Found device 4 with address: 28FB20C90F000099
+Sizes before creating tasks:
+234 Kb
+Free heap size: 92468, largest free block: 90100
+Inside Bluetooth task.
+Sizes after creating tasks:
+234 Kb
+Free heap size: 62940, largest free block: 61428
+heap with MALLOC_CAP_DEFAULT: 61428
+Counting task has started.
+Inside Measuring task.
+MaxMeasurements: 20
+Now running for 250 measurements.
+highWaterMark and freeHeap at beginning: 
+MeasuringTask stack high water mark: 6816
+Free heap size MeasuringTask: 62844
+
+Inside Display Measurements task.
+SavedTimestamp in DisplayMeasurements: 1729086710000
+Now running sendArray task.
+Measurement: 0
+doc size with .size(): 1 Size with measureJson: 261
+Free heap MeasuringTask: 62844 highWater mark: 6816
+Free heap ESP.getFreeHeap JSON: 66512, Heap fragmentation:  11%
+
+Measurement: 50
+doc size with .size(): 51 Size with measureJson: 7107
+Free heap MeasuringTask: 62844 highWater mark: 6816
+Free heap ESP.getFreeHeap JSON: 51392, Heap fragmentation:  17%
+
+Measurement: 100
+doc size with .size(): 101 Size with measureJson: 13984
+Free heap MeasuringTask: 62844 highWater mark: 6816
+Free heap ESP.getFreeHeap JSON: 36400, Heap fragmentation:  25%
+
+Measurement: 150
+doc size with .size(): 151 Size with measureJson: 20815
+Free heap MeasuringTask: 62844 highWater mark: 6816
+Free heap ESP.getFreeHeap JSON: 22736, Heap fragmentation:  40%
+
+JSON overflowed, not enough memory
+doc size with .size(): 200 Size with measureJson: 27391
+Free heap MeasuringTask: 62844 highWater mark: 6816
+Free heap ESP.getFreeHeap JSON: 9680, Heap fragmentation:  32%
+Current Measurement index: 199
+
+JSON overflowed, not enough memory
+doc size with .size(): 200 Size with measureJson: 27391
+Free heap MeasuringTask: 62844 highWater mark: 6816
+Free heap ESP.getFreeHeap JSON: 9680, Heap fragmentation:  32%
+Current Measurement index: 200
+
+Measurement: 200
+doc size with .size(): 200 Size with measureJson: 27391
+Free heap MeasuringTask: 62844 highWater mark: 6816
+Free heap ESP.getFreeHeap JSON: 9680, Heap fragmentation:  32%
+
+JSON overflowed, not enough memory
+doc size with .size(): 200 Size with measureJson: 27391
+Free heap MeasuringTask: 62844 highWater mark: 6816
+Free heap ESP.getFreeHeap JSON: 9648, Heap fragmentation:  32%
+Current Measurement index: 201
+
+JSON overflowed, not enough memory
+doc size with .size(): 200 Size with measureJson: 27391
+Free heap MeasuringTask: 62844 highWater mark: 6816
+Free heap ESP.getFreeHeap JSON: 9648, Heap fragmentation:  32%
+Current Measurement index: 202
+
+JSON overflowed, not enough memory
+doc size with .size(): 200 Size with measureJson: 27391
+Free heap MeasuringTask: 62844 highWater mark: 6816
+Free heap ESP.getFreeHeap JSON: 9680, Heap fragmentation:  32%
+Current Measurement index: 203
+
+JSON overflowed, not enough memory
+doc size with .size(): 200 Size with measureJson: 27391
+Free heap MeasuringTask: 62844 highWater mark: 6816
+Free heap ESP.getFreeHeap JSON: 9680, Heap fragmentation:  32%
+Current Measurement index: 204
+
+JSON overflowed, not enough memory
+doc size with .size(): 200 Size with measureJson: 27391
+Free heap MeasuringTask: 62844 highWater mark: 6816
+Free heap ESP.getFreeHeap JSON: 9712, Heap fragmentation:  32%
+Current Measurement index: 205
+
+JSON overflowed, not enough memory
+doc size with .size(): 200 Size with measureJson: 27391
+Free heap MeasuringTask: 62844 highWater mark: 6816
+Free heap ESP.getFreeHeap JSON: 9712, Heap fragmentation:  32%
+Current Measurement index: 206
+
+JSON overflowed, not enough memory
+doc size with .size(): 200 Size with measureJson: 27391
+Free heap MeasuringTask: 62844 highWater mark: 6816
+Free heap ESP.getFreeHeap JSON: 9712, Heap fragmentation:  32%
+Current Measurement index: 207
+
+JSON overflowed, not enough memory
+doc size with .size(): 200 Size with measureJson: 27391
+Free heap MeasuringTask: 62844 highWater mark: 6816
+Free heap ESP.getFreeHeap JSON: 9712, Heap fragmentation:  32%
+Current Measurement index: 208
+
+JSON overflowed, not enough memory
+doc size with .size(): 200 Size with measureJson: 27391
+Free heap MeasuringTask: 62844 highWater mark: 6816
+Free heap ESP.getFreeHeap JSON: 9680, Heap fragmentation:  32%
+Current Measurement index: 209
+
+JSON overflowed, not enough memory
+doc size with .size(): 200 Size with measureJson: 27391
+Free heap MeasuringTask: 62844 highWater mark: 6816
+Free heap ESP.getFreeHeap JSON: 9680, Heap fragmentation:  32%
+Current Measurement index: 210
+
+JSON overflowed, not enough memory
+doc size with .size(): 200 Size with measureJson: 27391
+Free heap MeasuringTask: 62844 highWater mark: 6816
+Free heap ESP.getFreeHeap JSON: 9680, Heap fragmentation:  32%
+Current Measurement index: 211
+
+JSON overflowed, not enough memory
+doc size with .size(): 200 Size with measureJson: 27391
+Free heap MeasuringTask: 62844 highWater mark: 6816
+Free heap ESP.getFreeHeap JSON: 9680, Heap fragmentation:  32%
+Current Measurement index: 212
+
+JSON overflowed, not enough memory
+doc size with .size(): 200 Size with measureJson: 27391
+Free heap MeasuringTask: 62844 highWater mark: 6816
+Free heap ESP.getFreeHeap JSON: 9680, Heap fragmentation:  32%
+Current Measurement index: 213
+
+JSON overflowed, not enough memory
+doc size with .size(): 200 Size with measureJson: 27391
+Free heap MeasuringTask: 62844 highWater mark: 6816
+Free heap ESP.getFreeHeap JSON: 9680, Heap fragmentation:  32%
+Current Measurement index: 214
+
+JSON overflowed, not enough memory
+doc size with .size(): 200 Size with measureJson: 27391
+Free heap MeasuringTask: 62844 highWater mark: 6816
+Free heap ESP.getFreeHeap JSON: 9680, Heap fragmentation:  32%
+Current Measurement index: 215
+
+JSON overflowed, not enough memory
+doc size with .size(): 200 Size with measureJson: 27391
+Free heap MeasuringTask: 62844 highWater mark: 6816
+Free heap ESP.getFreeHeap JSON: 9648, Heap fragmentation:  32%
+Current Measurement index: 216
+
+JSON overflowed, not enough memory
+doc size with .size(): 200 Size with measureJson: 27391
+Free heap MeasuringTask: 62844 highWater mark: 6816
+Free heap ESP.getFreeHeap JSON: 9648, Heap fragmentation:  32%
+Current Measurement index: 217
+
+JSON overflowed, not enough memory
+doc size with .size(): 200 Size with measureJson: 27391
+Free heap MeasuringTask: 62844 highWater mark: 6816
+Free heap ESP.getFreeHeap JSON: 9648, Heap fragmentation:  32%
+Current Measurement index: 218
+
+JSON overflowed, not enough memory
+doc size with .size(): 200 Size with measureJson: 27391
+Free heap MeasuringTask: 62844 highWater mark: 6816
+Free heap ESP.getFreeHeap JSON: 9680, Heap fragmentation:  32%
+Current Measurement index: 219
+
+JSON overflowed, not enough memory
+doc size with .size(): 200 Size with measureJson: 27391
+Free heap MeasuringTask: 62844 highWater mark: 6816
+Free heap ESP.getFreeHeap JSON: 9712, Heap fragmentation:  32%
+Current Measurement index: 220
+
+JSON overflowed, not enough memory
+doc size with .size(): 200 Size with measureJson: 27391
+Free heap MeasuringTask: 62844 highWater mark: 6816
+Free heap ESP.getFreeHeap JSON: 9680, Heap fragmentation:  32%
+Current Measurement index: 221
+
+JSON overflowed, not enough memory
+doc size with .size(): 200 Size with measureJson: 27391
+Free heap MeasuringTask: 62844 highWater mark: 6816
+Free heap ESP.getFreeHeap JSON: 9648, Heap fragmentation:  32%
+Current Measurement index: 222
+
+JSON overflowed, not enough memory
+doc size with .size(): 200 Size with measureJson: 27391
+Free heap MeasuringTask: 62844 highWater mark: 6816
+Free heap ESP.getFreeHeap JSON: 9648, Heap fragmentation:  32%
+Current Measurement index: 223
+
+JSON overflowed, not enough memory
+doc size with .size(): 200 Size with measureJson: 27391
+Free heap MeasuringTask: 62844 highWater mark: 6816
+Free heap ESP.getFreeHeap JSON: 9680, Heap fragmentation:  32%
+Current Measurement index: 224
+
+JSON overflowed, not enough memory
+doc size with .size(): 200 Size with measureJson: 27391
+Free heap MeasuringTask: 62844 highWater mark: 6816
+Free heap ESP.getFreeHeap JSON: 9680, Heap fragmentation:  32%
+Current Measurement index: 225
+
+JSON overflowed, not enough memory
+doc size with .size(): 200 Size with measureJson: 27391
+Free heap MeasuringTask: 62844 highWater mark: 6816
+Free heap ESP.getFreeHeap JSON: 9712, Heap fragmentation:  32%
+Current Measurement index: 226
+
+JSON overflowed, not enough memory
+doc size with .size(): 200 Size with measureJson: 27391
+Free heap MeasuringTask: 62844 highWater mark: 6816
+Free heap ESP.getFreeHeap JSON: 9712, Heap fragmentation:  32%
+Current Measurement index: 227
+
+JSON overflowed, not enough memory
+doc size with .size(): 200 Size with measureJson: 27391
+Free heap MeasuringTask: 62844 highWater mark: 6816
+Free heap ESP.getFreeHeap JSON: 9680, Heap fragmentation:  32%
+Current Measurement index: 228
+
+JSON overflowed, not enough memory
+doc size with .size(): 200 Size with measureJson: 27391
+Free heap MeasuringTask: 62844 highWater mark: 6816
+Free heap ESP.getFreeHeap JSON: 9680, Heap fragmentation:  32%
+Current Measurement index: 229
+
+JSON overflowed, not enough memory
+doc size with .size(): 200 Size with measureJson: 27391
+Free heap MeasuringTask: 62844 highWater mark: 6816
+Free heap ESP.getFreeHeap JSON: 9680, Heap fragmentation:  32%
+Current Measurement index: 230
+
+JSON overflowed, not enough memory
+doc size with .size(): 200 Size with measureJson: 27391
+Free heap MeasuringTask: 62844 highWater mark: 6816
+Free heap ESP.getFreeHeap JSON: 9680, Heap fragmentation:  32%
+Current Measurement index: 231
+
+JSON overflowed, not enough memory
+doc size with .size(): 200 Size with measureJson: 27391
+Free heap MeasuringTask: 62844 highWater mark: 6816
+Free heap ESP.getFreeHeap JSON: 9680, Heap fragmentation:  32%
+Current Measurement index: 232
+
+JSON overflowed, not enough memory
+doc size with .size(): 200 Size with measureJson: 27391
+Free heap MeasuringTask: 62844 highWater mark: 6816
+Free heap ESP.getFreeHeap JSON: 9680, Heap fragmentation:  32%
+Current Measurement index: 233
+
+JSON overflowed, not enough memory
+doc size with .size(): 200 Size with measureJson: 27391
+Free heap MeasuringTask: 62844 highWater mark: 6816
+Free heap ESP.getFreeHeap JSON: 9680, Heap fragmentation:  32%
+Current Measurement index: 234
+
+JSON overflowed, not enough memory
+doc size with .size(): 200 Size with measureJson: 27391
+Free heap MeasuringTask: 62844 highWater mark: 6816
+Free heap ESP.getFreeHeap JSON: 9648, Heap fragmentation:  32%
+Current Measurement index: 235
+
+JSON overflowed, not enough memory
+doc size with .size(): 200 Size with measureJson: 27391
+Free heap MeasuringTask: 62844 highWater mark: 6816
+Free heap ESP.getFreeHeap JSON: 9648, Heap fragmentation:  32%
+Current Measurement index: 236
+
+JSON overflowed, not enough memory
+doc size with .size(): 200 Size with measureJson: 27391
+Free heap MeasuringTask: 62844 highWater mark: 6816
+Free heap ESP.getFreeHeap JSON: 9648, Heap fragmentation:  32%
+Current Measurement index: 237
+
+JSON overflowed, not enough memory
+doc size with .size(): 200 Size with measureJson: 27391
+Free heap MeasuringTask: 62844 highWater mark: 6816
+Free heap ESP.getFreeHeap JSON: 9648, Heap fragmentation:  32%
+Current Measurement index: 238
+
+JSON overflowed, not enough memory
+doc size with .size(): 200 Size with measureJson: 27391
+Free heap MeasuringTask: 62844 highWater mark: 6816
+Free heap ESP.getFreeHeap JSON: 9680, Heap fragmentation:  32%
+Current Measurement index: 239
+
+JSON overflowed, not enough memory
+doc size with .size(): 200 Size with measureJson: 27391
+Free heap MeasuringTask: 62844 highWater mark: 6816
+Free heap ESP.getFreeHeap JSON: 9712, Heap fragmentation:  32%
+Current Measurement index: 240
+
+JSON overflowed, not enough memory
+doc size with .size(): 200 Size with measureJson: 27391
+Free heap MeasuringTask: 62844 highWater mark: 6816
+Free heap ESP.getFreeHeap JSON: 9648, Heap fragmentation:  32%
+Current Measurement index: 241
+
+JSON overflowed, not enough memory
+doc size with .size(): 200 Size with measureJson: 27391
+Free heap MeasuringTask: 62844 highWater mark: 6816
+Free heap ESP.getFreeHeap JSON: 9648, Heap fragmentation:  32%
+Current Measurement index: 242
+
+JSON overflowed, not enough memory
+doc size with .size(): 200 Size with measureJson: 27391
+Free heap MeasuringTask: 62844 highWater mark: 6816
+Free heap ESP.getFreeHeap JSON: 9680, Heap fragmentation:  32%
+Current Measurement index: 243
+
+JSON overflowed, not enough memory
+doc size with .size(): 200 Size with measureJson: 27391
+Free heap MeasuringTask: 62844 highWater mark: 6816
+Free heap ESP.getFreeHeap JSON: 9680, Heap fragmentation:  32%
+Current Measurement index: 244
+
+JSON overflowed, not enough memory
+doc size with .size(): 200 Size with measureJson: 27391
+Free heap MeasuringTask: 62844 highWater mark: 6816
+Free heap ESP.getFreeHeap JSON: 9680, Heap fragmentation:  32%
+Current Measurement index: 245
+
+JSON overflowed, not enough memory
+doc size with .size(): 200 Size with measureJson: 27391
+Free heap MeasuringTask: 62844 highWater mark: 6816
+Free heap ESP.getFreeHeap JSON: 9680, Heap fragmentation:  32%
+Current Measurement index: 246
+
+JSON overflowed, not enough memory
+doc size with .size(): 200 Size with measureJson: 27391
+Free heap MeasuringTask: 62844 highWater mark: 6816
+Free heap ESP.getFreeHeap JSON: 9680, Heap fragmentation:  32%
+Current Measurement index: 247
+
+JSON overflowed, not enough memory
+doc size with .size(): 200 Size with measureJson: 27391
+Free heap MeasuringTask: 62844 highWater mark: 6816
+Free heap ESP.getFreeHeap JSON: 9712, Heap fragmentation:  32%
+Current Measurement index: 248
+
+JSON overflowed, not enough memory
+doc size with .size(): 200 Size with measureJson: 27391
+Free heap MeasuringTask: 62844 highWater mark: 6816
+Free heap ESP.getFreeHeap JSON: 9680, Heap fragmentation:  32%
+Current Measurement index: 249
+
+After for loop, freeHeap: 2932 highWater mark: 5488
+
+Free heap before writing to SD card: 9680
+, Heap fragmentation:  32%
+
+abort() was called at PC 0x40086585 on core 1
+
+
+Backtrace: 0x40083ec9:0x3ffee790 0x4009729d:0x3ffee7b0 0x4009c885:0x3ffee7d0 0x40086585:0x3ffee850 0x400865b2:0x3ffee870 0x40086719:0x3ffee8a0 0x40086842:0x3ffee8c0 0x4008689b:0x3ffee8e0 0x40094f36:0x3ffee900 0x401753c9:0x3ffee930 0x40176cc3:0x3ffee980 0x40178983:0x3ffeebf0 0x400f42a3:0x3ffeec20 0x401bde44:0x3ffeec40 0x401bdeed:0x3ffeec70 0x401b973d:0x3ffeec90 0x401b9f0a:0x3ffeecd0 0x401ba084:0x3ffeed00 0x400e0851:0x3ffeed90 0x400dad4e:0x3ffeedc0
+
+
+
+
+ELF file SHA256: 4d778b48a4d71330
+
+Rebooting...
+ets Jul 29 2019 12:21:46
+
+rst:0xc (SW_CPU_RESET),boot:0x13 (SP clock div:1
+load:0x3fff0030,len:1344
+load:0x40078000,len:13964
+load:0x40080400,len:3600
+entry 0x400805f0
+I_FAST_FLASH_BOOT)
+configsip: 0, SPIWP:0xee
+clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+mode:DIO,E (347) psram: PSRAM ID read error: 0xffffffff
+CPU frequency set to: 240 MHz
+getXtalFrequencyMhz: 40
+getCpuFrequencyMhz: 240
+getApbFrequency: 80000000
+Reading config file.
+System Volume Information/
+	WPSettings.dat		12
+	IndexerVolumeGuid		76
+Test7_2MB.txt		2020000
+Test6_1MB.txt		1010000
+Test5_500k.txt		505000
+Test4_100k.txt		101000
+Test3_10k.txt		10100
+Test2_1k.txt		1010
+Tetst1_100.txt		101
+config.txt		909
+foo.txt		13
+log.txt		1298018
+log_copy512.txt		1281540
+log_copy1024.txt		0
+log_copy4096.txt		1281540
+test.txt		1048576
+Test8_5MB.txt		1048576
+TestFile.txt		1048576
+log_copy.txt		0
+test_with_json.txt		21993
+One_Measurement.txt		27311
+SD Card initialized.
+SD Card Type: SDHC
+SD Card Size: 59344MB
+Log.txt file already exists
+One_Measurement.txt file already exists
+Total space: 32756MB
+Used space: 10MB
+Displays initialized!
+Bluetooth initialized with 1843200
+Configure APN settings.
+readGsmResponse timeout
+(printf) Response: AT
+OK
+AT+IPR=115200
+OK
+AT&W
+OK
+AT+CSQ
++CSQ: 27,0
+
+OK
+AT+SAPBR=3,1,"Contype","GPRS","IP"
+ERROR
+AT+CCID=?
+OK
+AT+CCID
+8931090200035587547f
+
+OK
+AT+SAPBR=3,1,"APN",data.lycamobile.nl
+OK
+
+readGsmResponse timeout
+(printf) Response: AT+SAPBR=3,1,"USER",lmnl
+OK
+
+readGsmResponse timeout
+(printf) Response: AT+SAPBR=3,1,"PWD",plus
+OK
+
+readGsmResponse timeout
+(printf) Response: AT+SAPBR=1,1
+ERROR
+
+readGsmResponse timeout
+(printf) Response: AT+SAPBR=2,1
++SAPBR: 1,1,"10.239.73.21"
+
+OK
+
+SIM808 requesting datetime...
+readGsmResponse timeout
+(printf) Response: AT+CLTS=1
+OK
+
+readGsmResponse timeout
+(printf) Response: AT+CLTS=?
++CLTS: "yy/MM/dd,hh:mm:ss+/-zz"
+
+OK
+
+readGsmResponse timeout
+(printf) Response: AT+CLTS?
++CLTS: 1
+
+OK
+
+Response: AT+CCLK?+CCLK: "24/10/16,13:56:30+08"
+Parsed Date: 24/10/16
+Parsed Time: 13:56:30
+Data in convertToUnixTimestamp: 
+Parsed day: 16
+Parsed month: 10
+Parsed year: 2024
+Parsed Date: 24/10/16
+Parsed hour: 13
+Parsed minute: 56
+Parsed second: 30
+Parsed Time: 13:56:30
+Intermediate timestamp: 1729086990
+Final timestamp with milliseconds: 1729086990000
+Timestamp before comparison: 1729086990000
+Valid datetime received. 24/10/16 
+Date: 24/10/16
+Time: 
+Saved timestamp in setup: 1729086990000
+..........Done calculating R0 for MQ7!.
+MQ7 initialized!
+
+************************************************************************************************************************************************
+MQ sensor reading library for arduino
+Note: remember that all the parameters below can be modified during the program execution with the methods:
+setR0, setRL, setA, setB where you will have to send as parameter the new value, example: mySensor.setR0(20); //R0 = 20KΩ
+Authors: Miguel A. Califa U - Yersson R. Carrillo A - Ghiordy F. Contreras C
+Contributors: Andres A. Martinez - Juan A. Rodríguez - Mario A. Rodríguez O 
+Sensor: MQ-7
+Supply voltage: 5.00 VDC
+ADC Resolution: 12 Bits
+R0: 22.07 KΩ
+RL: 10.00 KΩ
+Model: Exponential
+MQ-7 -> a: 99.04 | b: -1.52
+Development board: ESP32
+Calibrating MQ8 please wait...........R0 for MQ8 calculation done!.
+MQ8 initialized!
+
+************************************************************************************************************************************************
+MQ sensor reading library for arduino
+Note: remember that all the parameters below can be modified during the program execution with the methods:
+setR0, setRL, setA, setB where you will have to send as parameter the new value, example: mySensor.setR0(20); //R0 = 20KΩ
+Authors: Miguel A. Califa U - Yersson R. Carrillo A - Ghiordy F. Contreras C
+Contributors: Andres A. Martinez - Juan A. Rodríguez - Mario A. Rodríguez O 
+Sensor: MQ-8
+Supply voltage: 5.00 VDC
+ADC Resolution: 12 Bits
+R0: 3.60 K��
+RL: 10.00 KΩ
+Model: Exponential
+MQ-8 -> a: 976.97 | b: -0.69
+Development board: ESP32
+Found device 0 with address: 28A000CA0F00003F
+Found device 1 with address: 288823C90F000016
+Found device 2 with address: 284422C90F000039
+Found device 3 with address: 28E565C90F0000EA
+Found device 4 with address: 28FB20C90F000099
+Sizes before creating tasks:
+234 Kb
+Free heap size: 92476, largest free block: 90100
+Inside Bluetooth task.
+Sizes after creating tasks:
+234 Kb
+Free heap size: 62948, largest free block: 61428
+heap with MALLOC_CAP_DEFAULT: 61428
+Counting task has started.
+Inside Measuring task.
+MaxMeasurements: 20
+Now running for 250 measurements.
+highWaterMark and freeHeap at beginning: 
+MeasuringTask stack high water mark: 6816
+Free heap size MeasuringTask: 62852
+
+Inside Display Measurements task.
+SavedTimestamp in DisplayMeasurements: 1729086990000
+Now running sendArray task.
+Measurement: 0
+doc size with .size(): 1 Size with measureJson: 261
+Free heap MeasuringTask: 62852 highWater mark: 6816
+Free heap ESP.getFreeHeap JSON: 66524, Heap fragmentation:  11%
+
+Measurement: 50
+doc size with .size(): 51 Size with measureJson: 7085
+Free heap MeasuringTask: 62852 highWater mark: 6816
+Free heap ESP.getFreeHeap JSON: 51276, Heap fragmentation:  17%
+
+Measurement: 100
+doc size with .size(): 101 Size with measureJson: 13970
+Free heap MeasuringTask: 62852 highWater mark: 6816
+Free heap ESP.getFreeHeap JSON: 36380, Heap fragmentation:  25%
+
+Measurement: 150
+doc size with .size(): 151 Size with measureJson: 20795
+Free heap MeasuringTask: 62852 highWater mark: 6816
+Free heap ESP.getFreeHeap JSON: 23036, Heap fragmentation:  38%
+
+JSON overflowed, not enough memory
+doc size with .size(): 200 Size with measureJson: 27359
+Free heap MeasuringTask: 62852 highWater mark: 6816
+Free heap ESP.getFreeHeap JSON: 9884, Heap fragmentation:  33%
+Current Measurement index: 199
+
+JSON overflowed, not enough memory
+doc size with .size(): 200 Size with measureJson: 27359
+Free heap MeasuringTask: 62852 highWater mark: 6816
+Free heap ESP.getFreeHeap JSON: 9884, Heap fragmentation:  33%
+Current Measurement index: 200
+
+Measurement: 200
+doc size with .size(): 200 Size with measureJson: 27359
+Free heap MeasuringTask: 62852 highWater mark: 6816
+Free heap ESP.getFreeHeap JSON: 9884, Heap fragmentation:  33%
+
+JSON overflowed, not enough memory
+doc size with .size(): 200 Size with measureJson: 27359
+Free heap MeasuringTask: 62852 highWater mark: 6816
+Free heap ESP.getFreeHeap JSON: 9884, Heap fragmentation:  33%
+Current Measurement index: 201
+
+JSON overflowed, not enough memory
+doc size with .size(): 200 Size with measureJson: 27359
+Free heap MeasuringTask: 62852 highWater mark: 6816
+Free heap ESP.getFreeHeap JSON: 9884, Heap fragmentation:  33%
+Current Measurement index: 202
+
+JSON overflowed, not enough memory
+doc size with .size(): 200 Size with measureJson: 27359
+Free heap MeasuringTask: 62852 highWater mark: 6816
+Free heap ESP.getFreeHeap JSON: 9884, Heap fragmentation:  33%
+Current Measurement index: 203
+
+JSON overflowed, not enough memory
+doc size with .size(): 200 Size with measureJson: 27359
+Free heap MeasuringTask: 62852 highWater mark: 6816
+Free heap ESP.getFreeHeap JSON: 9884, Heap fragmentation:  33%
+Current Measurement index: 204
+
+JSON overflowed, not enough memory
+doc size with .size(): 200 Size with measureJson: 27359
+Free heap MeasuringTask: 62852 highWater mark: 6816
+Free heap ESP.getFreeHeap JSON: 9916, Heap fragmentation:  33%
+Current Measurement index: 205
+
+JSON overflowed, not enough memory
+doc size with .size(): 200 Size with measureJson: 27359
+Free heap MeasuringTask: 62852 highWater mark: 6816
+Free heap ESP.getFreeHeap JSON: 9916, Heap fragmentation:  33%
+Current Measurement index: 206
+
+JSON overflowed, not enough memory
+doc size with .size(): 200 Size with measureJson: 27359
+Free heap MeasuringTask: 62852 highWater mark: 6816
+Free heap ESP.getFreeHeap JSON: 9852, Heap fragmentation:  33%
+Current Measurement index: 207
+
+JSON overflowed, not enough memory
+doc size with .size(): 200 Size with measureJson: 27359
+Free heap MeasuringTask: 62852 highWater mark: 6816
+Free heap ESP.getFreeHeap JSON: 9852, Heap fragmentation:  33%
+Current Measurement index: 208
+
+JSON overflowed, not enough memory
+doc size with .size(): 200 Size with measureJson: 27359
+Free heap MeasuringTask: 62852 highWater mark: 6816
+Free heap ESP.getFreeHeap JSON: 9852, Heap fragmentation:  33%
+Current Measurement index: 209
+
+JSON overflowed, not enough memory
+doc size with .size(): 200 Size with measureJson: 27359
+Free heap MeasuringTask: 62852 highWater mark: 6816
+Free heap ESP.getFreeHeap JSON: 9884, Heap fragmentation:  33%
+Current Measurement index: 210
+
+JSON overflowed, not enough memory
+doc size with .size(): 200 Size with measureJson: 27359
+Free heap MeasuringTask: 62852 highWater mark: 6816
+Free heap ESP.getFreeHeap JSON: 9884, Heap fragmentation:  33%
+Current Measurement index: 211
+
+JSON overflowed, not enough memory
+doc size with .size(): 200 Size with measureJson: 27359
+Free heap MeasuringTask: 62852 highWater mark: 6816
+Free heap ESP.getFreeHeap JSON: 9884, Heap fragmentation:  33%
+Current Measurement index: 212
+
+JSON overflowed, not enough memory
+doc size with .size(): 200 Size with measureJson: 27359
+Free heap MeasuringTask: 62852 highWater mark: 6816
+Free heap ESP.getFreeHeap JSON: 9852, Heap fragmentation:  33%
+Current Measurement index: 213
+
+JSON overflowed, not enough memory
+doc size with .size(): 200 Size with measureJson: 27359
+Free heap MeasuringTask: 62852 highWater mark: 6816
+Free heap ESP.getFreeHeap JSON: 9852, Heap fragmentation:  33%
+Current Measurement index: 214
+
+JSON overflowed, not enough memory
+doc size with .size(): 200 Size with measureJson: 27359
+Free heap MeasuringTask: 62852 highWater mark: 6816
+Free heap ESP.getFreeHeap JSON: 9884, Heap fragmentation:  33%
+Current Measurement index: 215
+
+JSON overflowed, not enough memory
+doc size with .size(): 200 Size with measureJson: 27359
+Free heap MeasuringTask: 62852 highWater mark: 6816
+Free heap ESP.getFreeHeap JSON: 9884, Heap fragmentation:  33%
+Current Measurement index: 216
+
+JSON overflowed, not enough memory
+doc size with .size(): 200 Size with measureJson: 27359
+Free heap MeasuringTask: 62852 highWater mark: 6816
+Free heap ESP.getFreeHeap JSON: 9884, Heap fragmentation:  33%
+Current Measurement index: 217
+
+JSON overflowed, not enough memory
+doc size with .size(): 200 Size with measureJson: 27359
+Free heap MeasuringTask: 62852 highWater mark: 6816
+Free heap ESP.getFreeHeap JSON: 10252, Heap fragmentation:  36%
+Current Measurement index: 218
+
+JSON overflowed, not enough memory
+doc size with .size(): 200 Size with measureJson: 27359
+Free heap MeasuringTask: 62852 highWater mark: 6816
+Free heap ESP.getFreeHeap JSON: 9884, Heap fragmentation:  33%
+Current Measurement index: 219
+
+JSON overflowed, not enough memory
+doc size with .size(): 200 Size with measureJson: 27359
+Free heap MeasuringTask: 62852 highWater mark: 6816
+Free heap ESP.getFreeHeap JSON: 9916, Heap fragmentation:  33%
+Current Measurement index: 220
+
+JSON overflowed, not enough memory
+doc size with .size(): 200 Size with measureJson: 27359
+Free heap MeasuringTask: 62852 highWater mark: 6816
+Free heap ESP.getFreeHeap JSON: 9916, Heap fragmentation:  33%
+Current Measurement index: 221
+
+JSON overflowed, not enough memory
+doc size with .size(): 200 Size with measureJson: 27359
+Free heap MeasuringTask: 62852 highWater mark: 6816
+Free heap ESP.getFreeHeap JSON: 9884, Heap fragmentation:  33%
+Current Measurement index: 222
+
+JSON overflowed, not enough memory
+doc size with .size(): 200 Size with measureJson: 27359
+Free heap MeasuringTask: 62852 highWater mark: 6816
+Free heap ESP.getFreeHeap JSON: 9884, Heap fragmentation:  33%
+Current Measurement index: 223
+
+JSON overflowed, not enough memory
+doc size with .size(): 200 Size with measureJson: 27359
+Free heap MeasuringTask: 62852 highWater mark: 6816
+Free heap ESP.getFreeHeap JSON: 9852, Heap fragmentation:  33%
+Current Measurement index: 224
+
+JSON overflowed, not enough memory
+doc size with .size(): 200 Size with measureJson: 27359
+Free heap MeasuringTask: 62852 highWater mark: 6816
+Free heap ESP.getFreeHeap JSON: 9852, Heap fragmentation:  33%
+Current Measurement index: 225
+
+JSON overflowed, not enough memory
+doc size with .size(): 200 Size with measureJson: 27359
+Free heap MeasuringTask: 62852 highWater mark: 6816
+Free heap ESP.getFreeHeap JSON: 9884, Heap fragmentation:  33%
+Current Measurement index: 226
+
+JSON overflowed, not enough memory
+doc size with .size(): 200 Size with measureJson: 27359
+Free heap MeasuringTask: 62852 highWater mark: 6816
+Free heap ESP.getFreeHeap JSON: 9884, Heap fragmentation:  33%
+Current Measurement index: 227
+
+JSON overflowed, not enough memory
+doc size with .size(): 200 Size with measureJson: 27359
+Free heap MeasuringTask: 62852 highWater mark: 6816
+Free heap ESP.getFreeHeap JSON: 9916, Heap fragmentation:  33%
+Current Measurement index: 228
+
+JSON overflowed, not enough memory
+doc size with .size(): 200 Size with measureJson: 27359
+Free heap MeasuringTask: 62852 highWater mark: 6816
+Free heap ESP.getFreeHeap JSON: 9884, Heap fragmentation:  33%
+Current Measurement index: 229
+
+JSON overflowed, not enough memory
+doc size with .size(): 200 Size with measureJson: 27359
+Free heap MeasuringTask: 62852 highWater mark: 6816
+Free heap ESP.getFreeHeap JSON: 9884, Heap fragmentation:  33%
+Current Measurement index: 230
+
+JSON overflowed, not enough memory
+doc size with .size(): 200 Size with measureJson: 27359
+Free heap MeasuringTask: 62852 highWater mark: 6816
+Free heap ESP.getFreeHeap JSON: 9852, Heap fragmentation:  33%
+Current Measurement index: 231
+
+JSON overflowed, not enough memory
+doc size with .size(): 200 Size with measureJson: 27359
+Free heap MeasuringTask: 62852 highWater mark: 6816
+Free heap ESP.getFreeHeap JSON: 9884, Heap fragmentation:  33%
+Current Measurement index: 232
+
+JSON overflowed, not enough memory
+doc size with .size(): 200 Size with measureJson: 27359
+Free heap MeasuringTask: 62852 highWater mark: 6816
+Free heap ESP.getFreeHeap JSON: 9884, Heap fragmentation:  33%
+Current Measurement index: 233
+
+JSON overflowed, not enough memory
+doc size with .size(): 200 Size with measureJson: 27359
+Free heap MeasuringTask: 62852 highWater mark: 6816
+Free heap ESP.getFreeHeap JSON: 9884, Heap fragmentation:  33%
+Current Measurement index: 234
+
+JSON overflowed, not enough memory
+doc size with .size(): 200 Size with measureJson: 27359
+Free heap MeasuringTask: 62852 highWater mark: 6816
+Free heap ESP.getFreeHeap JSON: 9916, Heap fragmentation:  33%
+Current Measurement index: 235
+
+JSON overflowed, not enough memory
+doc size with .size(): 200 Size with measureJson: 27359
+Free heap MeasuringTask: 62852 highWater mark: 6816
+Free heap ESP.getFreeHeap JSON: 9916, Heap fragmentation:  33%
+Current Measurement index: 236
+
+JSON overflowed, not enough memory
+doc size with .size(): 200 Size with measureJson: 27359
+Free heap MeasuringTask: 62852 highWater mark: 6816
+Free heap ESP.getFreeHeap JSON: 9916, Heap fragmentation:  33%
+Current Measurement index: 237
+
+JSON overflowed, not enough memory
+doc size with .size(): 200 Size with measureJson: 27359
+Free heap MeasuringTask: 62852 highWater mark: 6816
+Free heap ESP.getFreeHeap JSON: 9884, Heap fragmentation:  33%
+Current Measurement index: 238
+
+JSON overflowed, not enough memory
+doc size with .size(): 200 Size with measureJson: 27359
+Free heap MeasuringTask: 62852 highWater mark: 6816
+Free heap ESP.getFreeHeap JSON: 9884, Heap fragmentation:  33%
+Current Measurement index: 239
+
+JSON overflowed, not enough memory
+doc size with .size(): 200 Size with measureJson: 27359
+Free heap MeasuringTask: 62852 highWater mark: 6816
+Free heap ESP.getFreeHeap JSON: 9852, Heap fragmentation:  33%
+Current Measurement index: 240
+
+JSON overflowed, not enough memory
+doc size with .size(): 200 Size with measureJson: 27359
+Free heap MeasuringTask: 62852 highWater mark: 6816
+Free heap ESP.getFreeHeap JSON: 9852, Heap fragmentation:  33%
+Current Measurement index: 241
+
+JSON overflowed, not enough memory
+doc size with .size(): 200 Size with measureJson: 27359
+Free heap MeasuringTask: 62852 highWater mark: 6816
+Free heap ESP.getFreeHeap JSON: 9852, Heap fragmentation:  33%
+Current Measurement index: 242
+
+JSON overflowed, not enough memory
+doc size with .size(): 200 Size with measureJson: 27359
+Free heap MeasuringTask: 62852 highWater mark: 6816
+Free heap ESP.getFreeHeap JSON: 9884, Heap fragmentation:  33%
+Current Measurement index: 243
+
+JSON overflowed, not enough memory
+doc size with .size(): 200 Size with measureJson: 27359
+Free heap MeasuringTask: 62852 highWater mark: 6816
+Free heap ESP.getFreeHeap JSON: 9916, Heap fragmentation:  33%
+Current Measurement index: 244
+
+JSON overflowed, not enough memory
+doc size with .size(): 200 Size with measureJson: 27359
+Free heap MeasuringTask: 62852 highWater mark: 6816
+Free heap ESP.getFreeHeap JSON: 9852, Heap fragmentation:  33%
+Current Measurement index: 245
+
+JSON overflowed, not enough memory
+doc size with .size(): 200 Size with measureJson: 27359
+Free heap MeasuringTask: 62852 highWater mark: 6816
+Free heap ESP.getFreeHeap JSON: 9852, Heap fragmentation:  33%
+Current Measurement index: 246
+
+JSON overflowed, not enough memory
+doc size with .size(): 200 Size with measureJson: 27359
+Free heap MeasuringTask: 62852 highWater mark: 6816
+Free heap ESP.getFreeHeap JSON: 9884, Heap fragmentation:  33%
+Current Measurement index: 247
+
+JSON overflowed, not enough memory
+doc size with .size(): 200 Size with measureJson: 27359
+Free heap MeasuringTask: 62852 highWater mark: 6816
+Free heap ESP.getFreeHeap JSON: 9884, Heap fragmentation:  33%
+Current Measurement index: 248
+
+JSON overflowed, not enough memory
+doc size with .size(): 200 Size with measureJson: 27359
+Free heap MeasuringTask: 62852 highWater mark: 6816
+Free heap ESP.getFreeHeap JSON: 9884, Heap fragmentation:  33%
+Current Measurement index: 249
+
+After for loop, freeHeap: 3136 highWater mark: 5488
+
+Free heap before writing to SD card: 9884
+, Heap fragmentation:  33%
+Data written to one measurement file.
+Free heap after serialize JSON: 9684
+Heap fragmentation after serialize JSON: 32%
+[279539][E][vfs_api.cpp:301] VFSFileImpl(): fopen(/sd/One_Measurement.txt) failed
+Error opening OneLog file
+Guru Meditation Error: Core  0 panic'ed (IllegalInstruction). Exception was unhandled.
+Memory dump at 0x400dd380: 46ffea06 f01dffd2 32004136
+Core  0 register dump:
+PC      : 0x400dd386  PS      : 0x00060330  A0      : 0x00000000  A1      : 0x3fff06a0  
+A2      : 0x228e6b30  A3      : 0x228e6b30  A4      : 0x3ffc4be4  A5      : 0x3ffc46e4  
+A6      : 0x3ffc4008  A7      : 0x00000000  A8      : 0x800dcdb4  A9      : 0x3fff0680  
+A10     : 0x3fff06b4  A11     : 0x00000019  A12     : 0x3f400c3a  A13     : 0x3f421cc6  
+A14     : 0x00000000  A15     : 0x80000001  SAR     : 0x0000001e  EXCCAUSE: 0x00000000  
+EXCVADDR: 0x00000000  LBEG    : 0x40094ab5  LEND    : 0x40094ac5  LCOUNT  : 0xffffffff  
+
+
+Backtrace: 0x400dd383:0x3fff06a0
+
+
+
+
+ELF file SHA256: 4d778b48a4d71330
+
+Rebooting...
+ets Jul 29 2019 12:21:46
+
+rst:0xc (SW_CPU_RESET),boot:0x13 (SPI_FAST_FLASH_BOOT)
+configsip: 0, SPIWP:0xee
+clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+mode:DIO, clock div:1
+load:0x3fff0030,len:1344
+load:0x40078000,len:13964
+load:0x40080400,len:3600
+entry 0x400805f0
+E (347) psram: PSRAM ID read error: 0xffffffff
+CPU frequency set to: 240 MHz
+getXtalFrequencyMhz: 40
+getCpuFrequencyMhz: 240
+getApbFrequency: 80000000
+Reading config file.
+System Volume Information/
+	WPSettings.dat		12
+	IndexerVolumeGuid		76
+Test7_2MB.txt		2020000
+Test6_1MB.txt		1010000
+Test5_500k.txt		505000
+Test4_100k.txt		101000
+Test3_10k.txt		10100
+Test2_1k.txt		1010
+Tetst1_100.txt		101
+config.txt		909
+foo.txt		13
+log.txt		1298018
+log_copy512.txt		1281540
+log_copy1024.txt		0
+log_copy4096.txt		1281540
+test.txt		1048576
+Test8_5MB.txt		1048576
+TestFile.txt		1048576
+log_copy.txt		0
+test_with_json.txt		21993
+One_Measurement.txt		27359
+SD Card initialized.
+SD Card Type: SDHC
+SD Card Size: 59344MB
+Log.txt file already exists
+One_Measurement.txt file already exists
+Total space: 32756MB
+Used space: 10MB
+Displays initialized!
+Bluetooth initialized with 1843200
+Configure APN settings.
+readGsmResponse timeout
+(printf) Response: AT
+OK
+AT+IPR=115200
+OK
+AT&W
+OK
+AT+CSQ
++CSQ: 25,0
+
+OK
+AT+SAPBR=3,1,"Contype","GPRS","IP"
+ERROR
+AT+CCID=?
+OK
+AT+CCID
+8931090200035587547f
+
+OK
+AT+SAPBR=3,1,"APN",data.lycamobile.nl
+OK
+
+readGsmResponse timeout
+(printf) Response: AT+SAPBR=3,1,"USER",lmnl
+OK
+
+readGsmResponse timeout
+(printf) Response: AT+SAPBR=3,1,"PWD",plus
+OK
+
+readGsmResponse timeout
+(printf) Response: AT+SAPBR=1,1
+ERROR
+
+readGsmResponse timeout
+(printf) Response: AT+SAPBR=2,1
++SAPBR: 1,1,"10.239.73.21"
+
+OK
+
+SIM808 requesting datetime...
+readGsmResponse timeout
+(printf) Response: AT+CLTS=1
+OK
+
+readGsmResponse timeout
+(printf) Response: AT+CLTS=?
++CLTS: "yy/MM/dd,hh:mm:ss+/-zz"
+
+OK
+
+readGsmResponse timeout
+(printf) Response: AT+CLTS?
++CLTS: 1
+
+OK
+
+Response: AT+CCLK?+CCLK: "24/10/16,14:01:10+08"
+Parsed Date: 24/10/16
+Parsed Time: 14:01:10
+Data in convertToUnixTimestamp: 
+Parsed day: 16
+Parsed month: 10
+Parsed year: 2024
+Parsed Date: 24/10/16
+Parsed hour: 14
+Parsed minute: 1
+Parsed second: 10
+Parsed Time: 14:01:10
+Intermediate timestamp: 1729087270
+Final timestamp with milliseconds: 1729087270000
+Timestamp before comparison: 1729087270000
+Valid datetime received. 24/10/16 
+Date: 24/10/16
+Time: 
+Saved timestamp in setup: 1729087270000
+..........Done calculating R0 for MQ7!.
+MQ7 initialized!
+
+************************************************************************************************************************************************
+MQ sensor reading library for arduino
+Note: remember that all the parameters below can be modified during the program execution with the methods:
+setR0, setRL, setA, setB where you will have to send as parameter the new value, example: mySensor.setR0(20); //R0 = 20KΩ
+Authors: Miguel A. Califa U - Yersson R. Carrillo A - Ghiordy F. Contreras C
+Contributors: Andres A. Martinez - Juan A. Rodríguez - Mario A. Rodríguez O 
+Sensor: MQ-7
+Supply voltage: 5.00 VDC
+ADC Resolution: 12 Bits
+R0: 21.79 KΩ
+RL: 10.00 KΩ
+Model: Exponential
+MQ-7 -> a: 99.04 | b: -1.52
+Development board: ESP32
+Calibrating MQ8 please wait...........R0 for MQ8 calculation done!.
+MQ8 initialized!
+
+************************************************************************************************************************************************
+MQ sensor reading library for arduino
+Note: remember that all the parameters below can be modified during the program execution with the methods:
+setR0, setRL, setA, setB where you will have to send as parameter the new value, example: mySensor.setR0(20); //R0 = 20KΩ
+Authors: Miguel A. Califa U - Yersson R. Carrillo A - Ghiordy F. Contreras C
+Contributors: Andres A. Martinez - Juan A. Rodríguez - Mario A. Rodríguez O 
+Sensor: MQ-8
+Supply voltage: 5.00 VDC
+ADC Resolution: 12 Bits
+R0: 3.66 K��
+RL: 10.00 KΩ
+Model: Exponential
+MQ-8 -> a: 976.97 | b: -0.69
+Development board: ESP32
+Found device 0 with address: 28A000CA0F00003F
+Found device 1 with address: 288823C90F000016
+Found device 2 with address: 284422C90F000039
+Found device 3 with address: 28E565C90F0000EA
+Found device 4 with address: 28FB20C90F000099
+Sizes before creating tasks:
+234 Kb
+Free heap size: 92488, largest free block: 90100
+Inside Bluetooth task.
+Sizes after creating tasks:
+234 Kb
+Free heap size: 62960, largest free block: 61428
+heap with MALLOC_CAP_DEFAULT: 61428
+Counting task has started.
+Inside Measuring task.
+MaxMeasurements: 20
+Now running for 250 measurements.
+highWaterMark and freeHeap at beginning: 
+MeasuringTask stack high water mark: 6820
+Free heap size MeasuringTask: 62864
+
+Inside Display Measurements task.
+SavedTimestamp in DisplayMeasurements: 1729087270000
+Now running sendArray task.
+Measurement: 0
+doc size with .size(): 1 Size with measureJson: 261
+Free heap MeasuringTask: 62864 highWater mark: 6820
+Free heap ESP.getFreeHeap JSON: 66504, Heap fragmentation:  11%
+
+Measurement: 50
+doc size with .size(): 51 Size with measureJson: 7082
+Free heap MeasuringTask: 62864 highWater mark: 6820
+Free heap ESP.getFreeHeap JSON: 51544, Heap fragmentation:  17%
+
+ets Jul 29 2019 12:21:46
+
+rst:0x1 (POWERON_RESET),boot:0x3 (DOWNLOAD_BOOT(UART0/UART1/SDIO_REI_REO_V2))
+waiting for download

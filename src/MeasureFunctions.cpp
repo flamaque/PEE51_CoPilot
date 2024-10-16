@@ -1,9 +1,38 @@
 #include "config.h"
 #include <algorithm>
-#define ARDUINOJSON_STRING_LENGTH_SIZE 2      //Max characters 65,635
-#define ARDUINOJSON_SLOT_ID_SIZE 2            //Max-nodes 65,635
-#define ARDUINOJSON_USE_LONG_LONG 0           //Store jsonVariant as long
-#define ARDUINOJSON_USE_DOUBLE 0              //Store floating point NOT as double 
+
+/*              Setup Flowsensor    */
+void pcnt_example_init(pcnt_unit_t unit, int pulse_gpio_num)
+{
+  /* Prepare configuration for the PCNT unit */
+  pcnt_config_t pcnt_config = {
+      // Set PCNT input signal GPIO
+      .pulse_gpio_num = pulse_gpio_num,
+      // No control GPIO needed
+      .ctrl_gpio_num = PCNT_PIN_NOT_USED,
+      // What to do on the positive / negative edge of pulse input?
+      .pos_mode = PCNT_COUNT_INC, // Count up on the positive edge
+      .neg_mode = PCNT_COUNT_DIS, // Ignore negative edge
+      // Set the maximum and minimum limit values to watch
+      .counter_h_lim = 0,
+      .counter_l_lim = 0,
+      .unit = unit,
+      .channel = PCNT_CHANNEL_0,
+  };
+  /* Initialize PCNT unit */
+  pcnt_unit_config(&pcnt_config);
+
+  /* Configure and enable the input filter */
+  pcnt_set_filter_value(unit, 100);
+  pcnt_filter_enable(unit);
+
+  /* Initialize PCNT's counter */
+  pcnt_counter_pause(unit);
+  pcnt_counter_clear(unit);
+
+  /* Everything is set up, now go to counting */
+  pcnt_counter_resume(unit);
+}
 
 /*        Flor sensor temperature     */
 float Read_NTC()
@@ -11,9 +40,9 @@ float Read_NTC()
   uint8_t i;
   uint16_t sample;
   float average = 0;
-  
+
   // take N samples in a row, with a slight delay
-  for (i=0; i< NUMSAMPLES; i++)
+  for (i = 0; i < NUMSAMPLES; i++)
   {
     sample = analogRead(NTC_PIN);
     average += sample;
@@ -21,41 +50,40 @@ float Read_NTC()
   }
   average /= NUMSAMPLES;
 
-  #ifdef DEBUG_MODE_3  
-  Serial.print("1 sample analog reading "); 
+#ifdef DEBUG_MODE_3
+  Serial.print("1 sample analog reading ");
   Serial.println(sample);
   Serial.printf("Average analog reading: %.2f\n", average);
-  #endif
- 
+#endif
+
   // convert the value to resistance
   float resistance = 4095 / average - 1;
   resistance = serialResistance * resistance;
 
-  #ifdef DEBUG_MODE_3
+#ifdef DEBUG_MODE_3
   Serial.printf("Thermistor resistance: %.2f\n", resistance);
-  #endif
- 
- //resistance  / nominalResistance = 10 graden
- //nominalResistance / resistance = 43.25 graden
+#endif
+
+  // resistance  / nominalResistance = 10 graden
+  // nominalResistance / resistance = 43.25 graden
   float steinhart;
-  steinhart = nominalResistance / (resistance - nominalResistance);     // (R/Ro)
-  //steinhart = resistance  / nominalResistance;     // (R/Ro)
-  steinhart = log(steinhart);                  // ln(R/Ro)
-  steinhart /= bCoefficient;                   // 1/B * ln(R/Ro)
+  steinhart = nominalResistance / (resistance - nominalResistance); // (R/Ro)
+  // steinhart = resistance  / nominalResistance;     // (R/Ro)
+  steinhart = log(steinhart);                       // ln(R/Ro)
+  steinhart /= bCoefficient;                        // 1/B * ln(R/Ro)
   steinhart += 1.0 / (TEMPERATURENOMINAL + 273.15); // + (1/To)
-  steinhart = 1.0 / steinhart;                 // Invert
-  steinhart -= 273.15;                         // convert to C
- 
-  #ifdef DEBUG_MODE_3
+  steinhart = 1.0 / steinhart;                      // Invert
+  steinhart -= 273.15;                              // convert to C
+
+#ifdef DEBUG_MODE_3
   Serial.printf("Temperature: %.3f *C\n", steinhart);
-  #endif
-  
+#endif
+
   return steinhart;
 }
 
 /* voltage sensor   */
 float voltage = 0.00;
-
 float readVoltage()
 {
   const int numSamples = 100;
@@ -67,22 +95,22 @@ float readVoltage()
   {
     int adc = analogRead(voltPin);
     adc_voltage_sum += adc * (3.3 / 4095.0);
-     vTaskDelay(2 / portTICK_PERIOD_MS); // Small delay to allow for better averaging
+    vTaskDelay(2 / portTICK_PERIOD_MS); // Small delay to allow for better averaging
   }
-  
+
   float adc_voltage = adc_voltage_sum / numSamples; // Average the ADC voltage
   // Serial.println("ADC voltage: " + String(adc_voltage));
-  //printf("R1: %f, R2: %f, sampling: %d, ADC voltage: %f\n", R1, R2, numSamples, adc_voltage);
-  voltage = (adc_voltage * R2) / (R1 + R2);  // Calculate the sensor voltage
+  // printf("R1: %f, R2: %f, sampling: %d, ADC voltage: %f\n", R1, R2, numSamples, adc_voltage);
+  voltage = (adc_voltage * R2) / (R1 + R2); // Calculate the sensor voltage
 
   return voltage;
 }
 
 /*      DS18B20 sensor            */
-OneWire oneWire(DS18B20_PIN);                                               // Setup a oneWire instance to communicate with any OneWire devices (not just Maxim/Dallas temperature ICs)
-DallasTemperature sensors(&oneWire);                                        // Pass our oneWire reference to Dallas Temperature.
-int numberOfDevices;                                                        // Number of temperature devices found
-DeviceAddress tempDeviceAddress;                                            // We'll use this variable to store a found device address
+OneWire oneWire(DS18B20_PIN);        // Setup a oneWire instance to communicate with any OneWire devices (not just Maxim/Dallas temperature ICs)
+DallasTemperature sensors(&oneWire); // Pass our oneWire reference to Dallas Temperature.
+int numberOfDevices;                 // Number of temperature devices found
+DeviceAddress tempDeviceAddress;     // We'll use this variable to store a found device address
 // DS18B20 Find and print Address
 void printDS18B20Address()
 {
@@ -135,7 +163,7 @@ void AllDS18B20Sensors()
       {
         if(isnan(tempC)||isinf(tempC)){
           tempC = 0.0;
-        } 
+        }
         else{
           values["T1"] = tempC;
         }
@@ -144,7 +172,7 @@ void AllDS18B20Sensors()
       {
         if(isnan(tempC)||isinf(tempC)){
           tempC = 0.0;
-        } 
+        }
         else{
           values["T2"] = tempC;
         }
@@ -153,10 +181,10 @@ void AllDS18B20Sensors()
       {
         if(isnan(tempC)||isinf(tempC)){
           tempC = 0.0;
-        } 
+        }
         else{
           values["T3"] = tempC;
-          }        
+          }
       }
       else if (i == 3)
       {
@@ -180,39 +208,6 @@ void AllDS18B20Sensors()
   }
 }
 */
-
-/*              Setup Flowsensor    */
-void pcnt_example_init(pcnt_unit_t unit, int pulse_gpio_num)
-{
-  /* Prepare configuration for the PCNT unit */
-  pcnt_config_t pcnt_config = {
-      // Set PCNT input signal GPIO
-      .pulse_gpio_num = pulse_gpio_num,
-      // No control GPIO needed
-      .ctrl_gpio_num = PCNT_PIN_NOT_USED,
-      // What to do on the positive / negative edge of pulse input?
-      .pos_mode = PCNT_COUNT_INC, // Count up on the positive edge
-      .neg_mode = PCNT_COUNT_DIS, // Ignore negative edge
-      // Set the maximum and minimum limit values to watch
-      .counter_h_lim = 0,
-      .counter_l_lim = 0,
-      .unit = unit,
-      .channel = PCNT_CHANNEL_0,
-  };
-  /* Initialize PCNT unit */
-  pcnt_unit_config(&pcnt_config);
-
-  /* Configure and enable the input filter */
-  pcnt_set_filter_value(unit, 100);
-  pcnt_filter_enable(unit);
-
-  /* Initialize PCNT's counter */
-  pcnt_counter_pause(unit);
-  pcnt_counter_clear(unit);
-
-  /* Everything is set up, now go to counting */
-  pcnt_counter_resume(unit);
-}
 
 /*      MQ-7 MQ-8 sensor            */
 float RatioMQ7CleanAir = 27.5;
@@ -293,32 +288,30 @@ U8G2_SSD1306_128X64_NONAME_1_HW_I2C bigOled(U8G2_R0, /* reset=*/U8X8_PIN_NONE, /
 uint8_t u8log_buffer[U8LOG_WIDTH * U8LOG_HEIGHT];
 U8G2LOG u8g2log;
 
-
-void init_displays(){
-    // Serial.println("Display hight: " + String(bigOled.getDisplayHeight()) + "Display width: " + String(bigOled.getDisplayWidth()));
-    bigOled.setI2CAddress(0x3C * 2);
-    bigOled.setBusClock(400000);
-    bigOled.begin();
-    bigOled.clearBuffer();
-    bigOled.setFont(u8g2_font_6x12_mf); // set the font for the terminal window
-    bigOled.setDisplayRotation(U8G2_R1);
-    u8g2log.begin(bigOled, U8LOG_WIDTH, U8LOG_HEIGHT, u8log_buffer);
-    u8g2log.setLineHeightOffset(2); // set extra space between lines in pixel, this can be negative
-    u8g2log.setRedrawMode(1);       // 0: Update screen with newline, 1: Update screen for every char
-    Serial.println("Displays initialized!"); // Serial.println("Big Display height: " + bigOled.getDisplayHeight() + " Big Display Width: "  + bigOled.getDisplayHeight());
-  }
+void init_displays()
+{
+  bigOled.setI2CAddress(0x3C * 2);
+  bigOled.setBusClock(400000);
+  bigOled.begin();
+  bigOled.clearBuffer();
+  bigOled.setFont(u8g2_font_6x12_mf); // set the font for the terminal window
+  bigOled.setDisplayRotation(U8G2_R1);
+  u8g2log.begin(bigOled, U8LOG_WIDTH, U8LOG_HEIGHT, u8log_buffer);
+  u8g2log.setLineHeightOffset(2);          // set extra space between lines in pixel, this can be negative
+  u8g2log.setRedrawMode(1);                // 0: Update screen with newline, 1: Update screen for every char
+  Serial.println("Displays initialized!"); // Serial.println("Big Display height: " + bigOled.getDisplayHeight() + " Big Display Width: "  + bigOled.getDisplayHeight());
+}
 
 /*      Switching screens           */
 volatile bool buttonBigPressed, buttonDebugPressed = false;
 
 /*              Setup Currentsensor    */
-// extern int CurrentPin;
 float CurrentSensor_724()
 {
   float current_voltage, current = 0.0;
 
-  float R1 = 3300.0; //1000.0;
-  float R2 = 6800.0; //2000.0;
+  float R1 = 3300.0; // 1000.0;
+  float R2 = 6800.0; // 2000.0;
   float RatioVolDiv = (R1 + R2) / R2;
   const int numSamples = 100;
   long adc_voltage_sum = 0;
@@ -327,32 +320,32 @@ float CurrentSensor_724()
   for (int i = 0; i < numSamples; i++)
   {
     int adc = analogReadMilliVolts(CurrentPin);
-    adc_voltage_sum += adc; //3.3
-    vTaskDelay(2 / portTICK_PERIOD_MS);// Small delay to allow for better averaging
+    adc_voltage_sum += adc;             // 3.3
+    vTaskDelay(2 / portTICK_PERIOD_MS); // Small delay to allow for better averaging
   }
-  //Serial.println("ADC voltage raw: " + String(analogReadRaw(CurrentPin)));
-  //Serial.println("ADC mV Quick: " + String(analogReadMilliVolts(CurrentPin)));
-  // Average the ADC voltage
-  float adc_voltage = (adc_voltage_sum / numSamples);// * (3300 / 4095.0);
-  //Serial.println("ADC voltage Quick: " + String(adc_voltage));
-  // Serial.println("ADC voltage: " + String(adc_voltage));
+  // Serial.println("ADC voltage raw: " + String(analogReadRaw(CurrentPin)));
+  // Serial.println("ADC mV Quick: " + String(analogReadMilliVolts(CurrentPin)));
+  //  Average the ADC voltage
+  float adc_voltage = (adc_voltage_sum / numSamples); // * (3300 / 4095.0);
+  // Serial.println("ADC voltage Quick: " + String(adc_voltage));
+  //  Serial.println("ADC voltage: " + String(adc_voltage));
 
   // Calculate the sensor voltage
   current_voltage = adc_voltage * RatioVolDiv;
-  //Serial.println("Current voltage Quick: " + String(current_voltage));
+  // Serial.println("Current voltage Quick: " + String(current_voltage));
 
   // Measure this value when no current is flowing to calibrate zeroCurrentVoltage
-  //float zeroCurrentVoltage = 0.48; // Use the previously measured value or measure again
-  
-  //float sensitivity = 0.066; // Change this value based on your specific ACS712 model
+  // float zeroCurrentVoltage = 0.48; // Use the previously measured value or measure again
 
-  float zeroCurrentVoltage = 2500;//2500; //Or 1.58V after voltage divider
-  float sensitivity = 40; //0.040; //ACS724 sensitivity Change this value based on your specific ACS712 model
+  // float sensitivity = 0.066; // Change this value based on your specific ACS712 model
+
+  float zeroCurrentVoltage = 2500; // 2500; //Or 1.58V after voltage divider
+  float sensitivity = 40;          // 0.040; //ACS724 sensitivity Change this value based on your specific ACS712 model
 
   // Calculate the current
   current = (current_voltage - zeroCurrentVoltage) / sensitivity;
   // Serial.println("Current: " + String(current));
-  //printf("R1: %f, R2: %f, sampling: %d, ADC voltage: %f\n", R1, R2, numSamples, adc_voltage);
+  // printf("R1: %f, R2: %f, sampling: %d, ADC voltage: %f\n", R1, R2, numSamples, adc_voltage);
 
   return current;
 }
@@ -515,11 +508,12 @@ void appendFile(fs::FS &fs, const char *path, const char *message)
 
 void SD_init()
 {
-  //spi.begin();
-  if (!SD.begin(CS_PIN,spi,80000000)) {
-  Serial.println("Card Mount Failed");
-  return;
-}
+  // spi.begin();
+  if (!SD.begin(CS_PIN, spi, 80000000))
+  {
+    Serial.println("Card Mount Failed");
+    return;
+  }
   if (SD.begin(CS_PIN, spi, 25000000))
   {
     Serial.println("Reading config file.");
@@ -532,10 +526,11 @@ void SD_init()
     printDirectory(root, 0);
     root.close();
   }
-  else {
+  else
+  {
     Serial.println("SD initialization failed.");
   }
-  
+
   Serial.println("SD Card initialized.");
   uint8_t cardType = SD.cardType();
 
@@ -570,7 +565,7 @@ void SD_init()
   File file = SD.open("/log.txt");
   if (!file)
   {
-    Serial.println("File doens't exist");
+    Serial.println("Log file doens't exist");
     Serial.println("Creating file...");
     writeFile(SD, "/log.txt", "Reading ID, Date, Hour, Temperature \r\n");
   }
@@ -579,26 +574,46 @@ void SD_init()
     Serial.println("Log.txt file already exists");
   }
   file.close();
+  vTaskDelay(50 / portTICK_PERIOD_MS);
+  file = SD.open("/One_Measurement.txt");
+  if (!file)
+  {
+    Serial.println("One_Measurement file doens't exist");
+    Serial.println("Creating file...");
+    writeFile(SD, "/One_Measurement.txt", "Reading ID, Date, Hour, Temperature \r\n");
+  }
+  else
+  {
+    Serial.println("One_Measurement.txt file already exists");
+  }
+  file.close();
 
   Serial.printf("Total space: %lluMB\n", SD.totalBytes() / (1024 * 1024));
   Serial.printf("Used space: %lluMB\n", SD.usedBytes() / (1024 * 1024));
 }
 
-void printDirectory(File dir, int numTabs) {
-  while (true) {
-    File entry =  dir.openNextFile();
-    if (! entry) {
+void printDirectory(File dir, int numTabs)
+{
+  while (true)
+  {
+    File entry = dir.openNextFile();
+    if (!entry)
+    {
       // no more files
       break;
     }
-    for (uint8_t i = 0; i < numTabs; i++) {
+    for (uint8_t i = 0; i < numTabs; i++)
+    {
       Serial.print('\t');
     }
     Serial.print(entry.name());
-    if (entry.isDirectory()) {
+    if (entry.isDirectory())
+    {
       Serial.println("/");
       printDirectory(entry, numTabs + 1);
-    } else {
+    }
+    else
+    {
       // files have sizes, directories do not
       Serial.print("\t\t");
       Serial.println(entry.size(), DEC);
@@ -607,19 +622,27 @@ void printDirectory(File dir, int numTabs) {
   }
 }
 
-void deleteFile(fs::FS &fs, const char * path){
+void deleteFile(fs::FS &fs, const char *path)
+{
   Serial.printf("Deleting file: %s\n", path);
-  if(fs.remove(path)){
+  if (fs.remove(path))
+  {
     Serial.println("File deleted");
-  } else {
+  }
+  else
+  {
     Serial.println("Delete failed");
   }
 }
-void renameFile(fs::FS &fs, const char * path1, const char * path2){
+void renameFile(fs::FS &fs, const char *path1, const char *path2)
+{
   Serial.printf("Renaming file %s to %s\n", path1, path2);
-  if (fs.rename(path1, path2)) {
+  if (fs.rename(path1, path2))
+  {
     Serial.println("File renamed");
-  } else {
+  }
+  else
+  {
     Serial.println("Rename failed");
   }
 }
@@ -661,7 +684,6 @@ void logMeasurement(String s)
   }
 }
 
-
 void sendFileOverBluetooth(const char *path)
 {
   Serial.printf("Reading file: %s\n", path);
@@ -702,4 +724,3 @@ void buttonInterrupt_debug()
     buttonDebugPressed = true; // Set button press flag
   }
 }
-

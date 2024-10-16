@@ -3,10 +3,6 @@ extern HardwareSerial gsmSerial;
 volatile uint8_t stateBigOled = 1;
 String response, longitude, latitude, date, time_gsm, jsonPayload, datetime_gsm = "";
 bool Posting = false;
-#define ARDUINOJSON_STRING_LENGTH_SIZE 2      //Max characters 65,635
-#define ARDUINOJSON_SLOT_ID_SIZE 2            //Max-nodes 65,635
-#define ARDUINOJSON_USE_LONG_LONG 0           //Store jsonVariant as long
-#define ARDUINOJSON_USE_DOUBLE 0              //Store floating point NOT as double 
 
 void sendCmd(const char* cmd)
 {
@@ -581,9 +577,9 @@ enum GsmState
 
 GsmState gsmState = GSM_INIT;
 unsigned long previousMillis = 0;
-const long interval1 = 5000;
-const long interval2 = 2000;
-const long interval3 = 3000;
+const long interval1 = 1000; //5000
+const long interval2 = 1000; //2000
+const long interval3 = 1000; //3000
 
 void initialize_gsm()
 {

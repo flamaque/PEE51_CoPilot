@@ -1,8 +1,3 @@
-#define ARDUINOJSON_STRING_LENGTH_SIZE 2      //Max characters 65,635
-#define ARDUINOJSON_SLOT_ID_SIZE 2            //Max-nodes 65,635
-#define ARDUINOJSON_USE_LONG_LONG 0           //Store jsonVariant as long
-#define ARDUINOJSON_USE_DOUBLE 0              //Store floating point NOT as double 
-
 //------------------------------------------------------------------------------------------------------------------------
 // 
 // Title: SD Card Benchmark for ESP2 using 1Bit SPI

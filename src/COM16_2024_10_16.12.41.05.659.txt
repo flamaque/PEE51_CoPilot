@@ -1,0 +1,930 @@
+ets Jul 29 2019 12:21:46
+
+rst:0x1 (POWERON_RESET),boot:0x13 (SPI_FAST_FLASH_BOOT)
+configsip: 0, SPIWP:0xee
+clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+mode:DIO, clock div:1
+load:0x3fff0030,len:1344
+load:0x40078000,len:13964
+load:0x40080400,len:3600
+entry 0x400805f0
+E (339) psram: PSRAM ID read error: 0xffffffff
+CPU frequency set to: 240 MHz
+getXtalFrequencyMhz: 40
+getCpuFrequencyMhz: 240
+getApbFrequency: 80000000
+Reading config file.
+System Volume Information/
+	WPSettings.dat		12
+	IndexerVolumeGuid		76
+Test7_2MB.txt		2020000
+Test6_1MB.txt		1010000
+Test5_500k.txt		505000
+Test4_100k.txt		101000
+Test3_10k.txt		10100
+Test2_1k.txt		1010
+Tetst1_100.txt		101
+config.txt		909
+foo.txt		13
+log.txt		1298018
+log_copy512.txt		1281540
+log_copy1024.txt		0
+log_copy4096.txt		1281540
+test.txt		1048576
+Test8_5MB.txt		1048576
+TestFile.txt		1048576
+log_copy.txt		0
+test_with_json.txt		21993
+One_Measurement.txt		6844
+SD Card initialized.
+SD Card Type: SDHC
+SD Card Size: 59344MB
+Log.txt file already exists
+One_Measurement.txt file already exists
+Total space: 32756MB
+Used space: 10MB
+Displays initialized!
+Bluetooth initialized with 1843200
+Configure APN settings.
+readGsmResponse timeout
+(printf) Response: 
+readGsmResponse timeout
+(printf) Response: AT+SAPBR=3,1,"USER",lmnl
+OK
+
+readGsmResponse timeout
+(printf) Response: AT+SAPBR=3,1,"PWD",plus
+OK
+
+readGsmResponse timeout
+(printf) Response: AT+SAPBR=1,1
+ERROR
+
+readGsmResponse timeout
+(printf) Response: AT+SAPBR=2,1
++SAPBR: 1,1,"10.239.83.114"
+
+OK
+
+SIM808 requesting datetime...
+readGsmResponse timeout
+(printf) Response: AT+CLTS=1
+OK
+
+readGsmResponse timeout
+(printf) Response: AT+CLTS=?
++CLTS: "yy/MM/dd,hh:mm:ss+/-zz"
+
+OK
+
+readGsmResponse timeout
+(printf) Response: AT+CLTS?
++CLTS: 1
+
+OK
+
+Response: AT+CCLK?+CCLK: "24/10/16,12:41:32+08"
+Parsed Date: 24/10/16
+Parsed Time: 12:41:32
+Data in convertToUnixTimestamp: 
+Parsed day: 16
+Parsed month: 10
+Parsed year: 2024
+Parsed Date: 24/10/16
+Parsed hour: 12
+Parsed minute: 41
+Parsed second: 32
+Parsed Time: 12:41:32
+Intermediate timestamp: 1729082492
+Final timestamp with milliseconds: 1729082492000
+Timestamp before comparison: 1729082492000
+Valid datetime received. 24/10/16 
+Date: 24/10/16
+Time: 
+Saved timestamp in setup: 1729082492000
+..........Done calculating R0 for MQ7!.
+MQ7 initialized!
+
+************************************************************************************************************************************************
+MQ sensor reading library for arduino
+Note: remember that all the parameters below can be modified during the program execution with the methods:
+setR0, setRL, setA, setB where you will have to send as parameter the new value, example: mySensor.setR0(20); //R0 = 20KΩ
+Authors: Miguel A. Califa U - Yersson R. Carrillo A - Ghiordy F. Contreras C
+Contributors: Andres A. Martinez - Juan A. Rodríguez - Mario A. Rodríguez O 
+Sensor: MQ-7
+Supply voltage: 5.00 VDC
+ADC Resolution: 12 Bits
+R0: 19.63 KΩ
+RL: 10.00 KΩ
+Model: Exponential
+MQ-7 -> a: 99.04 | b: -1.52
+Development board: ESP32
+Calibrating MQ8 please wait...........R0 for MQ8 calculation done!.
+MQ8 initialized!
+
+************************************************************************************************************************************************
+MQ sensor reading library for arduino
+Note: remember that all the parameters below can be modified during the program execution with the methods:
+setR0, setRL, setA, setB where you will have to send as parameter the new value, example: mySensor.setR0(20); //R0 = 20KΩ
+Authors: Miguel A. Califa U - Yersson R. Carrillo A - Ghiordy F. Contreras C
+Contributors: Andres A. Martinez - Juan A. Rodríguez - Mario A. Rodríguez O 
+Sensor: MQ-8
+Supply voltage: 5.00 VDC
+ADC Resolution: 12 Bits
+R0: 3.42 K��
+RL: 10.00 KΩ
+Model: Exponential
+MQ-8 -> a: 976.97 | b: -0.69
+Development board: ESP32
+Found device 0 with address: 28A000CA0F00003F
+Found device 1 with address: 288823C90F000016
+Found device 2 with address: 284422C90F000039
+Found device 3 with address: 28E565C90F0000EA
+Found device 4 with address: 28FB20C90F000099
+Sizes before creating tasks:
+234 Kb
+Free heap size: 92460, largest free block: 90100
+Inside Bluetooth task.
+Sizes after creating tasks:
+234 Kb
+Free heap size: 62932, largest free block: 61428
+heap with MALLOC_CAP_DEFAULT: 61428
+Counting task has started.
+Inside Measuring task.
+MaxMeasurements: 20
+Now running for 500 measurements.
+highWaterMark and freeHeap at beginning: 
+MeasuringTask stack high water mark: 6672
+Free heap size MeasuringTask: 62836
+
+Inside Display Measurements task.
+SavedTimestamp in DisplayMeasurements: 1729082492000
+Now running sendArray task.
+Measurement: 0
+doc size with .size(): 1 Size with measureJson: 263
+Free heap MeasuringTask: 62836 highWater mark: 6672
+Free heap ESP.getFreeHeap JSON: 66460
+, Heap fragmentation:  11%
+
+Measurement: 50
+doc size with .size(): 51 Size with measureJson: 7069
+Free heap MeasuringTask: 62836 highWater mark: 6672
+Free heap ESP.getFreeHeap JSON: 51404
+, Heap fragmentation:  17%
+
+Measurement: 100
+doc size with .size(): 101 Size with measureJson: 13921
+Free heap MeasuringTask: 62836 highWater mark: 6672
+Free heap ESP.getFreeHeap JSON: 36380
+, Heap fragmentation:  25%
+
+Measurement: 150
+doc size with .size(): 151 Size with measureJson: 20720
+Free heap MeasuringTask: 62836 highWater mark: 6672
+Free heap ESP.getFreeHeap JSON: 23164
+, Heap fragmentation:  41%
+
+Measurement: 200
+doc size with .size(): 200 Size with measureJson: 27276
+Free heap MeasuringTask: 62836 highWater mark: 6672
+Free heap ESP.getFreeHeap JSON: 9980
+, Heap fragmentation:  34%
+
+Measurement: 250
+doc size with .size(): 200 Size with measureJson: 27276
+Free heap MeasuringTask: 62836 highWater mark: 6672
+Free heap ESP.getFreeHeap JSON: 9948
+, Heap fragmentation:  34%
+
+Measurement: 300
+doc size with .size(): 200 Size with measureJson: 27276
+Free heap MeasuringTask: 62836 highWater mark: 6672
+Free heap ESP.getFreeHeap JSON: 10012
+, Heap fragmentation:  34%
+
+Measurement: 350
+doc size with .size(): 200 Size with measureJson: 27276
+Free heap MeasuringTask: 62836 highWater mark: 6672
+Free heap ESP.getFreeHeap JSON: 9980
+, Heap fragmentation:  34%
+
+Measurement: 400
+doc size with .size(): 200 Size with measureJson: 27276
+Free heap MeasuringTask: 62836 highWater mark: 6672
+Free heap ESP.getFreeHeap JSON: 9948
+, Heap fragmentation:  34%
+
+Measurement: 450
+doc size with .size(): 200 Size with measureJson: 27276
+Free heap MeasuringTask: 62836 highWater mark: 6672
+Free heap ESP.getFreeHeap JSON: 10012
+, Heap fragmentation:  34%
+
+After for loop, freeHeap: 3232 highWater mark: 5344
+
+jsonBuffer size before writing to SD card: 15
+Free heap before writing to SD card: 9980
+, Heap fragmentation:  34%
+Free heap after serialize JSON: 9748
+jsonBuffer size after serialization: 15
+Heap fragmentation after serialize JSON: 32%
+
+abort() was called at PC 0x4019ce03 on core 0
+
+
+Backtrace: 0x40083ec9:0x3fff05a0 0x4009729d:0x3fff05c0 0x4009c885:0x3fff05e0 0x4019ce03:0x3fff0660 0x4019ce4a:0x3fff0680 0x4019d039:0x3fff06a0 0x4019d0f4:0x3fff06c0 0x401ba4aa:0x3fff06e0 0x401ba648:0x3fff0710 0x400e0da1:0x3fff07a0 0x400dba5e:0x3fff07d0
+
+
+
+
+ELF file SHA256: 38d84553b7f81291
+
+Rebooting...
+ets Jul 29 2019 12:21:46
+
+rst:0xc (SW_CPU_RESET),boot:0x13 (SPI_FAST_FLASH_BOOT)
+configsip: 0, SPIWP:0xee
+clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+mode:DIO, clock div:1
+load:0x3fff0030,len:1344
+load:0x40078000,len:13964
+load:0x40080400,len:3600
+entry 0x400805f0
+E (348) psram: PSRAM ID read error: 0xffffffff
+CPU frequency set to: 240 MHz
+getXtalFrequencyMhz: 40
+getCpuFrequencyMhz: 240
+getApbFrequency: 80000000
+Reading config file.
+System Volume Information/
+	WPSettings.dat		12
+	IndexerVolumeGuid		76
+Test7_2MB.txt		2020000
+Test6_1MB.txt		1010000
+Test5_500k.txt		505000
+Test4_100k.txt		101000
+Test3_10k.txt		10100
+Test2_1k.txt		1010
+Tetst1_100.txt		101
+config.txt		909
+foo.txt		13
+log.txt		1298018
+log_copy512.txt		1281540
+log_copy1024.txt		0
+log_copy4096.txt		1281540
+test.txt		1048576
+Test8_5MB.txt		1048576
+TestFile.txt		1048576
+log_copy.txt		0
+test_with_json.txt		21993
+One_Measurement.txt		27276
+SD Card initialized.
+SD Card Type: SDHC
+SD Card Size: 59344MB
+Log.txt file already exists
+One_Measurement.txt file already exists
+Total space: 32756MB
+Used space: 10MB
+Displays initialized!
+Bluetooth initialized with 1843200
+Configure APN settings.
+readGsmResponse timeout
+(printf) Response: AT
+OK
+AT+IPR=115200
+OK
+AT&W
+OK
+AT+CSQ
++CSQ: 27,0
+
+OK
+AT+SAPBR=3,1,"Contype","GPRS","IP"
+ERROR
+AT+CCID=?
+OK
+AT+CCID
+8931090200035587547f
+
+OK
+AT+SAPBR=3,1,"APN",data.lycamobile.nl
+OK
+
+readGsmResponse timeout
+(printf) Response: AT+SAPBR=3,1,"USER",lmnl
+OK
+
+readGsmResponse timeout
+(printf) Response: AT+SAPBR=3,1,"PWD",plus
+OK
+
+readGsmResponse timeout
+(printf) Response: AT+SAPBR=1,1
+ERROR
+
+readGsmResponse timeout
+(printf) Response: AT+SAPBR=2,1
++SAPBR: 1,1,"10.239.83.114"
+
+OK
+
+SIM808 requesting datetime...
+readGsmResponse timeout
+(printf) Response: AT+CLTS=1
+OK
+
+readGsmResponse timeout
+(printf) Response: AT+CLTS=?
++CLTS: "yy/MM/dd,hh:mm:ss+/-zz"
+
+OK
+
+readGsmResponse timeout
+(printf) Response: AT+CLTS?
++CLTS: 1
+
+OK
+
+Response: AT+CCLK?+CCLK: "24/10/16,12:50:20+08"
+Parsed Date: 24/10/16
+Parsed Time: 12:50:20
+Data in convertToUnixTimestamp: 
+Parsed day: 16
+Parsed month: 10
+Parsed year: 2024
+Parsed Date: 24/10/16
+Parsed hour: 12
+Parsed minute: 50
+Parsed second: 20
+Parsed Time: 12:50:20
+Intermediate timestamp: 1729083020
+Final timestamp with milliseconds: 1729083020000
+Timestamp before comparison: 1729083020000
+Valid datetime received. 24/10/16 
+Date: 24/10/16
+Time: 
+Saved timestamp in setup: 1729083020000
+..........Done calculating R0 for MQ7!.
+MQ7 initialized!
+
+************************************************************************************************************************************************
+MQ sensor reading library for arduino
+Note: remember that all the parameters below can be modified during the program execution with the methods:
+setR0, setRL, setA, setB where you will have to send as parameter the new value, example: mySensor.setR0(20); //R0 = 20KΩ
+Authors: Miguel A. Califa U - Yersson R. Carrillo A - Ghiordy F. Contreras C
+Contributors: Andres A. Martinez - Juan A. Rodríguez - Mario A. Rodríguez O 
+Sensor: MQ-7
+Supply voltage: 5.00 VDC
+ADC Resolution: 12 Bits
+R0: 21.07 KΩ
+RL: 10.00 KΩ
+Model: Exponential
+MQ-7 -> a: 99.04 | b: -1.52
+Development board: ESP32
+Calibrating MQ8 please wait...........R0 for MQ8 calculation done!.
+MQ8 initialized!
+
+************************************************************************************************************************************************
+MQ sensor reading library for arduino
+Note: remember that all the parameters below can be modified during the program execution with the methods:
+setR0, setRL, setA, setB where you will have to send as parameter the new value, example: mySensor.setR0(20); //R0 = 20KΩ
+Authors: Miguel A. Califa U - Yersson R. Carrillo A - Ghiordy F. Contreras C
+Contributors: Andres A. Martinez - Juan A. Rodríguez - Mario A. Rodríguez O 
+Sensor: MQ-8
+Supply voltage: 5.00 VDC
+ADC Resolution: 12 Bits
+R0: 3.50 K��
+RL: 10.00 KΩ
+Model: Exponential
+MQ-8 -> a: 976.97 | b: -0.69
+Development board: ESP32
+Found device 0 with address: 28A000CA0F00003F
+Found device 1 with address: 288823C90F000016
+Found device 2 with address: 284422C90F000039
+Found device 3 with address: 28E565C90F0000EA
+Found device 4 with address: 28FB20C90F000099
+Sizes before creating tasks:
+234 Kb
+Free heap size: 92452, largest free block: 90100
+Inside Bluetooth task.
+Sizes after creating tasks:
+234 Kb
+Free heap size: 62924, largest free block: 61428
+heap with MALLOC_CAP_DEFAULT: 61428
+Counting task has started.
+Inside Measuring task.
+MaxMeasurements: 20
+Now running for 500 measurements.
+highWaterMark and freeHeap at beginning: 
+MeasuringTask stack high water mark: 6672
+Free heap size MeasuringTask: 62828
+
+Inside Display Measurements task.
+SavedTimestamp in DisplayMeasurements: 1729083020000
+Now running sendArray task.
+Measurement: 0
+doc size with .size(): 1 Size with measureJson: 265
+Free heap MeasuringTask: 62828 highWater mark: 6672
+Free heap ESP.getFreeHeap JSON: 66448
+, Heap fragmentation:  11%
+
+Measurement: 50
+doc size with .size(): 51 Size with measureJson: 7073
+Free heap MeasuringTask: 62828 highWater mark: 6672
+Free heap ESP.getFreeHeap JSON: 51456
+, Heap fragmentation:  17%
+
+Measurement: 100
+doc size with .size(): 101 Size with measureJson: 13926
+Free heap MeasuringTask: 62828 highWater mark: 6672
+Free heap ESP.getFreeHeap JSON: 36624
+, Heap fragmentation:  25%
+
+Measurement: 150
+doc size with .size(): 151 Size with measureJson: 20737
+Free heap MeasuringTask: 62828 highWater mark: 6672
+Free heap ESP.getFreeHeap JSON: 23184
+, Heap fragmentation:  39%
+
+Guru Meditation Error: Core  0 panic'ed (LoadProhibited). Exception was unhandled.
+
+Core  0 register dump:
+PC      : 0x400decfc  PS      : 0x00060b30  A0      : 0x800ded68  A1      : 0x3ffecc70  
+A2      : 0x00000000  A3      : 0x00000000  A4      : 0x00000030  A5      : 0x00000000  
+A6      : 0x0000fffe  A7      : 0x3ffc3edc  A8      : 0x400df19c  A9      : 0x3ffecc50  
+A10     : 0x3ffc3edc  A11     : 0x00000000  A12     : 0x00000028  A13     : 0x00000032  
+A14     : 0x0000ffff  A15     : 0x3ffffa5c  SAR     : 0x0000001d  EXCCAUSE: 0x0000001c  
+EXCVADDR: 0x00000000  LBEG    : 0x401d7540  LEND    : 0x401d7570  LCOUNT  : 0x00000000  
+
+
+Backtrace: 0x400decf9:0x3ffecc70 0x400ded65:0x3ffecc90 0x400d5855:0x3ffeccb0 0x400d6996:0x3ffeccd0
+
+
+
+
+ELF file SHA256: 38d84553b7f81291
+
+Rebooting...
+ets Jul 29 2019 12:21:46
+
+rst:0xc (SW_CPU_RESET),boot:0x13 (SPI_FAST_FLASH_BOOT)
+configsip: 0, SPIWP:0xee
+clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+mode:DIO, clock div:1
+load:0x3fff0030,len:1344
+load:0x40078000,len:13964
+load:0x40080400,len:3600
+entry 0x400805f0
+E (347) psram: PSRAM ID read error: 0xffffffff
+CPU frequency set to: 240 MHz
+getXtalFrequencyMhz: 40
+getCpuFrequencyMhz: 240
+getApbFrequency: 80000000
+Reading config file.
+System Volume Information/
+	WPSettings.dat		12
+	IndexerVolumeGuid		76
+Test7_2MB.txt		2020000
+Test6_1MB.txt		1010000
+Test5_500k.txt		505000
+Test4_100k.txt		101000
+Test3_10k.txt		10100
+Test2_1k.txt		1010
+Tetst1_100.txt		101
+config.txt		909
+foo.txt		13
+log.txt		1298018
+log_copy512.txt		1281540
+log_copy1024.txt		0
+log_copy4096.txt		1281540
+test.txt		1048576
+Test8_5MB.txt		1048576
+TestFile.txt		1048576
+log_copy.txt		0
+test_with_json.txt		21993
+One_Measurement.txt		27276
+SD Card initialized.
+SD Card Type: SDHC
+SD Card Size: 59344MB
+Log.txt file already exists
+One_Measurement.txt file already exists
+Total space: 32756MB
+Used space: 10MB
+Displays initialized!
+Bluetooth initialized with 1843200
+Configure APN settings.
+readGsmResponse timeout
+(printf) Response: AT
+OK
+AT+IPR=115200
+OK
+AT&W
+OK
+AT+CSQ
++CSQ: 27,0
+
+OK
+AT+SAPBR=3,1,"Contype","GPRS","IP"
+ERROR
+AT+CCID=?
+OK
+AT+CCID
+8931090200035587547f
+
+OK
+AT+SAPBR=3,1,"APN",data.lycamobile.nl
+OK
+
+readGsmResponse timeout
+(printf) Response: AT+SAPBR=3,1,"USER",lmnl
+OK
+
+readGsmResponse timeout
+(printf) Response: AT+SAPBR=3,1,"PWD",plus
+OK
+
+readGsmResponse timeout
+(printf) Response: AT+SAPBR=1,1
+ERROR
+
+readGsmResponse timeout
+(printf) Response: AT+SAPBR=2,1
++SAPBR: 1,1,"10.239.83.114"
+
+OK
+
+SIM808 requesting datetime...
+readGsmResponse timeout
+(printf) Response: AT+CLTS=1
+OK
+
+readGsmResponse timeout
+(printf) Response: AT+CLTS=?
++CLTS: "yy/MM/dd,hh:mm:ss+/-zz"
+
+OK
+
+readGsmResponse timeout
+(printf) Response: AT+CLTS?
++CLTS: 1
+
+OK
+
+Response: AT+CCLK?+CCLK: "24/10/16,12:54:09+08"
+Parsed Date: 24/10/16
+Parsed Time: 12:54:09
+Data in convertToUnixTimestamp: 
+Parsed day: 16
+Parsed month: 10
+Parsed year: 2024
+Parsed Date: 24/10/16
+Parsed hour: 12
+Parsed minute: 54
+Parsed second: 9
+Parsed Time: 12:54:09
+Intermediate timestamp: 1729083249
+Final timestamp with milliseconds: 1729083249000
+Timestamp before comparison: 1729083249000
+Valid datetime received. 24/10/16 
+Date: 24/10/16
+Time: 
+Saved timestamp in setup: 1729083249000
+..........Done calculating R0 for MQ7!.
+MQ7 initialized!
+
+************************************************************************************************************************************************
+MQ sensor reading library for arduino
+Note: remember that all the parameters below can be modified during the program execution with the methods:
+setR0, setRL, setA, setB where you will have to send as parameter the new value, example: mySensor.setR0(20); //R0 = 20KΩ
+Authors: Miguel A. Califa U - Yersson R. Carrillo A - Ghiordy F. Contreras C
+Contributors: Andres A. Martinez - Juan A. Rodríguez - Mario A. Rodríguez O 
+Sensor: MQ-7
+Supply voltage: 5.00 VDC
+ADC Resolution: 12 Bits
+R0: 21.33 KΩ
+RL: 10.00 KΩ
+Model: Exponential
+MQ-7 -> a: 99.04 | b: -1.52
+Development board: ESP32
+Calibrating MQ8 please wait...........R0 for MQ8 calculation done!.
+MQ8 initialized!
+
+************************************************************************************************************************************************
+MQ sensor reading library for arduino
+Note: remember that all the parameters below can be modified during the program execution with the methods:
+setR0, setRL, setA, setB where you will have to send as parameter the new value, example: mySensor.setR0(20); //R0 = 20KΩ
+Authors: Miguel A. Califa U - Yersson R. Carrillo A - Ghiordy F. Contreras C
+Contributors: Andres A. Martinez - Juan A. Rodríguez - Mario A. Rodríguez O 
+Sensor: MQ-8
+Supply voltage: 5.00 VDC
+ADC Resolution: 12 Bits
+R0: 3.66 KΩ
+RL: 10.00 KΩ
+Model: Exponential
+MQ-8 -> a: 976.97 | b: -0.69
+Development board: ESP32
+Found device 0 with address: 28A000CA0F00003F
+Found device 1 with address: 288823C90F000016
+Found device 2 with address: 284422C90F000039
+Found device 3 with address: 28E565C90F0000EA
+Found device 4 with address: 28FB20C90F000099
+Sizes before creating tasks:
+234 Kb
+Free heap size: 92480, largest free block: 90100
+Inside Bluetooth task.
+Sizes after creating tasks:
+234 Kb
+Free heap size: 62952, largest free block: 61428
+heap with MALLOC_CAP_DEFAULT: 61428
+Counting task has started.
+Inside Measuring task.
+MaxMeasurements: 20
+Now running for 500 measurements.
+highWaterMark and freeHeap at beginning: 
+MeasuringTask stack high water mark: 6676
+Free heap size MeasuringTask: 62856
+
+Inside Display Measurements task.
+SavedTimestamp in DisplayMeasurements: 1729083249000
+Now running sendArray task.
+Measurement: 0
+doc size with .size(): 1 Size with measureJson: 263
+Free heap MeasuringTask: 62856 highWater mark: 6676
+Free heap ESP.getFreeHeap JSON: 66500
+, Heap fragmentation:  11%
+
+Measurement: 50
+doc size with .size(): 51 Size with measureJson: 7064
+Free heap MeasuringTask: 62856 highWater mark: 6676
+Free heap ESP.getFreeHeap JSON: 51380
+, Heap fragmentation:  17%
+
+Measurement: 100
+doc size with .size(): 101 Size with measureJson: 13930
+Free heap MeasuringTask: 62856 highWater mark: 6676
+Free heap ESP.getFreeHeap JSON: 36516
+, Heap fragmentation:  25%
+
+Measurement: 150
+doc size with .size(): 151 Size with measureJson: 20730
+Free heap MeasuringTask: 62856 highWater mark: 6676
+Free heap ESP.getFreeHeap JSON: 22980
+, Heap fragmentation:  38%
+
+Measurement: 200
+doc size with .size(): 200 Size with measureJson: 27284
+Free heap MeasuringTask: 62856 highWater mark: 6676
+Free heap ESP.getFreeHeap JSON: 9764
+, Heap fragmentation:  32%
+
+Measurement: 250
+doc size with .size(): 200 Size with measureJson: 27284
+Free heap MeasuringTask: 62856 highWater mark: 6676
+Free heap ESP.getFreeHeap JSON: 9732
+, Heap fragmentation:  32%
+
+Measurement: 300
+doc size with .size(): 200 Size with measureJson: 27284
+Free heap MeasuringTask: 62856 highWater mark: 6676
+Free heap ESP.getFreeHeap JSON: 9764
+, Heap fragmentation:  32%
+
+Measurement: 350
+doc size with .size(): 200 Size with measureJson: 27284
+Free heap MeasuringTask: 62856 highWater mark: 6676
+Free heap ESP.getFreeHeap JSON: 9732
+, Heap fragmentation:  32%
+
+Measurement: 400
+doc size with .size(): 200 Size with measureJson: 27284
+Free heap MeasuringTask: 62856 highWater mark: 6676
+Free heap ESP.getFreeHeap JSON: 9732
+, Heap fragmentation:  32%
+
+Measurement: 450
+doc size with .size(): 200 Size with measureJson: 27284
+Free heap MeasuringTask: 62856 highWater mark: 6676
+Free heap ESP.getFreeHeap JSON: 9732
+, Heap fragmentation:  32%
+
+After for loop, freeHeap: 2984 highWater mark: 5348
+
+jsonBuffer size before writing to SD card: 15
+Free heap before writing to SD card: 9732
+, Heap fragmentation:  32%
+Free heap after serialize JSON: 9500
+jsonBuffer size after serialization: 15
+Heap fragmentation after serialize JSON: 31%
+[526997][E][vfs_api.cpp:35] open(): malloc failed
+Error opening OneLog file
+Guru Meditation Error: Core  0 panic'ed (IllegalInstruction). Exception was unhandled.
+Memory dump at 0x400dc054: 46ffea06 f01dffd2 41010136
+Core  0 register dump:
+PC      : 0x400dc05a  PS      : 0x00060930  A0      : 0x00000000  A1      : 0x3fff07e0  
+A2      : 0xf8a0fd89  A3      : 0xf8a0fd89  A4      : 0x3ffc4bfc  A5      : 0x3ffc46fc  
+A6      : 0x3ffc4008  A7      : 0x00000000  A8      : 0x800dba88  A9      : 0x3fff07c0  
+A10     : 0x3fff07f4  A11     : 0x00000019  A12     : 0x3f400c92  A13     : 0x3f421cb6  
+A14     : 0x00000000  A15     : 0x80000001  SAR     : 0x00000004  EXCCAUSE: 0x00000000  
+EXCVADDR: 0x00000000  LBEG    : 0x40094ab5  LEND    : 0x40094ac5  LCOUNT  : 0xffffffff  
+
+
+Backtrace: 0x400dc057:0x3fff07e0
+
+
+
+
+ELF file SHA256: 38d84553b7f81291
+
+Rebooting...
+ets Jul 29 2019 12:21:46
+
+rst:0xc (SW_CPU_RESET),boot:0x13 (SPI_FAST_FLASH_BOOT)
+configsip: 0, SPIWP:0xee
+clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+mode:DIO, clock div:1
+load:0x3fff0030,len:1344
+load:0x40078000,len:13964
+load:0x40080400,len:3600
+entry 0x400805f0
+E (348) psram: PSRAM ID read error: 0xffffffff
+CPU frequency set to: 240 MHz
+getXtalFrequencyMhz: 40
+getCpuFrequencyMhz: 240
+getApbFrequency: 80000000
+Reading config file.
+System Volume Information/
+	WPSettings.dat		12
+	IndexerVolumeGuid		76
+Test7_2MB.txt		2020000
+Test6_1MB.txt		1010000
+Test5_500k.txt		505000
+Test4_100k.txt		101000
+Test3_10k.txt		10100
+Test2_1k.txt		1010
+Tetst1_100.txt		101
+config.txt		909
+foo.txt		13
+log.txt		1298018
+log_copy512.txt		1281540
+log_copy1024.txt		0
+log_copy4096.txt		1281540
+test.txt		1048576
+Test8_5MB.txt		1048576
+TestFile.txt		1048576
+log_copy.txt		0
+test_with_json.txt		21993
+One_Measurement.txt		27284
+SD Card initialized.
+SD Card Type: SDHC
+SD Card Size: 59344MB
+Log.txt file already exists
+One_Measurement.txt file already exists
+Total space: 32756MB
+Used space: 10MB
+Displays initialized!
+Bluetooth initialized with 1843200
+Configure APN settings.
+readGsmResponse timeout
+(printf) Response: AT
+OK
+AT+IPR=115200
+OK
+AT&W
+OK
+AT+CSQ
++CSQ: 25,0
+
+OK
+AT+SAPBR=3,1,"Contype","GPRS","IP"
+ERROR
+AT+CCID=?
+OK
+AT+CCID
+8931090200035587547f
+
+OK
+AT+SAPBR=3,1,"APN",data.lycamobile.nl
+OK
+
+readGsmResponse timeout
+(printf) Response: AT+SAPBR=3,1,"USER",lmnl
+OK
+
+readGsmResponse timeout
+(printf) Response: AT+SAPBR=3,1,"PWD",plus
+OK
+
+readGsmResponse timeout
+(printf) Response: AT+SAPBR=1,1
+ERROR
+
+readGsmResponse timeout
+(printf) Response: AT+SAPBR=2,1
++SAPBR: 1,1,"10.239.83.114"
+
+OK
+
+SIM808 requesting datetime...
+readGsmResponse timeout
+(printf) Response: AT+CLTS=1
+OK
+
+readGsmResponse timeout
+(printf) Response: AT+CLTS=?
++CLTS: "yy/MM/dd,hh:mm:ss+/-zz"
+
+OK
+
+readGsmResponse timeout
+(printf) Response: AT+CLTS?
++CLTS: 1
+
+OK
+
+Response: AT+CCLK?+CCLK: "24/10/16,13:02:57+08"
+Parsed Date: 24/10/16
+Parsed Time: 13:02:57
+Data in convertToUnixTimestamp: 
+Parsed day: 16
+Parsed month: 10
+Parsed year: 2024
+Parsed Date: 24/10/16
+Parsed hour: 13
+Parsed minute: 2
+Parsed second: 57
+Parsed Time: 13:02:57
+Intermediate timestamp: 1729083777
+Final timestamp with milliseconds: 1729083777000
+Timestamp before comparison: 1729083777000
+Valid datetime received. 24/10/16 
+Date: 24/10/16
+Time: 
+Saved timestamp in setup: 1729083777000
+..........Done calculating R0 for MQ7!.
+MQ7 initialized!
+
+************************************************************************************************************************************************
+MQ sensor reading library for arduino
+Note: remember that all the parameters below can be modified during the program execution with the methods:
+setR0, setRL, setA, setB where you will have to send as parameter the new value, example: mySensor.setR0(20); //R0 = 20KΩ
+Authors: Miguel A. Califa U - Yersson R. Carrillo A - Ghiordy F. Contreras C
+Contributors: Andres A. Martinez - Juan A. Rodríguez - Mario A. Rodríguez O 
+Sensor: MQ-7
+Supply voltage: 5.00 VDC
+ADC Resolution: 12 Bits
+R0: 21.65 KΩ
+RL: 10.00 KΩ
+Model: Exponential
+MQ-7 -> a: 99.04 | b: -1.52
+Development board: ESP32
+Calibrating MQ8 please wait...........R0 for MQ8 calculation done!.
+MQ8 initialized!
+
+************************************************************************************************************************************************
+MQ sensor reading library for arduino
+Note: remember that all the parameters below can be modified during the program execution with the methods:
+setR0, setRL, setA, setB where you will have to send as parameter the new value, example: mySensor.setR0(20); //R0 = 20KΩ
+Authors: Miguel A. Califa U - Yersson R. Carrillo A - Ghiordy F. Contreras C
+Contributors: Andres A. Martinez - Juan A. Rodríguez - Mario A. Rodríguez O 
+Sensor: MQ-8
+Supply voltage: 5.00 VDC
+ADC Resolution: 12 Bits
+R0: 3.60 K��
+RL: 10.00 KΩ
+Model: Exponential
+MQ-8 -> a: 976.97 | b: -0.69
+Development board: ESP32
+Found device 0 with address: 28A000CA0F00003F
+Found device 1 with address: 288823C90F000016
+Found device 2 with address: 284422C90F000039
+Found device 3 with address: 28E565C90F0000EA
+Found device 4 with address: 28FB20C90F000099
+Sizes before creating tasks:
+234 Kb
+Free heap size: 92452, largest free block: 90100
+Inside Bluetooth task.
+Sizes after creating tasks:
+234 Kb
+Free heap size: 62924, largest free block: 61428
+heap with MALLOC_CAP_DEFAULT: 61428
+Counting task has started.
+Inside Measuring task.
+MaxMeasurements: 20
+Now running for 500 measurements.
+highWaterMark and freeHeap at beginning: 
+MeasuringTask stack high water mark: 6672
+Free heap size MeasuringTask: 62828
+
+Inside Display Measurements task.
+SavedTimestamp in DisplayMeasurements: 1729083777000
+Now running sendArray task.
+Measurement: 0
+doc size with .size(): 1 Size with measureJson: 263
+Free heap MeasuringTask: 62828 highWater mark: 6672
+Free heap ESP.getFreeHeap JSON: 66480
+, Heap fragmentation:  11%
+
+ets Jul 29 2019 12:21:46
+
+rst:0x1 (POWERON_RESET),boot:0x3 (DOWNLOAD_BOOT(UART0/UART1/SDIO_REI_REO_V2))
+waiting for download

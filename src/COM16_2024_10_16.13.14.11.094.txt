@@ -1,0 +1,395 @@
+ets Jul 29 2019 12:21:46
+
+rst:0x1 (POWERON_RESET),boot:0x13 (SPI_FAST_FLASH_BOOT)
+configsip: 0, SPIWP:0xee
+clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+mode:DIO, clock div:1
+load:0x3fff0030,len:1344
+load:0x40078000,len:13964
+load:0x40080400,len:3600
+entry 0x400805f0
+E (347) psram: PSRAM ID read error: 0xffffffff
+CPU frequency set to: 240 MHz
+getXtalFrequencyMhz: 40
+getCpuFrequencyMhz: 240
+getApbFrequency: 80000000
+Reading config file.
+System Volume Information/
+	WPSettings.dat		12
+	IndexerVolumeGuid		76
+Test7_2MB.txt		2020000
+Test6_1MB.txt		1010000
+Test5_500k.txt		505000
+Test4_100k.txt		101000
+Test3_10k.txt		10100
+Test2_1k.txt		1010
+Tetst1_100.txt		101
+config.txt		909
+foo.txt		13
+log.txt		1298018
+log_copy512.txt		1281540
+log_copy1024.txt		0
+log_copy4096.txt		1281540
+test.txt		1048576
+Test8_5MB.txt		1048576
+TestFile.txt		1048576
+log_copy.txt		0
+test_with_json.txt		21993
+One_Measurement.txt		27284
+SD Card initialized.
+SD Card Type: SDHC
+SD Card Size: 59344MB
+Log.txt file already exists
+One_Measurement.txt file already exists
+Total space: 32756MB
+Used space: 10MB
+Displays initialized!
+Bluetooth initialized with 1843200
+Configure APN settings.
+readGsmResponse timeout
+(printf) Response: 
+readGsmResponse timeout
+(printf) Response: AT+SAPBR=3,1,"USER",lmnl
+OK
+
+readGsmResponse timeout
+(printf) Response: AT+SAPBR=3,1,"PWD",plus
+OK
+
+readGsmResponse timeout
+(printf) Response: AT+SAPBR=1,1
+ERROR
+
+readGsmResponse timeout
+(printf) Response: AT+SAPBR=2,1
++SAPBR: 1,1,"10.239.83.114"
+
+OK
+
+SIM808 requesting datetime...
+readGsmResponse timeout
+(printf) Response: AT+CLTS=1
+OK
+
+readGsmResponse timeout
+(printf) Response: AT+CLTS=?
++CLTS: "yy/MM/dd,hh:mm:ss+/-zz"
+
+OK
+
+readGsmResponse timeout
+(printf) Response: AT+CLTS?
++CLTS: 1
+
+OK
+
+Response: AT+CCLK?+CCLK: "24/10/16,13:14:38+08"
+Parsed Date: 24/10/16
+Parsed Time: 13:14:38
+Data in convertToUnixTimestamp: 
+Parsed day: 16
+Parsed month: 10
+Parsed year: 2024
+Parsed Date: 24/10/16
+Parsed hour: 13
+Parsed minute: 14
+Parsed second: 38
+Parsed Time: 13:14:38
+Intermediate timestamp: 1729084478
+Final timestamp with milliseconds: 1729084478000
+Timestamp before comparison: 1729084478000
+Valid datetime received. 24/10/16 
+Date: 24/10/16
+Time: 
+Saved timestamp in setup: 1729084478000
+..........Done calculating R0 for MQ7!.
+MQ7 initialized!
+
+************************************************************************************************************************************************
+MQ sensor reading library for arduino
+Note: remember that all the parameters below can be modified during the program execution with the methods:
+setR0, setRL, setA, setB where you will have to send as parameter the new value, example: mySensor.setR0(20); //R0 = 20KΩ
+Authors: Miguel A. Califa U - Yersson R. Carrillo A - Ghiordy F. Contreras C
+Contributors: Andres A. Martinez - Juan A. Rodríguez - Mario A. Rodríguez O 
+Sensor: MQ-7
+Supply voltage: 5.00 VDC
+ADC Resolution: 12 Bits
+R0: 22.34 KΩ
+RL: 10.00 KΩ
+Model: Exponential
+MQ-7 -> a: 99.04 | b: -1.52
+Development board: ESP32
+Calibrating MQ8 please wait...........R0 for MQ8 calculation done!.
+MQ8 initialized!
+
+************************************************************************************************************************************************
+MQ sensor reading library for arduino
+Note: remember that all the parameters below can be modified during the program execution with the methods:
+setR0, setRL, setA, setB where you will have to send as parameter the new value, example: mySensor.setR0(20); //R0 = 20KΩ
+Authors: Miguel A. Califa U - Yersson R. Carrillo A - Ghiordy F. Contreras C
+Contributors: Andres A. Martinez - Juan A. Rodríguez - Mario A. Rodríguez O 
+Sensor: MQ-8
+Supply voltage: 5.00 VDC
+ADC Resolution: 12 Bits
+R0: 3.85 K��
+RL: 10.00 KΩ
+Model: Exponential
+MQ-8 -> a: 976.97 | b: -0.69
+Development board: ESP32
+Found device 0 with address: 28A000CA0F00003F
+Found device 1 with address: 288823C90F000016
+Found device 2 with address: 284422C90F000039
+Found device 3 with address: 28E565C90F0000EA
+Found device 4 with address: 28FB20C90F000099
+Sizes before creating tasks:
+234 Kb
+Free heap size: 92428, largest free block: 90100
+Inside Bluetooth task.
+Sizes after creating tasks:
+234 Kb
+Free heap size: 62900, largest free block: 61428
+heap with MALLOC_CAP_DEFAULT: 61428
+Counting task has started.
+Inside Measuring task.
+MaxMeasurements: 20
+Now running for 250 measurements.
+highWaterMark and freeHeap at beginning: 
+MeasuringTask stack high water mark: 6676
+Free heap size MeasuringTask: 62804
+
+Inside Display Measurements task.
+SavedTimestamp in DisplayMeasurements: 1729084478000
+Now running sendArray task.
+Measurement: 0
+doc size with .size(): 1 Size with measureJson: 263
+Free heap MeasuringTask: 62804 highWater mark: 6676
+Free heap ESP.getFreeHeap JSON: 66864, Heap fragmentation:  12%
+
+Measurement: 50
+doc size with .size(): 51 Size with measureJson: 7111
+Free heap MeasuringTask: 62804 highWater mark: 6676
+Free heap ESP.getFreeHeap JSON: 51808, Heap fragmentation:  18%
+
+Measurement: 100
+doc size with .size(): 101 Size with measureJson: 14014
+Free heap MeasuringTask: 62804 highWater mark: 6676
+Free heap ESP.getFreeHeap JSON: 36912, Heap fragmentation:  23%
+
+Measurement: 150
+doc size with .size(): 151 Size with measureJson: 20844
+Free heap MeasuringTask: 62804 highWater mark: 6676
+Free heap ESP.getFreeHeap JSON: 23568, Heap fragmentation:  38%
+
+Measurement: 200
+doc size with .size(): 201 Size with measureJson: 27731
+Free heap MeasuringTask: 62804 highWater mark: 6676
+Free heap ESP.getFreeHeap JSON: 9344, Heap fragmentation:  29%
+
+JSON overflowed, not enough memory
+27967
+6676
+Free heap ESP.getFreeHeap JSON: 9184, Heap fragmentation:  28%
+202
+
+JSON overflowed, not enough memory
+28033
+6676
+Free heap ESP.getFreeHeap JSON: 9536, Heap fragmentation:  31%
+Current Measurement index: 203
+
+JSON overflowed, not enough memory
+28233
+6676
+Free heap ESP.getFreeHeap JSON: 9504, Heap fragmentation:  31%
+Current Measurement index: 204
+
+JSON overflowed, not enough memory
+28233
+6676
+Free heap ESP.getFreeHeap JSON: 9504, Heap fragmentation:  31%
+Current Measurement index: 205
+
+JSON overflowed, not enough memory
+28233
+6676
+Free heap ESP.getFreeHeap JSON: 9504, Heap fragmentation:  31%
+Current Measurement index: 206
+
+JSON overflowed, not enough memory
+28233
+6676
+Free heap ESP.getFreeHeap JSON: 9504, Heap fragmentation:  31%
+Current Measurement index: 207
+
+JSON overflowed, not enough memory
+28233
+6676
+Free heap ESP.getFreeHeap JSON: 9504, Heap fragmentation:  31%
+Current Measurement index: 208
+
+JSON overflowed, not enough memory
+28233
+6676
+Free heap ESP.getFreeHeap JSON: 9504, Heap fragmentation:  31%
+Current Measurement index: 209
+
+JSON overflowed, not enough memory
+28233
+6676
+Free heap ESP.getFreeHeap JSON: 9504, Heap fragmentation:  31%
+Current Measurement index: 210
+
+JSON overflowed, not enough memory
+28233
+6676
+Free heap ESP.getFreeHeap JSON: 9504, Heap fragmentation:  31%
+Current Measurement index: 211
+
+JSON overflowed, not enough memory
+28233
+6676
+Free heap ESP.getFreeHeap JSON: 9504, Heap fragmentation:  31%
+Current Measurement index: 212
+
+JSON overflowed, not enough memory
+28233
+6676
+Free heap ESP.getFreeHeap JSON: 9504, Heap fragmentation:  31%
+Current Measurement index: 213
+
+JSON overflowed, not enough memory
+28233
+6676
+Free heap ESP.getFreeHeap JSON: 9504, Heap fragmentation:  31%
+Current Measurement index: 214
+
+JSON overflowed, not enough memory
+28233
+6676
+Free heap ESP.getFreeHeap JSON: 9504, Heap fragmentation:  31%
+Current Measurement index: 215
+
+JSON overflowed, not enough memory
+28233
+6676
+Free heap ESP.getFreeHeap JSON: 9504, Heap fragmentation:  31%
+Current Measurement index: 216
+
+JSON overflowed, not enough memory
+28233
+6676
+Free heap ESP.getFreeHeap JSON: 9504, Heap fragmentation:  31%
+Current Measurement index: 217
+
+JSON overflowed, not enough memory
+28233
+6676
+Free heap ESP.getFreeHeap JSON: 9504, Heap fragmentation:  31%
+Current Measurement index: 218
+
+JSON overflowed, not enough memory
+28233
+6676
+Free heap ESP.getFreeHeap JSON: 9504, Heap fragmentation:  31%
+Current Measurement index: 219
+
+JSON overflowed, not enough memory
+28233
+6676
+Free heap ESP.getFreeHeap JSON: 9504, Heap fragmentation:  31%
+Current Measurement index: 220
+
+JSON overflowed, not enough memory
+28233
+6676
+Free heap ESP.getFreeHeap JSON: 9504, Heap fragmentation:  31%
+Current Measurement index: 221
+
+JSON overflowed, not enough memory
+28233
+6676
+Free heap ESP.getFreeHeap JSON: 9504, Heap fragmentation:  31%
+Current Measurement index: 222
+
+JSON overflowed, not enough memory
+28233
+6676
+Free heap ESP.getFreeHeap JSON: 9504, Heap fragmentation:  31%
+Current Measurement index: 223
+
+JSON overflowed, not enough memory
+28233
+6676
+Free heap ESP.getFreeHeap JSON: 9504, Heap fragmentation:  31%
+Current Measurement index: 224
+
+JSON overflowed, not enough memory
+28233
+6676
+Free heap ESP.getFreeHeap JSON: 9504, Heap fragmentation:  31%
+Current Measurement index: 225
+
+JSON overflowed, not enough memory
+28233
+6676
+Free heap ESP.getFreeHeap JSON: 9504, Heap fragmentation:  31%
+Current Measurement index: 226
+
+JSON overflowed, not enough memory
+28233
+6676
+Free heap ESP.getFreeHeap JSON: 9504, Heap fragmentation:  31%
+Current Measurement index: 227
+
+JSON overflowed, not enough memory
+28233
+6676
+Free heap ESP.getFreeHeap JSON: 9504, Heap fragmentation:  31%
+Current Measurement index: 228
+
+JSON overflowed, not enough memory
+28233
+6676
+Free heap ESP.getFreeHeap JSON: 9504, Heap fragmentation:  31%
+Current Measurement index: 229
+
+JSON overflowed, not enough memory
+28233
+6676
+Free heap ESP.getFreeHeap JSON: 9504, Heap fragmentation:  31%
+Current Measurement index: 230
+
+JSON overflowed, not enough memory
+28233
+6676
+Free heap ESP.getFreeHeap JSON: 9504, Heap fragmentation:  31%
+Current Measurement index: 231
+
+JSON overflowed, not enough memory
+28233
+6676
+Free heap ESP.getFreeHeap JSON: 9504, Heap fragmentation:  31%
+Current Measurement index: 232
+
+JSON overflowed, not enough memory
+28233
+6676
+Free heap ESP.getFreeHeap JSON: 9504, Heap fragmentation:  31%
+Current Measurement index: 233
+
+JSON overflowed, not enough memory
+28233
+6676
+Free heap ESP.getFreeHeap JSON: 9504, Heap fragmentation:  31%
+Current Measurement index: 234
+
+JSON overflowed, not enough memory
+28233
+6676
+Free heap ESP.getFreeHeap JSON: 9504, Heap fragmentation:  31%
+Current Measurement index: 235
+
+ets Jul 29 2019 12:21:46
+
+rst:0x1 (POWERON_RESET),boot:0x23 (DOWNLOAD_BOOT(UART0/UART1/SDIO_REI_REO_V2))
+waiting for download

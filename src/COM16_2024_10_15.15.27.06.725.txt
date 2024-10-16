@@ -1,0 +1,1120 @@
+ets Jul 29 2019 12:21:46
+
+rst:0x1 (POWERON_RESET),boot:0x13 (SPI_FAST_FLASH_BOOT)
+configsip: 0, SPIWP:0xee
+clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+mode:DIO, clock div:1
+load:0x3fff0030,len:1344
+load:0x40078000,len:13964
+load:0x40080400,len:3600
+entry 0x400805f0
+E (347) psram: PSRAM ID read error: 0xffffffff
+CPU frequency set to: 240 MHz
+getXtalFrequencyMhz: 40
+getCpuFrequencyMhz: 240
+getApbFrequency: 80000000
+Reading config file.
+System Volume Information/
+	WPSettings.dat		12
+	IndexerVolumeGuid		76
+Test7_2MB.txt		2020000
+Test6_1MB.txt		1010000
+Test5_500k.txt		505000
+Test4_100k.txt		101000
+Test3_10k.txt		10100
+Test2_1k.txt		1010
+Tetst1_100.txt		101
+config.txt		909
+foo.txt		13
+log.txt		1281540
+log_copy512.txt		1281540
+log_copy1024.txt		0
+log_copy4096.txt		1281540
+test.txt		1048576
+Test8_5MB.txt		1048576
+TestFile.txt		1048576
+log_copy.txt		0
+SD Card initialized.
+SD Card Type: SDHC
+SD Card Size: 59344MB
+Log.txt file already exists
+Total space: 32756MB
+Used space: 10MB
+Displays initialized!
+Configure APN settings.
+readGsmResponse timeout
+(printf) Response: 
+readGsmResponse timeout
+(printf) Response: AT+SAPBR=3,1,"USER",lmnl
+OK
+
+readGsmResponse timeout
+(printf) Response: AT+SAPBR=3,1,"PWD",plus
+OK
+
+readGsmResponse timeout
+(printf) Response: AT+SAPBR=1,1
+ERROR
+
+readGsmResponse timeout
+(printf) Response: AT+SAPBR=2,1
++SAPBR: 1,1,"10.167.98.249"
+
+OK
+
+SIM808 requesting datetime...
+readGsmResponse timeout
+(printf) Response: AT+CLTS=1
+OK
+
+readGsmResponse timeout
+(printf) Response: AT+CLTS=?
++CLTS: "yy/MM/dd,hh:mm:ss+/-zz"
+
+OK
+
+readGsmResponse timeout
+(printf) Response: AT+CLTS?
++CLTS: 1
+
+OK
+
+Response: AT+CCLK?+CCLK: "24/10/15,15:27:34+08"
+Parsed Date: 24/10/15
+Parsed Time: 15:27:34
+Data in convertToUnixTimestamp: 
+Parsed day: 15
+Parsed month: 10
+Parsed year: 2024
+Parsed Date: 24/10/15
+Parsed hour: 15
+Parsed minute: 27
+Parsed second: 34
+Parsed Time: 15:27:34
+Intermediate timestamp: 1729006054
+Final timestamp with milliseconds: 1729006054000
+Timestamp before comparison: 1729006054000
+Valid datetime received. 24/10/15 
+Date: 24/10/15
+Time: 
+Saved timestamp in setup: 1729006054000
+..........Done calculating R0 for MQ7!.
+MQ7 initialized!
+
+************************************************************************************************************************************************
+MQ sensor reading library for arduino
+Note: remember that all the parameters below can be modified during the program execution with the methods:
+setR0, setRL, setA, setB where you will have to send as parameter the new value, example: mySensor.setR0(20); //R0 = 20KΩ
+Authors: Miguel A. Califa U - Yersson R. Carrillo A - Ghiordy F. Contreras C
+Contributors: Andres A. Martinez - Juan A. Rodríguez - Mario A. Rodríguez O 
+Sensor: MQ-7
+Supply voltage: 5.00 VDC
+ADC Resolution: 12 Bits
+R0: 25.05 KΩ
+RL: 10.00 KΩ
+Model: Exponential
+MQ-7 -> a: 99.04 | b: -1.52
+Development board: ESP32
+Calibrating MQ8 please wait...........R0 for MQ8 calculation done!.
+MQ8 initialized!
+
+************************************************************************************************************************************************
+MQ sensor reading library for arduino
+Note: remember that all the parameters below can be modified during the program execution with the methods:
+setR0, setRL, setA, setB where you will have to send as parameter the new value, example: mySensor.setR0(20); //R0 = 20KΩ
+Authors: Miguel A. Califa U - Yersson R. Carrillo A - Ghiordy F. Contreras C
+Contributors: Andres A. Martinez - Juan A. Rodríguez - Mario A. Rodríguez O 
+Sensor: MQ-8
+Supply voltage: 5.00 VDC
+ADC Resolution: 12 Bits
+R0: 3.41 K��
+RL: 10.00 KΩ
+Model: Exponential
+MQ-8 -> a: 976.97 | b: -0.69
+Development board: ESP32
+Found device 0 with address: 28A000CA0F00003F
+Found device 1 with address: 288823C90F000016
+Found device 2 with address: 284422C90F000039
+Found device 3 with address: 28E565C90F0000EA
+Found device 4 with address: 28FB20C90F000099
+Bluetooth initialized with 1843200
+measurementQueue created successfully.
+measurementQueue created with size: 24 bytes.
+Sizes before creating tasks:
+234 Kb
+Free heap size: 92440, largest free block: 90100
+Now running sendArray task.
+Sizes after creating tasks:
+234 Kb
+Free heap size: 62912, largest free block: 61428
+heap with MALLOC_CAP_DEFAULT: 61428
+Inside Display Measurements task.
+SavedTimestamp in DisplayMeasurements: 1729006054000
+Inside Bluetooth task.
+Counting task has started.
+Inside Measuring task.
+MaxMeasurements: 20
+Now running for 110 measurements.
+highWaterMark and freeHeap at beginning: 
+MeasuringTask stack high water mark: 6840
+Free heap size MeasuringTask: 61832
+
+Measurement: 0
+jsonBuffer size: 15
+doc size with .size(): 1 Size with measureJson: 265
+Free heap size MeasuringTask: 61832 highWater mark: 6840
+Free heap ESP.getFreeHeap JSON: 66424
+Heap fragmentation at measurement serialize JSON: 11%
+
+Measurement: 10
+jsonBuffer size: 15
+doc size with .size(): 11 Size with measureJson: 1613
+Free heap size MeasuringTask: 61832 highWater mark: 6840
+Free heap ESP.getFreeHeap JSON: 64520
+Heap fragmentation at measurement serialize JSON: 12%
+
+Measurement: 20
+jsonBuffer size: 15
+doc size with .size(): 21 Size with measureJson: 3014
+Free heap size MeasuringTask: 61832 highWater mark: 6840
+Free heap ESP.getFreeHeap JSON: 61928
+Heap fragmentation at measurement serialize JSON: 15%
+
+Measurement: 30
+jsonBuffer size: 15
+doc size with .size(): 31 Size with measureJson: 4362
+Free heap size MeasuringTask: 61832 highWater mark: 6840
+Free heap ESP.getFreeHeap JSON: 59128
+Heap fragmentation at measurement serialize JSON: 14%
+
+Measurement: 40
+jsonBuffer size: 15
+doc size with .size(): 41 Size with measureJson: 5763
+Free heap size MeasuringTask: 61832 highWater mark: 6840
+Free heap ESP.getFreeHeap JSON: 56460
+Heap fragmentation at measurement serialize JSON: 13%
+
+Measurement: 50
+jsonBuffer size: 15
+doc size with .size(): 51 Size with measureJson: 7111
+Free heap size MeasuringTask: 61832 highWater mark: 6840
+Free heap ESP.getFreeHeap JSON: 54972
+Heap fragmentation at measurement serialize JSON: 15%
+
+Measurement: 60
+jsonBuffer size: 15
+doc size with .size(): 61 Size with measureJson: 8512
+Free heap size MeasuringTask: 61832 highWater mark: 6840
+Free heap ESP.getFreeHeap JSON: 52412
+Heap fragmentation at measurement serialize JSON: 15%
+
+Measurement: 70
+jsonBuffer size: 15
+doc size with .size(): 71 Size with measureJson: 9860
+Free heap size MeasuringTask: 61832 highWater mark: 6840
+Free heap ESP.getFreeHeap JSON: 49916
+Heap fragmentation at measurement serialize JSON: 18%
+
+Measurement: 80
+jsonBuffer size: 15
+doc size with .size(): 81 Size with measureJson: 11261
+Free heap size MeasuringTask: 61832 highWater mark: 6840
+Free heap ESP.getFreeHeap JSON: 48524
+Heap fragmentation at measurement serialize JSON: 16%
+
+Measurement: 90
+jsonBuffer size: 15
+doc size with .size(): 91 Size with measureJson: 12609
+Free heap size MeasuringTask: 61832 highWater mark: 6840
+Free heap ESP.getFreeHeap JSON: 46188
+Heap fragmentation at measurement serialize JSON: 16%
+
+Measurement: 100
+jsonBuffer size: 15
+doc size with .size(): 101 Size with measureJson: 14010
+Free heap size MeasuringTask: 61832 highWater mark: 6840
+Free heap ESP.getFreeHeap JSON: 43564
+Heap fragmentation at measurement serialize JSON: 21%
+
+highWaterMark and freeHeap at end: 
+MeasuringTask stack high water mark: 5512
+Free heap size MeasuringTask: 35552
+
+jsonBuffer size before serialization: 15
+Free heap before serialize JSON: 42300
+Heap fragmentation before serialize JSON: 18%
+Free heap after serialize JSON: 42092
+jsonBuffer size after serialization: 15
+Heap fragmentation after serialize JSON: 18%
+Successfully posted buffer to queue
+
+Buffer in sendArray: 
+Size of doc in measuring: 15146
+Size of doc in measuring with .size(): 110
+Now running for 120 measurements.
+highWaterMark and freeHeap at beginning: 
+MeasuringTask stack high water mark: 5496
+Free heap size MeasuringTask: 60876
+
+readGsmResponse timeout
+(printf) Response: 
+OK
+AT+HTTPINIT
+ERROR
+
+Measurement: 0
+jsonBuffer size: 15
+doc size with .size(): 1 Size with measureJson: 266
+Free heap size MeasuringTask: 60876 highWater mark: 5496
+Free heap ESP.getFreeHeap JSON: 65988
+Heap fragmentation at measurement serialize JSON: 48%
+
+readGsmResponse timeout
+(printf) Response: AT+HTTPINIT=?
+OK
+
+Post http data...
+readGsmResponse timeout
+(printf) Response: AT+HTTPPARA="CID",1
+OK
+
+readGsmResponse timeout
+(printf) Response: AT+HTTPPARA="URL", http://jrbubuntu.ddns.net:5000/api/telemetry
+OK
+
+readGsmResponse timeout
+(printf) Response: AT+HTTPPARA="CONTENT","application/json"
+OK
+
+readGsmResponse timeout
+(printf) Response: AT+HTTPDATA=0,20000
+OK
+
+readGsmResponse timeout
+(printf) Response: 
+readGsmResponse timeout
+(printf) Response: AT+HTTPACTION=1
+OK
+
+AT+HTTPREAD
+OK
+
++HTTPACTION: 1,500,106
+Time between usage: 2 min 21 sec.
+SendArray stack high water mark: 4448
+Free heap size SendArray: 57644
+Measurement: 10
+jsonBuffer size: 15
+doc size with .size(): 11 Size with measureJson: 1614
+Free heap size MeasuringTask: 60876 highWater mark: 5496
+Free heap ESP.getFreeHeap JSON: 64280
+Heap fragmentation at measurement serialize JSON: 46%
+
+Measurement: 20
+jsonBuffer size: 15
+doc size with .size(): 21 Size with measureJson: 3015
+Free heap size MeasuringTask: 60876 highWater mark: 5496
+Free heap ESP.getFreeHeap JSON: 61592
+Heap fragmentation at measurement serialize JSON: 44%
+
+Measurement: 30
+jsonBuffer size: 15
+doc size with .size(): 31 Size with measureJson: 4363
+Free heap size MeasuringTask: 60876 highWater mark: 5496
+Free heap ESP.getFreeHeap JSON: 59048
+Heap fragmentation at measurement serialize JSON: 42%
+
+Measurement: 40
+jsonBuffer size: 15
+doc size with .size(): 41 Size with measureJson: 5764
+Free heap size MeasuringTask: 60876 highWater mark: 5496
+Free heap ESP.getFreeHeap JSON: 56564
+Heap fragmentation at measurement serialize JSON: 39%
+
+Measurement: 50
+jsonBuffer size: 15
+doc size with .size(): 51 Size with measureJson: 7112
+Free heap size MeasuringTask: 60876 highWater mark: 5496
+Free heap ESP.getFreeHeap JSON: 55160
+Heap fragmentation at measurement serialize JSON: 37%
+
+Measurement: 60
+jsonBuffer size: 15
+doc size with .size(): 61 Size with measureJson: 8513
+Free heap size MeasuringTask: 60876 highWater mark: 5496
+Free heap ESP.getFreeHeap JSON: 52856
+Heap fragmentation at measurement serialize JSON: 35%
+
+Measurement: 70
+jsonBuffer size: 15
+doc size with .size(): 71 Size with measureJson: 9861
+Free heap size MeasuringTask: 60876 highWater mark: 5496
+Free heap ESP.getFreeHeap JSON: 50488
+Heap fragmentation at measurement serialize JSON: 32%
+
+Measurement: 80
+jsonBuffer size: 15
+doc size with .size(): 81 Size with measureJson: 11262
+Free heap size MeasuringTask: 60876 highWater mark: 5496
+Free heap ESP.getFreeHeap JSON: 49256
+Heap fragmentation at measurement serialize JSON: 30%
+
+Measurement: 90
+jsonBuffer size: 15
+doc size with .size(): 91 Size with measureJson: 12610
+Free heap size MeasuringTask: 60876 highWater mark: 5496
+Free heap ESP.getFreeHeap JSON: 46920
+Heap fragmentation at measurement serialize JSON: 26%
+
+Measurement: 100
+jsonBuffer size: 15
+doc size with .size(): 101 Size with measureJson: 14011
+Free heap size MeasuringTask: 60876 highWater mark: 5496
+Free heap ESP.getFreeHeap JSON: 44500
+Heap fragmentation at measurement serialize JSON: 22%
+
+Measurement: 110
+jsonBuffer size: 15
+doc size with .size(): 111 Size with measureJson: 15359
+Free heap size MeasuringTask: 60876 highWater mark: 5496
+Free heap ESP.getFreeHeap JSON: 42036
+Heap fragmentation at measurement serialize JSON: 18%
+
+highWaterMark and freeHeap at end: 
+MeasuringTask stack high water mark: 5496
+Free heap size MeasuringTask: 34088
+
+jsonBuffer size before serialization: 15
+Free heap before serialize JSON: 40836
+Heap fragmentation before serialize JSON: 20%
+Free heap after serialize JSON: 40836
+jsonBuffer size after serialization: 15
+Heap fragmentation after serialize JSON: 20%
+Successfully posted buffer to queue
+Size of doc in measuring: 16495
+Size of doc in measuring with .size(): 120
+Now running for 130 measurements.
+highWaterMark and freeHeap at beginning: 
+MeasuringTask stack high water mark: 5480
+Free heap size MeasuringTask: 60868
+
+
+Buffer in sendArray: 
+readGsmResponse timeout
+(printf) Response: AT+HTTPINIT
+ERROR
+
+Measurement: 0
+jsonBuffer size: 15
+doc size with .size(): 1 Size with measureJson: 266
+Free heap size MeasuringTask: 60868 highWater mark: 5480
+Free heap ESP.getFreeHeap JSON: 65960
+Heap fragmentation at measurement serialize JSON: 48%
+
+readGsmResponse timeout
+(printf) Response: AT+HTTPINIT=?
+OK
+
+Post http data...
+readGsmResponse timeout
+(printf) Response: AT+HTTPPARA="CID",1
+OK
+
+readGsmResponse timeout
+(printf) Response: AT+HTTPPARA="URL", http://jrbubuntu.ddns.net:5000/api/telemetry
+OK
+
+readGsmResponse timeout
+(printf) Response: AT+HTTPPARA="CONTENT","application/json"
+OK
+
+readGsmResponse timeout
+(printf) Response: AT+HTTPDATA=0,20000
+OK
+
+readGsmResponse timeout
+(printf) Response: 
+readGsmResponse timeout
+(printf) Response: AT+HTTPACTION=1
+OK
+
+AT+HTTPREAD
+OK
+
++HTTPACTION: 1,500,106
+Time between usage: 1 min 59 sec.
+SendArray stack high water mark: 4448
+Free heap size SendArray: 57656
+Measurement: 10
+jsonBuffer size: 15
+doc size with .size(): 11 Size with measureJson: 1614
+Free heap size MeasuringTask: 60868 highWater mark: 5480
+Free heap ESP.getFreeHeap JSON: 64312
+Heap fragmentation at measurement serialize JSON: 46%
+
+Measurement: 20
+jsonBuffer size: 15
+doc size with .size(): 21 Size with measureJson: 3015
+Free heap size MeasuringTask: 60868 highWater mark: 5480
+Free heap ESP.getFreeHeap JSON: 61572
+Heap fragmentation at measurement serialize JSON: 44%
+
+Measurement: 30
+jsonBuffer size: 15
+doc size with .size(): 31 Size with measureJson: 4363
+Free heap size MeasuringTask: 60868 highWater mark: 5480
+Free heap ESP.getFreeHeap JSON: 58836
+Heap fragmentation at measurement serialize JSON: 41%
+
+Measurement: 40
+jsonBuffer size: 15
+doc size with .size(): 41 Size with measureJson: 5764
+Free heap size MeasuringTask: 60868 highWater mark: 5480
+Free heap ESP.getFreeHeap JSON: 56308
+Heap fragmentation at measurement serialize JSON: 39%
+
+Measurement: 50
+jsonBuffer size: 15
+doc size with .size(): 51 Size with measureJson: 7112
+Free heap size MeasuringTask: 60868 highWater mark: 5480
+Free heap ESP.getFreeHeap JSON: 54840
+Heap fragmentation at measurement serialize JSON: 37%
+
+Measurement: 60
+jsonBuffer size: 15
+doc size with .size(): 61 Size with measureJson: 8513
+Free heap size MeasuringTask: 60868 highWater mark: 5480
+Free heap ESP.getFreeHeap JSON: 52440
+Heap fragmentation at measurement serialize JSON: 34%
+
+Measurement: 70
+jsonBuffer size: 15
+doc size with .size(): 71 Size with measureJson: 9861
+Free heap size MeasuringTask: 60868 highWater mark: 5480
+Free heap ESP.getFreeHeap JSON: 50200
+Heap fragmentation at measurement serialize JSON: 31%
+
+Measurement: 80
+jsonBuffer size: 15
+doc size with .size(): 81 Size with measureJson: 11262
+Free heap size MeasuringTask: 60868 highWater mark: 5480
+Free heap ESP.getFreeHeap JSON: 48872
+Heap fragmentation at measurement serialize JSON: 29%
+
+Measurement: 90
+jsonBuffer size: 15
+doc size with .size(): 91 Size with measureJson: 12610
+Free heap size MeasuringTask: 60868 highWater mark: 5480
+Free heap ESP.getFreeHeap JSON: 46504
+Heap fragmentation at measurement serialize JSON: 26%
+
+Measurement: 100
+jsonBuffer size: 15
+doc size with .size(): 101 Size with measureJson: 14011
+Free heap size MeasuringTask: 60868 highWater mark: 5480
+Free heap ESP.getFreeHeap JSON: 44008
+Heap fragmentation at measurement serialize JSON: 21%
+
+Measurement: 110
+jsonBuffer size: 15
+doc size with .size(): 111 Size with measureJson: 15359
+Free heap size MeasuringTask: 60868 highWater mark: 5480
+Free heap ESP.getFreeHeap JSON: 41672
+Heap fragmentation at measurement serialize JSON: 22%
+
+Measurement: 120
+jsonBuffer size: 15
+doc size with .size(): 121 Size with measureJson: 16760
+Free heap size MeasuringTask: 60868 highWater mark: 5480
+Free heap ESP.getFreeHeap JSON: 40504
+Heap fragmentation at measurement serialize JSON: 20%
+
+highWaterMark and freeHeap at end: 
+MeasuringTask stack high water mark: 5480
+Free heap size MeasuringTask: 31580
+
+jsonBuffer size before serialization: 15
+Free heap before serialize JSON: 38328
+Heap fragmentation before serialize JSON: 23%
+Free heap after serialize JSON: 38328
+jsonBuffer size after serialization: 15
+Heap fragmentation after serialize JSON: 23%
+Successfully posted buffer to queue
+
+Buffer in sendArray: 
+Size of doc in measuring: 17896
+Size of doc in measuring with .size(): 130
+Now running for 140 measurements.
+highWaterMark and freeHeap at beginning: 
+MeasuringTask stack high water mark: 5480
+Free heap size MeasuringTask: 60892
+
+readGsmResponse timeout
+(printf) Response: AT+HTTPINIT
+ERROR
+
+Measurement: 0
+jsonBuffer size: 15
+doc size with .size(): 1 Size with measureJson: 266
+Free heap size MeasuringTask: 60892 highWater mark: 5480
+Free heap ESP.getFreeHeap JSON: 65972
+Heap fragmentation at measurement serialize JSON: 48%
+
+readGsmResponse timeout
+(printf) Response: AT+HTTPINIT=?
+OK
+
+Post http data...
+readGsmResponse timeout
+(printf) Response: AT+HTTPPARA="CID",1
+OK
+
+readGsmResponse timeout
+(printf) Response: AT+HTTPPARA="URL", http://jrbubuntu.ddns.net:5000/api/telemetry
+OK
+
+readGsmResponse timeout
+(printf) Response: AT+HTTPPARA="CONTENT","application/json"
+OK
+
+readGsmResponse timeout
+(printf) Response: AT+HTTPDATA=0,20000
+OK
+
+readGsmResponse timeout
+(printf) Response: 
+readGsmResponse timeout
+(printf) Response: AT+HTTPACTION=1
+OK
+
+AT+HTTPREAD
+OK
+
++HTTPACTION: 1,500,106
+Time between usage: 2 min 9 sec.
+SendArray stack high water mark: 4356
+Free heap size SendArray: 57532
+Measurement: 10
+jsonBuffer size: 15
+doc size with .size(): 11 Size with measureJson: 1614
+Free heap size MeasuringTask: 60892 highWater mark: 5480
+Free heap ESP.getFreeHeap JSON: 64208
+Heap fragmentation at measurement serialize JSON: 46%
+
+Measurement: 20
+jsonBuffer size: 15
+doc size with .size(): 21 Size with measureJson: 3015
+Free heap size MeasuringTask: 60892 highWater mark: 5480
+Free heap ESP.getFreeHeap JSON: 62080
+Heap fragmentation at measurement serialize JSON: 44%
+
+Measurement: 30
+jsonBuffer size: 15
+doc size with .size(): 31 Size with measureJson: 4363
+Free heap size MeasuringTask: 60892 highWater mark: 5480
+Free heap ESP.getFreeHeap JSON: 59032
+Heap fragmentation at measurement serialize JSON: 42%
+
+Measurement: 40
+jsonBuffer size: 15
+doc size with .size(): 41 Size with measureJson: 5764
+Free heap size MeasuringTask: 60892 highWater mark: 5480
+Free heap ESP.getFreeHeap JSON: 56440
+Heap fragmentation at measurement serialize JSON: 39%
+
+Measurement: 50
+jsonBuffer size: 15
+doc size with .size(): 51 Size with measureJson: 7112
+Free heap size MeasuringTask: 60892 highWater mark: 5480
+Free heap ESP.getFreeHeap JSON: 55024
+Heap fragmentation at measurement serialize JSON: 37%
+
+Measurement: 60
+jsonBuffer size: 15
+doc size with .size(): 61 Size with measureJson: 8513
+Free heap size MeasuringTask: 60892 highWater mark: 5480
+Free heap ESP.getFreeHeap JSON: 52560
+Heap fragmentation at measurement serialize JSON: 34%
+
+Measurement: 70
+jsonBuffer size: 15
+doc size with .size(): 71 Size with measureJson: 9861
+Free heap size MeasuringTask: 60892 highWater mark: 5480
+Free heap ESP.getFreeHeap JSON: 50192
+Heap fragmentation at measurement serialize JSON: 31%
+
+Measurement: 80
+jsonBuffer size: 15
+doc size with .size(): 81 Size with measureJson: 11262
+Free heap size MeasuringTask: 60892 highWater mark: 5480
+Free heap ESP.getFreeHeap JSON: 48928
+Heap fragmentation at measurement serialize JSON: 29%
+
+Measurement: 90
+jsonBuffer size: 15
+doc size with .size(): 91 Size with measureJson: 12610
+Free heap size MeasuringTask: 60892 highWater mark: 5480
+Free heap ESP.getFreeHeap JSON: 46584
+Heap fragmentation at measurement serialize JSON: 26%
+
+Measurement: 100
+jsonBuffer size: 15
+doc size with .size(): 101 Size with measureJson: 14011
+Free heap size MeasuringTask: 60892 highWater mark: 5480
+Free heap ESP.getFreeHeap JSON: 44280
+Heap fragmentation at measurement serialize JSON: 22%
+
+Measurement: 110
+jsonBuffer size: 15
+doc size with .size(): 111 Size with measureJson: 15359
+Free heap size MeasuringTask: 60892 highWater mark: 5480
+Free heap ESP.getFreeHeap JSON: 42008
+Heap fragmentation at measurement serialize JSON: 18%
+
+Measurement: 120
+jsonBuffer size: 15
+doc size with .size(): 121 Size with measureJson: 16760
+Free heap size MeasuringTask: 60892 highWater mark: 5480
+Free heap ESP.getFreeHeap JSON: 40768
+Heap fragmentation at measurement serialize JSON: 20%
+
+Measurement: 130
+jsonBuffer size: 15
+doc size with .size(): 131 Size with measureJson: 18108
+Free heap size MeasuringTask: 60892 highWater mark: 5480
+Free heap ESP.getFreeHeap JSON: 38528
+Heap fragmentation at measurement serialize JSON: 21%
+
+highWaterMark and freeHeap at end: 
+MeasuringTask stack high water mark: 5480
+Free heap size MeasuringTask: 30612
+
+jsonBuffer size before serialization: 15
+Free heap before serialize JSON: 37360
+Heap fragmentation before serialize JSON: 21%
+Free heap after serialize JSON: 37360
+jsonBuffer size after serialization: 15
+Heap fragmentation after serialize JSON: 21%
+Successfully posted buffer to queue
+
+Buffer in sendArray: 
+Size of doc in measuring: 19244
+Size of doc in measuring with .size(): 140
+Now running for 150 measurements.
+highWaterMark and freeHeap at beginning: 
+MeasuringTask stack high water mark: 5480
+Free heap size MeasuringTask: 60876
+
+readGsmResponse timeout
+(printf) Response: AT+HTTPINIT
+ERROR
+
+Measurement: 0
+jsonBuffer size: 15
+doc size with .size(): 1 Size with measureJson: 266
+Free heap size MeasuringTask: 60876 highWater mark: 5480
+Free heap ESP.getFreeHeap JSON: 65948
+Heap fragmentation at measurement serialize JSON: 55%
+
+readGsmResponse timeout
+(printf) Response: AT+HTTPINIT=?
+OK
+
+Post http data...
+readGsmResponse timeout
+(printf) Response: AT+HTTPPARA="CID",1
+OK
+
+readGsmResponse timeout
+(printf) Response: AT+HTTPPARA="URL", http://jrbubuntu.ddns.net:5000/api/telemetry
+OK
+
+readGsmResponse timeout
+(printf) Response: AT+HTTPPARA="CONTENT","application/json"
+OK
+
+readGsmResponse timeout
+(printf) Response: AT+HTTPDATA=0,20000
+OK
+
+readGsmResponse timeout
+(printf) Response: 
+readGsmResponse timeout
+(printf) Response: AT+HTTPACTION=1
+OK
+
+AT+HTTPREAD
+OK
+
++HTTPACTION: 1,500,106
+Time between usage: 2 min 19 sec.
+SendArray stack high water mark: 4356
+Free heap size SendArray: 57684
+Measurement: 10
+jsonBuffer size: 15
+doc size with .size(): 11 Size with measureJson: 1614
+Free heap size MeasuringTask: 60876 highWater mark: 5480
+Free heap ESP.getFreeHeap JSON: 64276
+Heap fragmentation at measurement serialize JSON: 46%
+
+Measurement: 20
+jsonBuffer size: 15
+doc size with .size(): 21 Size with measureJson: 3015
+Free heap size MeasuringTask: 60876 highWater mark: 5480
+Free heap ESP.getFreeHeap JSON: 61652
+Heap fragmentation at measurement serialize JSON: 44%
+
+Measurement: 30
+jsonBuffer size: 15
+doc size with .size(): 31 Size with measureJson: 4363
+Free heap size MeasuringTask: 60876 highWater mark: 5480
+Free heap ESP.getFreeHeap JSON: 58916
+Heap fragmentation at measurement serialize JSON: 41%
+
+Measurement: 40
+jsonBuffer size: 15
+doc size with .size(): 41 Size with measureJson: 5764
+Free heap size MeasuringTask: 60876 highWater mark: 5480
+Free heap ESP.getFreeHeap JSON: 56400
+Heap fragmentation at measurement serialize JSON: 39%
+
+Measurement: 50
+jsonBuffer size: 15
+doc size with .size(): 51 Size with measureJson: 7112
+Free heap size MeasuringTask: 60876 highWater mark: 5480
+Free heap ESP.getFreeHeap JSON: 55008
+Heap fragmentation at measurement serialize JSON: 37%
+
+Measurement: 60
+jsonBuffer size: 15
+doc size with .size(): 61 Size with measureJson: 8513
+Free heap size MeasuringTask: 60876 highWater mark: 5480
+Free heap ESP.getFreeHeap JSON: 52608
+Heap fragmentation at measurement serialize JSON: 34%
+
+Measurement: 70
+jsonBuffer size: 15
+doc size with .size(): 71 Size with measureJson: 9861
+Free heap size MeasuringTask: 60876 highWater mark: 5480
+Free heap ESP.getFreeHeap JSON: 50140
+Heap fragmentation at measurement serialize JSON: 31%
+
+Measurement: 80
+jsonBuffer size: 15
+doc size with .size(): 81 Size with measureJson: 11262
+Free heap size MeasuringTask: 60876 highWater mark: 5480
+Free heap ESP.getFreeHeap JSON: 48876
+Heap fragmentation at measurement serialize JSON: 29%
+
+Measurement: 90
+jsonBuffer size: 15
+doc size with .size(): 91 Size with measureJson: 12610
+Free heap size MeasuringTask: 60876 highWater mark: 5480
+Free heap ESP.getFreeHeap JSON: 46540
+Heap fragmentation at measurement serialize JSON: 26%
+
+Measurement: 100
+jsonBuffer size: 15
+doc size with .size(): 101 Size with measureJson: 14011
+Free heap size MeasuringTask: 60876 highWater mark: 5480
+Free heap ESP.getFreeHeap JSON: 44176
+Heap fragmentation at measurement serialize JSON: 22%
+
+Measurement: 110
+jsonBuffer size: 15
+doc size with .size(): 111 Size with measureJson: 15359
+Free heap size MeasuringTask: 60876 highWater mark: 5480
+Free heap ESP.getFreeHeap JSON: 42032
+Heap fragmentation at measurement serialize JSON: 18%
+
+Measurement: 120
+jsonBuffer size: 15
+doc size with .size(): 121 Size with measureJson: 16760
+Free heap size MeasuringTask: 60876 highWater mark: 5480
+Free heap ESP.getFreeHeap JSON: 41008
+Heap fragmentation at measurement serialize JSON: 20%
+
+Measurement: 130
+jsonBuffer size: 15
+doc size with .size(): 131 Size with measureJson: 18108
+Free heap size MeasuringTask: 60876 highWater mark: 5480
+Free heap ESP.getFreeHeap JSON: 38688
+Heap fragmentation at measurement serialize JSON: 21%
+
+Measurement: 140
+jsonBuffer size: 15
+doc size with .size(): 141 Size with measureJson: 19509
+Free heap size MeasuringTask: 60876 highWater mark: 5480
+Free heap ESP.getFreeHeap JSON: 36544
+Heap fragmentation at measurement serialize JSON: 22%
+
+highWaterMark and freeHeap at end: 
+MeasuringTask stack high water mark: 5480
+Free heap size MeasuringTask: 28692
+
+jsonBuffer size before serialization: 15
+Free heap before serialize JSON: 35440
+Heap fragmentation before serialize JSON: 23%
+Free heap after serialize JSON: 35432
+jsonBuffer size after serialization: 15
+Heap fragmentation after serialize JSON: 23%
+Successfully posted buffer to queue
+Size of doc in measuring: 20645
+Size of doc in measuring with .size(): 150
+Now running for 160 measurements.
+highWaterMark and freeHeap at beginning: 
+MeasuringTask stack high water mark: 5480
+Free heap size MeasuringTask: 60876
+
+
+Buffer in sendArray: 
+readGsmResponse timeout
+(printf) Response: AT+HTTPINIT
+ERROR
+
+Measurement: 0
+jsonBuffer size: 15
+doc size with .size(): 1 Size with measureJson: 266
+Free heap size MeasuringTask: 60876 highWater mark: 5480
+Free heap ESP.getFreeHeap JSON: 65928
+Heap fragmentation at measurement serialize JSON: 48%
+
+readGsmResponse timeout
+(printf) Response: AT+HTTPINIT=?
+OK
+
+Post http data...
+readGsmResponse timeout
+(printf) Response: AT+HTTPPARA="CID",1
+OK
+
+readGsmResponse timeout
+(printf) Response: AT+HTTPPARA="URL", http://jrbubuntu.ddns.net:5000/api/telemetry
+OK
+
+readGsmResponse timeout
+(printf) Response: AT+HTTPPARA="CONTENT","application/json"
+OK
+
+readGsmResponse timeout
+(printf) Response: AT+HTTPDATA=0,20000
+OK
+
+readGsmResponse timeout
+(printf) Response: 
+readGsmResponse timeout
+(printf) Response: AT+HTTPACTION=1
+OK
+
+AT+HTTPREAD
+OK
+
++HTTPACTION: 1,500,106
+Time between usage: 2 min 29 sec.
+SendArray stack high water mark: 4356
+Free heap size SendArray: 57624
+Measurement: 10
+jsonBuffer size: 15
+doc size with .size(): 11 Size with measureJson: 1614
+Free heap size MeasuringTask: 60876 highWater mark: 5480
+Free heap ESP.getFreeHeap JSON: 64228
+Heap fragmentation at measurement serialize JSON: 46%
+
+Measurement: 20
+jsonBuffer size: 15
+doc size with .size(): 21 Size with measureJson: 3015
+Free heap size MeasuringTask: 60876 highWater mark: 5480
+Free heap ESP.getFreeHeap JSON: 61604
+Heap fragmentation at measurement serialize JSON: 44%
+
+Measurement: 30
+jsonBuffer size: 15
+doc size with .size(): 31 Size with measureJson: 4363
+Free heap size MeasuringTask: 60876 highWater mark: 5480
+Free heap ESP.getFreeHeap JSON: 58932
+Heap fragmentation at measurement serialize JSON: 41%
+
+Measurement: 40
+jsonBuffer size: 15
+doc size with .size(): 41 Size with measureJson: 5764
+Free heap size MeasuringTask: 60876 highWater mark: 5480
+Free heap ESP.getFreeHeap JSON: 56504
+Heap fragmentation at measurement serialize JSON: 39%
+
+Measurement: 50
+jsonBuffer size: 15
+doc size with .size(): 51 Size with measureJson: 7112
+Free heap size MeasuringTask: 60876 highWater mark: 5480
+Free heap ESP.getFreeHeap JSON: 55016
+Heap fragmentation at measurement serialize JSON: 37%
+
+Measurement: 60
+jsonBuffer size: 15
+doc size with .size(): 61 Size with measureJson: 8513
+Free heap size MeasuringTask: 60876 highWater mark: 5480
+Free heap ESP.getFreeHeap JSON: 52680
+Heap fragmentation at measurement serialize JSON: 34%
+
+Measurement: 70
+jsonBuffer size: 15
+doc size with .size(): 71 Size with measureJson: 9861
+Free heap size MeasuringTask: 60876 highWater mark: 5480
+Free heap ESP.getFreeHeap JSON: 50248
+Heap fragmentation at measurement serialize JSON: 31%
+
+Measurement: 80
+jsonBuffer size: 15
+doc size with .size(): 81 Size with measureJson: 11262
+Free heap size MeasuringTask: 60876 highWater mark: 5480
+Free heap ESP.getFreeHeap JSON: 48788
+Heap fragmentation at measurement serialize JSON: 29%
+
+Measurement: 90
+jsonBuffer size: 15
+doc size with .size(): 91 Size with measureJson: 12610
+Free heap size MeasuringTask: 60876 highWater mark: 5480
+Free heap ESP.getFreeHeap JSON: 46356
+Heap fragmentation at measurement serialize JSON: 25%
+
+Measurement: 100
+jsonBuffer size: 15
+doc size with .size(): 101 Size with measureJson: 14011
+Free heap size MeasuringTask: 60876 highWater mark: 5480
+Free heap ESP.getFreeHeap JSON: 43928
+Heap fragmentation at measurement serialize JSON: 21%
+
+Measurement: 110
+jsonBuffer size: 15
+doc size with .size(): 111 Size with measureJson: 15359
+Free heap size MeasuringTask: 60876 highWater mark: 5480
+Free heap ESP.getFreeHeap JSON: 41656
+Heap fragmentation at measurement serialize JSON: 22%
+
+Measurement: 120
+jsonBuffer size: 15
+doc size with .size(): 121 Size with measureJson: 16760
+Free heap size MeasuringTask: 60876 highWater mark: 5480
+Free heap ESP.getFreeHeap JSON: 40436
+Heap fragmentation at measurement serialize JSON: 19%
+
+Measurement: 130
+jsonBuffer size: 15
+doc size with .size(): 131 Size with measureJson: 18108
+Free heap size MeasuringTask: 60876 highWater mark: 5480
+Free heap ESP.getFreeHeap JSON: 38260
+Heap fragmentation at measurement serialize JSON: 23%
+
+Measurement: 140
+jsonBuffer size: 15
+doc size with .size(): 141 Size with measureJson: 19509
+Free heap size MeasuringTask: 60876 highWater mark: 5480
+Free heap ESP.getFreeHeap JSON: 36040
+Heap fragmentation at measurement serialize JSON: 24%
+
+Measurement: 150
+jsonBuffer size: 15
+doc size with .size(): 151 Size with measureJson: 20857
+Free heap size MeasuringTask: 60876 highWater mark: 5480
+Free heap ESP.getFreeHeap JSON: 34904
+Heap fragmentation at measurement serialize JSON: 24%
+
+highWaterMark and freeHeap at end: 
+MeasuringTask stack high water mark: 5480
+Free heap size MeasuringTask: 26012
+
+jsonBuffer size before serialization: 15
+Free heap before serialize JSON: 32760
+Heap fragmentation before serialize JSON: 26%
+Free heap after serialize JSON: 32760
+jsonBuffer size after serialization: 15
+Heap fragmentation after serialize JSON: 26%
+Successfully posted buffer to queue
+
+Buffer in sendArray: 
+Size of doc in measuring: 21993
+Size of doc in measuring with .size(): 160
+Now running for 170 measurements.
+highWaterMark and freeHeap at beginning: 
+MeasuringTask stack high water mark: 5480
+Free heap size MeasuringTask: 60796
+
+readGsmResponse timeout
+(printf) Response: AT+HTTPINIT
+ERROR
+
+Measurement: 0
+jsonBuffer size: 15
+doc size with .size(): 1 Size with measureJson: 266
+Free heap size MeasuringTask: 60796 highWater mark: 5480
+Free heap ESP.getFreeHeap JSON: 65852
+Heap fragmentation at measurement serialize JSON: 48%
+
+readGsmResponse timeout
+(printf) Response: AT+HTTPINIT=?
+OK
+
+Post http data...
+readGsmResponse timeout
+(printf) Response: AT+HTTPPARA="CID",1
+OK
+
+readGsmResponse timeout
+(printf) Response: AT+HTTPPARA="URL", http://jrbubuntu.ddns.net:5000/api/telemetry
+OK
+
+readGsmResponse timeout
+(printf) Response: AT+HTTPPARA="CONTENT","application/json"
+OK
+
+readGsmResponse timeout
+(printf) Response: AT+HTTPDATA=0,20000
+OK
+
+readGsmResponse timeout
+(printf) Response: 
+readGsmResponse timeout
+(printf) Response: AT+HTTPACTION=1
+OK
+
+AT+HTTPREAD
+OK
+
++HTTPACTION: 1,500,106
+Time between usage: 2 min 39 sec.
+SendArray stack high water mark: 4356
+Free heap size SendArray: 57480
+Measurement: 10
+jsonBuffer size: 15
+doc size with .size(): 11 Size with measureJson: 1614
+Free heap size MeasuringTask: 60796 highWater mark: 5480
+Free heap ESP.getFreeHeap JSON: 64180
+Heap fragmentation at measurement serialize JSON: 46%
+
+Measurement: 20
+jsonBuffer size: 15
+doc size with .size(): 21 Size with measureJson: 3015
+Free heap size MeasuringTask: 60796 highWater mark: 5480
+Free heap ESP.getFreeHeap JSON: 61460
+Heap fragmentation at measurement serialize JSON: 44%
+
+Measurement: 30
+jsonBuffer size: 15
+doc size with .size(): 31 Size with measureJson: 4363
+Free heap size MeasuringTask: 60796 highWater mark: 5480
+Free heap ESP.getFreeHeap JSON: 58916
+Heap fragmentation at measurement serialize JSON: 41%
+
+Measurement: 40
+jsonBuffer size: 15
+doc size with .size(): 41 Size with measureJson: 5764
+Free heap size MeasuringTask: 60796 highWater mark: 5480
+Free heap ESP.getFreeHeap JSON: 56548
+Heap fragmentation at measurement serialize JSON: 39%
+
+Measurement: 50
+jsonBuffer size: 15
+doc size with .size(): 51 Size with measureJson: 7112
+Free heap size MeasuringTask: 60796 highWater mark: 5480
+Free heap ESP.getFreeHeap JSON: 55144
+Heap fragmentation at measurement serialize JSON: 37%
+
